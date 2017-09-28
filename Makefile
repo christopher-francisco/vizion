@@ -26,6 +26,8 @@ install_brew_items:
 	brew install zsh-autosuggestions
 	brew install zsh-syntax-highlighting
 	brew install ccat
+	brew install the_silver_searcher
+	brew install ripgrep #supposedly faster than the_silver_searcher
 
 install_brew_cask_items:
 	echo "Installing casks. Your password may be asked..."
