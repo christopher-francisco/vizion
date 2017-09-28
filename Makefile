@@ -13,6 +13,8 @@ install_brew:
 
 install_brew_items:
 	echo "Installing brew formulaes. This may take a while..."
+	brew install zsh
+	brew install zsh-completions
 	brew install ctags
 	brew install editorconfig
 	brew install neovim
@@ -23,6 +25,7 @@ install_brew_items:
 	brew install wget
 	brew install zsh-autosuggestions
 	brew install zsh-syntax-highlighting
+	brew install ccat
 
 install_brew_cask_items:
 	echo "Installing casks. Your password may be asked..."
@@ -35,7 +38,10 @@ install_brew_cask_items:
 	brew cask install mysqlworkbench
 	brew cask install sequel-pro
 	brew cask install slack
-	brew install spectacle
+	brew cask install spectacle
+
+install_npm_global_tools:
+	npm install -g vtop
 
 configure_git:
 	echo -e "[user]\n\tname = Christopher Francisco\n\temail = christopher.f.almanza@gmail.com\n\n[core]\n\teditor = vim" > ~/.gitconfig
