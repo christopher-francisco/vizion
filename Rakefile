@@ -1,81 +1,213 @@
+class Installer
+  def initialize
+    @brew_not_installed = []
+    @brew_cask_not_installed = []
+    @shell_not_installed = []
+  end
+
+  def brew(formula)
+    unless system("brew install #{formula}")
+      @brew_not_installed.push(formula)
+    end
+  end
+
+  def brew_cask(formula)
+    # brew-cask doesn't return 1 when a formula is already installed
+    output = `brew cask install #{formula}`
+    if output.include?('already installed')
+      @brew_cask_not_installed.push(formula)
+    end
+  end
+
+  def npm(package)
+    Rake::FileUtilsExt.sh("npm install -g #{package}")
+  end
+
+  def shell(program, required = false)
+    if required
+      Rake::FileUtilsExt.sh(program)
+    else
+      unless system(program)
+        @shell_not_installed.push(program)
+      end
+    end
+  end
+end
+
+class Logger
+  def write(message)
+    puts message
+  end
+
+  def step(description)
+    description = "-- #{description} "
+    description = description.ljust(80, '-')
+    puts
+    puts "\e[32m#{description}\e[0m"
+  end
+end
+
+class Linker
+  def link_file(original, symlink)
+    if File.exists?(symlink) || File.symlink?(symlink)
+      puts "Unable to link #{symlink}, a file or a symlink already exist with the same name."
+    else
+      ln_s original, symlink, :verbose => true
+    end
+  end
+
+  def unlink_file(symlink)
+    if File.symlink?(symlink)
+      rm_f symlink, :verbose => true
+    else
+      puts "Unable to unlink #{symlink}, the file doesn't exist or is not a symlink."
+    end
+  end
+end
+
 ######################################################################################################
 # Helper functions
 ######################################################################################################
 
-def step(description)
-  description = "-- #{description} "
-  description = description.ljust(80, '-')
-  puts
-  puts "\e[32m#{description}\e[0m"
-end
-
-def brew_install(formula)
-  sh "brew install #{formula}"
-end
-
-def brew_cask_install(formula)
-    sh "brew cask install #{formula}"
-end
-
-def link_file(original, symlink)
-  if File.exists?(symlink) || File.symlink?(symlink)
-    puts "Unable to link #{symlink}, a file or a symlink already exist with the same name."
-  else
-    ln_s original, symlink, :verbose => true
-  end
-end
-
-def unlink_file(symlink)
-  if File.symlink?(symlink)
-    rm_f symlink, :verbose => true
-  else
-    puts "Unable to unlink #{symlink}, the file doesn't exist or is not a symlink."
-  end
-end
-
+logger = Logger.new
+installer = Installer.new
+# linker = Linker.new
 
 ######################################################################################################
 # Installation
 ######################################################################################################
 
+test_brew_formulas = ['wget']
+test_brew_cask_formulas = ['atom']
+
 namespace :test do
-  desc 'Test brew_install'
+  desc 'Test brew'
   task :brew_install do
-    step 'wget'
-    brew_install 'wget'
+    test_brew_formulas.each do |formula|
+      logger.step(formula)
+      installer.brew(formula)
+    end
   end
 
+  desc 'Test brew-cask'
   task :brew_cask_install do
-    step 'atom'
-    brew_cask_install 'atom'
+    test_brew_cask_formulas.each do |formula|
+      logger.step(formula)
+      installer.brew_cask(formula)
+    end
   end
 
   task :all => [:brew_install, :brew_cask_install]
 end
 
+
+brew_formulas = [
+  'ccat',
+  'ctags',
+  'editorconfig',
+  'heroku',
+  'neovim',
+  'nvm',
+  'ruby',
+  'the_silver_searcher',
+  'ripgrep',
+  'tmux',
+  'tmuxinator-completion',
+  'tree',
+  'wget',
+  'yarn',
+  'zsh',
+  'zsh-autosuggestions',
+  'zsh-completions',
+  'zsh-syntax-highlighting',
+]
+
+brew_cask_formulas = [
+  'atom',
+  'docker',
+  'font-fira-code',
+  'google-chrome',
+  'iterm2',
+  'licecap',
+  'macvim',
+  'mysqlworkbench',
+  'sequel-pro',
+  'slack',
+  'spectacle',
+  'vagrant',
+  'virtualbox',
+  'visual-studio-code',
+]
+
+npm_packages = [
+  'create-react-app',
+  'vtop',
+]
+
 namespace :install do
+  desc 'Install command line developer tools, Oh My Zshell, Brew'
+  task :pre_requisites do
+    output = `xcode-select -p` 
+    unless output.include?('Developer') # TODO: What does the string contains when it's not installed??
+      logger.write('Installing command lines developer tools. Might ask for password.')
+      installer.shell('xcode-select --install', true)
+    else
+      logger.write('Developer command line tools already installed. Skipping...')
+    end
 
-  desc 'Install xcode tools'
-  task :xcode_select do
-    puts 'Installing xcode tools. Please accept the prompt'
-    sh "xcode-select --install"
+    unless system('ls -a ~ | grep .oh-my-zsh')
+      logger.write('Installing Oh My Zshell')
+      installer.shell('sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"', true)
+    else
+      logger.write('Oh My Zshell already installed. Skipping...')
+    end
+
+    unless system('which brew')
+      logger.write('Installing Oh My Zshell')
+      installer.shell('/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"', true)
+    else
+      logger.write('Brew installed. Skipping...')
+    end
   end
 
-  desc 'Install brew'
-  task :brew do
+  desc 'Install brew formulas'
+  task :brew_formulas do
+    brew_formulas.each do |formula|
+      logger.step(formula)
+      installer.brew(formula)
+    end
   end
 
-  desc 'Install oh my zsh'
-  task :oh_my_zsh do
-    sh 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
+  desc 'Install brew-cask formulas'
+  task :brew_cask_formulas do
+    brew_cask_formulas.each do |formula|
+      logger.step(formula)
+      installer.brew_cask(formula)
+    end
+  end
+
+  desc 'Install node and global npm packages'
+  task :node_and_npm do
+    logger.write('Installing latest version of node')
+    installer.shell('nvm install node')
+
+    npm_packages.each do |package|
+      installer.npm(package);
+    end
+  end
+
+  desc 'Link dotfiles'
+  task :dotfiles do
   end
 
   task :all => [
-    :xcode_select,
-    :brew,
+    :pre_requisites,
+    :brew_formulas,
+    :brew_cask_formulas,
+    :node_and_npm,
+    :dotfiles
   ]
 end
-
 
 task :default => 'install:all'
 task :test => 'test:all'
