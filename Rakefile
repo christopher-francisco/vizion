@@ -196,6 +196,31 @@ namespace :install do
     end
   end
 
+  desc 'Tmux Plugin Manager'
+  task :tmux_plugin_manager do
+    unless system('ls ~/.tmux/plugins/tpm')
+      logger.write('Installing Tmux Plugin Manager')
+      installer.shell('git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm')
+    else
+      logger.write('Tmux Plugin Manager already installed. Skipping...')
+    end
+
+    # TODO: run prefix+I
+  end
+
+  # TODO:  Vim 8 (from MacVim) should be installed and accessible from the SHELL
+  desc 'Vundle'
+  task :vundle do
+    unless system('ls ~/.vim/bundle/Vundle.vim')
+      logger.write('Installing Vundle')
+      installer.shell('git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim')
+    else
+      logger.write('Vundle already installed. Skipping...')
+    end
+
+    installer.shell('vim +PluginInstall +qall')
+  end
+
   desc 'Link dotfiles'
   task :dotfiles do
   end
@@ -205,7 +230,9 @@ namespace :install do
     :brew_formulas,
     :brew_cask_formulas,
     :node_and_npm,
-    :dotfiles
+    :dotfiles,
+    :tmux_plugin_manager,
+    :vundle
   ]
 end
 
