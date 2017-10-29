@@ -1,0 +1,205 @@
+snippet epre "epre"
+echo "<pre>{${1}}</pre>";
+endsnippet
+
+snippet dcount "dcount"
+die("".count(${1}));
+endsnippet
+
+snippet dclass "dcount"
+die("".get_class(${1}));
+endsnippet
+
+snippet darr "darr"
+die(print_r(${1}, true));
+endsnippet
+
+snippet class "class" b
+<?php
+namespace ${1}
+
+class ${2}
+{
+    // STUB
+}
+endsnippet
+
+snippet module "Module" !
+<?php
+namespace ${1};
+
+use Zend\Mvc\MvcEvent;
+
+class Module
+{
+    /**
+     * @{inheritDocs}
+     */
+    public function getConfig()
+    {
+        return array_merge(
+            include __DIR__ . '/config/module.config.php'
+        );
+    }
+
+    /**
+     * @{inheritDocs}
+     */
+    public function onBootstrap(MvcEvent $e)
+    {
+        // STUB
+    }
+}
+endsnippet
+
+snippet config "module.config.php"
+<?php
+namespace ${1}
+
+return [
+  'service_manager' => [
+    'factories' => [
+      // STUB
+    ],
+    'invokables' => [
+      // STUB
+    ],
+  ],
+  'controllers' => [
+    'factories' => [
+      // STUB
+    ],
+    'invokables' => [
+      // STUB
+    ],
+  ],
+];
+endsnippet
+
+snippet config "routes.config.php"
+<?php
+namespace ${1}
+
+return [
+  'router' => [
+    'routes' => [
+      '${2}' => [
+        'type' => 'literal',
+        'options' => ['route' => '${3}'],
+        'may_terminate' => false,
+        'child_routes' => [
+
+          /**
+           * ${4}
+           */
+          '${5}' => [
+            'type' => 'segment',
+            'options' => [
+              'route' => '${6}',
+              'defaults' => [
+                'controller' => ${7},
+                'action' => '${8}',
+              ],
+            ],
+          ],
+      ],
+    ],
+  ],
+
+  'console' => [
+    'router' => [
+      'routes' => [
+        // STUB
+      ],
+    ],
+  ],
+];
+endsnippet
+
+snippet config "Views"
+<?php
+namespace ${1}
+
+return [
+  'view_manager' => [
+    'template_map' => [
+      // STUB
+    ],
+  ],
+];
+endsnippet
+
+snippet factory "Factory"
+<?php
+namespace ${1};
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+class ${2}Factory implements FactoryInterface
+{
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        // STUB
+    }
+}
+endsnippet
+
+snippet controller "Controller"
+<?php
+namespace ${1}
+
+use Core\Controller\BaseHttpController;
+
+class ${2}Controller extends BaseHttpController
+{
+    public function __construct()
+    {
+    }
+}
+endsnippet
+
+snippet listener "Listener"
+<?php
+namespace ${1}
+
+use Core\Listener\BaseListener;
+use Zend\EventManager\EventInterface;
+
+/**
+ * Listens to the \`${4}\` event
+ * and sends a notification.
+ */
+class ${2} extends BaseListener
+{
+    /**
+     * @{inheritDocs}
+     */
+    protected function getEventName()
+    {
+        return '${3}';
+    }
+
+    /**
+     * @{inheritDocs}
+     */
+    public function handle(EventInterface $e)
+    {
+    }
+}
+endsnippet
+
+snippet itest "test"
+<?php
+declare(strict_types=1);
+
+namespace Fcds\IvvyTest${1};
+${2}
+final class ${3}Test extends BaseTestCase
+{
+    public function test${4}()
+    {
+        ${5}
+    }
+}
+endsnippet

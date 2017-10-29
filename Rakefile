@@ -49,7 +49,7 @@ end
 
 class Linker
   def link(original, symlink)
-    if File.exists?(symlink) || File.symlink?(symlink)
+    if Dir.exist?(symlink) || File.exists?(symlink) || File.symlink?(symlink)
       return false
     else
       Rake::FileUtilsExt.ln_s(original, symlink, :verbose => true)
@@ -233,7 +233,23 @@ namespace :install do
 
     dotfiles.each do |filename|
       unless linker.link("#{projectDir}/dotfiles/#{filename}", "#{Dir.home}/#{filename}")
-        logger.write("Unable to link #{filename}, a file or a symlink already exist with the same name.")
+        logger.write("Unable to link #{filename}, a file, directory or a symlink already exist with the same name.")
+      end
+    end
+  end
+
+  desc 'Link directories'
+  task :directories do
+    logger.write('Linking directories')
+
+    projectDir = File.basename(__FILE__)
+    directories = Dir.entries('./directories').select {|f| !(f =='.' || f == '..')}
+
+    logger.write("There are #{directories.count} directories")
+
+    directories.each do |dirname|
+      unless linker.link("#{projectDir}/directories/#{dirname}", "#{Dir.home}/#{dirname}")
+        logger.write("Unable to link #{dirname}, a file, directory or a symlink already exist with the same name.")
       end
     end
   end
@@ -244,12 +260,11 @@ namespace :install do
     :brew_cask_formulas,
     :node_and_npm,
     :dotfiles,
+    :directories,
     :tmux_plugin_manager,
     :vundle
   ]
 end
 
 task :default => 'install:all'
-task :dotfiles => 'install:dotfiles'
-
 task :test => 'test:all'
