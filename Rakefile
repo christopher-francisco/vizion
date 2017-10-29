@@ -48,15 +48,16 @@ class Logger
 end
 
 class Linker
-  def link_file(original, symlink)
+  def link(original, symlink)
     if File.exists?(symlink) || File.symlink?(symlink)
-      puts "Unable to link #{symlink}, a file or a symlink already exist with the same name."
+      return false
     else
-      ln_s original, symlink, :verbose => true
+      Rake::FileUtilsExt.ln_s(original, symlink, :verbose => true)
+      return true
     end
   end
 
-  def unlink_file(symlink)
+  def unlink(symlink)
     if File.symlink?(symlink)
       rm_f symlink, :verbose => true
     else
@@ -71,7 +72,7 @@ end
 
 logger = Logger.new
 installer = Installer.new
-# linker = Linker.new
+linker = Linker.new
 
 ######################################################################################################
 # Installation
@@ -223,6 +224,18 @@ namespace :install do
 
   desc 'Link dotfiles'
   task :dotfiles do
+    logger.write('Linking dotfiles')
+
+    projectDir = File.basename(__FILE__)
+    dotfiles = Dir.entries('./dotfiles').select {|f| !File.directory? f}
+
+    logger.write("There are #{dotfiles.count} dotfiles")
+
+    dotfiles.each do |filename|
+      unless linker.link("#{projectDir}/dotfiles/#{filename}", "#{Dir.home}/#{filename}")
+        logger.write("Unable to link #{filename}, a file or a symlink already exist with the same name.")
+      end
+    end
   end
 
   task :all => [
@@ -237,4 +250,6 @@ namespace :install do
 end
 
 task :default => 'install:all'
+task :dotfiles => 'install:dotfiles'
+
 task :test => 'test:all'

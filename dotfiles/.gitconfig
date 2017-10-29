@@ -1,0 +1,6 @@
+[user]
+	name = Christopher Francisco
+	email = christopher.f.almanza@gmail.com
+[core]
+	editor = vim
+        excludesfile = ~/.gitignore

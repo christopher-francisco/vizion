@@ -1,0 +1,33 @@
+# Export
+export PATH=~/bin:$PATH
+export VISUAL=vim
+export EDITOR="$VISUAL"
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+
+# Navigation
+alias code:home='cd ~/Developer/code'
+
+alias code:android='cd ~/Developer/code/android'
+alias code:chef='cd ~/Developer/code/chef'
+alias code:ios='cd ~/Developer/code/ios'
+alias code:php='cd ~/Developer/code/php'
+alias code:vagrant='cd ~/Developer/code/vagrant'
+
+alias code:vms='cd ~/Developer/vms'
+
+# Commands
+alias ls='ls -lh'
+
+# Coding
+alias phpunit='vendor/bin/phpunit'
+alias behat='vendor/bin/behat'
+alias phpcs='vendor/bin/phpcs'
+
+alias ctags='`brew --prefix`/bin/ctags'                         # Use homebrew's CTags
+
+alias tern:create='cp ~/.tern-project . && vim .tern-project'
+
+alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+
+. ~/.zshrc.aliases.local
