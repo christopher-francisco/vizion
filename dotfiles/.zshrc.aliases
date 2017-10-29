@@ -30,4 +30,17 @@ alias tern:create='cp ~/.tern-project . && vim .tern-project'
 alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 
+
+export DEFAULT_USER=${whoami}
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh/site-functions/_tmuxinator
+
+bindkey '^ ' autosuggest-accept
+
+
+# Put this value on the local aliases
+# export HOMEBREW_GITHUB_API_TOKEN=MY_API_TOKEN
+
 . ~/.zshrc.aliases.local
