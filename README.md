@@ -1,6 +1,6 @@
 # dev-machine
 
-This project is a Makefile that will setup a development machine from scratch.
+This project is a Rakefile that will setup a development machine from scratch.
 
 The development setup turns around the holy trinity:
 
@@ -9,17 +9,15 @@ The development setup turns around the holy trinity:
 - tmux
 - iterm2 (not part of the trinity, but welcomed)
 
+It will also link dotfiles.
+
 ### Installation
 
-```bash
-# TODO: change the URL to the actual github repo, this is just for piping reference
-$ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+```
+rake
 ```
 
-### Changing the shell
+## TODO
+### tmux
 
-Use homebrew's zsh. *NOTE*: this ain't safe, it requires sudo. You better research before running it.
-
-```bash
-chsh -s /usr/local/bin/zsh
-```
+Remember to install Tmux Plugin Manager (tpm) and run `prefix + I` to install the plugins listed in `.tmux.conf`. This doesn't exist yet in this repository.
