@@ -12,7 +12,12 @@ The development setup turns around the holy trinity:
 It will also link dotfiles.
 
 ### Installation
+Install this repo running
+```
+// insert here a SH command to create directory on ~/Developer/code/ruby/dev-machine, and clone this repo.
+```
 
+And then run
 ```
 rake
 ```
@@ -20,6 +25,8 @@ rake
 ## TODO
 ### vim
 Figure out what to do with the bin/vim (macvim's vim) vs actual vim possible from homebrew?
+fix problem with vim airlines trying to load before installing the plugin
+install ycm and tern_for_vim after. Consider vim-plug
 
 ### tmux
 
@@ -32,6 +39,7 @@ option to create a public/private key pair
 
 ### iterm2
 configure settings
+automatically load color presets from .iterm2
 
 ### tokens
 reminder to add a githu homebrew token and similar
