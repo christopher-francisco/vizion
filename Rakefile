@@ -59,9 +59,10 @@ class Linker
 
   def unlink(symlink)
     if File.symlink?(symlink)
-      rm_f symlink, :verbose => true
+      Rake::FileUtilsExt.safe_unlink symlink, :verbose => true
+      return true
     else
-      puts "Unable to unlink #{symlink}, the file doesn't exist or is not a symlink."
+      return false
     end
   end
 end
@@ -115,6 +116,7 @@ brew_formulas = [
   'tmux',
   'tmuxinator-completion',
   'tree',
+  'vim',
   'wget',
   'yarn',
   'zsh',
@@ -226,7 +228,7 @@ namespace :install do
   task :dotfiles do
     logger.write('Linking dotfiles')
 
-    projectDir = File.basename(__FILE__)
+    projectDir = File.dirname(__FILE__)
     dotfiles = Dir.entries('./dotfiles').select {|f| !File.directory? f}
 
     logger.write("There are #{dotfiles.count} dotfiles")
@@ -242,7 +244,7 @@ namespace :install do
   task :directories do
     logger.write('Linking directories')
 
-    projectDir = File.basename(__FILE__)
+    projectDir = File.dirname(__FILE__)
     directories = Dir.entries('./directories').select {|f| !(f =='.' || f == '..')}
 
     logger.write("There are #{directories.count} directories")
@@ -264,6 +266,20 @@ namespace :install do
     :tmux_plugin_manager,
     :vundle
   ]
+end
+
+namespace :uninstall do
+  desc 'dotfiles'
+  task :dotfiles do
+    logger.write('Unlinking dotfiles')
+    dotfiles = Dir.entries('./dotfiles').select {|f| !File.directory? f}
+
+    dotfiles.each do |filename|
+      unless linker.unlink("#{Dir.home}/#{filename}")
+        logger.write("Unable to link #{filename}, it doesn't exist.")
+      end
+    end
+  end
 end
 
 task :default => 'install:all'
