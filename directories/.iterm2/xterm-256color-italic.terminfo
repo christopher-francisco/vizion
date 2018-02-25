@@ -1,0 +1,20 @@
+# See https://gist.github.com/sos4nt/3187620
+# See https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
+
+# A xterm-256color based TERMINFO that adds the escape sequences for italic.
+#
+# Install:
+#
+#   tic xterm-256color-italic.terminfo
+#
+# Usage:
+#
+#   export TERM=xterm-256color-italic
+#
+# Usage on iTerm2:
+#
+# Select it from the dropdown. You can just type the name, as it's probably not going to be listed in the dropdown.
+#
+xterm-256color-italic|xterm with 256 colors and italic,
+	sitm=\E[3m, ritm=\E[23m,
+	use=xterm-256color,

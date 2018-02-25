@@ -32,7 +32,8 @@ install ycm and tern_for_vim after. Consider vim-plug
 
 Remember to install Tmux Plugin Manager (tpm) and run `prefix + I` to install the plugins listed in `.tmux.conf`. This doesn't exist yet in this repository.
 
-Also, figure out how to scroll 1 line per scroll (instead of 5 or 10)
+Check TODO line on `dotfiles/.tmux.conf`. There's a thing for itallics and better mappings
+
 
 ### ssh
 option to create a public/private key pair
@@ -40,6 +41,8 @@ option to create a public/private key pair
 ### iterm2
 configure settings
 automatically load color presets from .iterm2
+
+Configure the terminfo file in `directories/.iterm2/xterm-256color-itallic.terminfo` reading the comments on that file
 
 ### tokens
 reminder to add a githu homebrew token and similar

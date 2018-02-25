@@ -15,7 +15,6 @@ set softtabstop=4                                       " Width of indent in ins
 set shiftwidth=4                                        " Width of indent in normal mode
 set autoindent                                          " New line keeps current indentation
 set linespace=15                                        " Macvim line height
-"set lines=999 columns=999                               " We want Vim in fullscreen
 set autoread                                            " Reload when changed on disk
 
 set backupdir=~/.vim/backup//				" Put backup files out of the project root.
@@ -25,10 +24,43 @@ set directory=~/.vim/swap//				" Put swap files out of the project root.
 
 
 "-------------------- Visuals --------------------
-set background=dark                                     " Set the background to dark
-colorscheme solarized                                   " Set the color scheme to altercation/vim-color-solarized
+" Apparently this line going before or after `colorscheme` depends on the
+" colorscheme. It'd be better just to abstract all this in a colorscheme file
+" and source it so that every colorscheme will have the call order it needs
+" set background=dark                                     " Set the background to dark
 
 set t_CO=256						" Use 256 colors on terminal Vim
+
+" Seems like this is used with solarized only?
+" let g:solarized_termtrans=1                             " Not sure what any of this do
+" let g:solarized_termcolors=256                          " Remove or comment if iTerm is using solarized scheme
+
+
+if (has("termguicolors"))
+set termguicolors
+endif
+
+set t_8b=[48;2;%lu;%lu;%lum
+set t_8f=[38;2;%lu;%lu;%lum
+
+colorscheme one
+set background=dark                                     " Called after colorscheme due to `rakr/vim-one`
+
+let g:one_allow_italics = 1
+let g:airline_theme='one'
+
+" ??
+set t_8b=[48;2;%lu;%lu;%lum
+set t_8f=[38;2;%lu;%lu;%lum
+
+" Disable `~` at end of buffer
+highlight EndOfBuffer ctermfg=bg guifg=bg
+
+
+
+
+set guifont=Fira\ Code:h13
+
 set guioptions-=e					" We don't want Gui tabs.
 set guioptions-=l                                       " Disable GUI scrollbars.
 set guioptions-=L
@@ -38,6 +70,9 @@ set guioptions+=c                                       " We want to get rid of 
 
 " Fake a custom left padding for each window
 set foldcolumn=2
+
+" hi LineNr ctermbg=none
+" hi vertsplit ctermfg=bg ctermbg=bg
 
 " Get rid of split borders on terminal vim
 " Gets rid of the horizontal bar when splitting windows
@@ -49,12 +84,14 @@ if has("gui_running")
     " hi StatusLine guifg=bg guibg=bg
     " hi StatusLineNC guifg=bg guibg=bg
 else
-    hi LineNr ctermbg=bg
-    hi vertsplit ctermfg=bg ctermbg=bg
-    hi foldcolumn ctermbg=bg
+    if exists("bg")
+        hi LineNr ctermbg=bg
+        hi vertsplit ctermfg=bg ctermbg=bg
+        hi foldcolumn ctermbg=bg
 
-    " hi StatusLine ctermfg=bg ctermbg=bg
-    " hi StatusLineNC ctermfg=bg ctermbg=bg
+        " hi StatusLine ctermfg=bg ctermbg=bg
+        " hi StatusLineNC ctermfg=bg ctermbg=bg
+    endif
 endif
 
 " Changes the `|` character on split windows
@@ -112,15 +149,6 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }'<cr
 " Insert new line after every tag
 nmap <Leader>x :%s/\(<[^>]*>\)/\1\r/g
 
-" Change filetype to php
-nmap <Leader>fp :set ft=php<cr>
-
-" Change filetype to html
-nmap <Leader>fh :set ft=html<cr>
-
-" Change filetype to html
-nmap <Leader>fj :set ft=javascript<cr>
-
 " Write to a file faster
 nmap <Leader>wf :w<cr>
 
@@ -130,21 +158,8 @@ nmap <Leader>q :q<cr>
 " Saves and quit
 nmap <Leader>x :x<cr>
 
-
-" Run PHPUnit
-" nmap <Leader>t :!vendor/bin/phpunit % --colors=never<cr>
-nmap <Leader>tr :!vendor/bin/phpunit<cr>
-
-" Run PHPUnit on method when the cursor is on the method name
-nmap <Leader>mn yiw:!vendor/bin/phpunit --colors=never --filter "<cr>
-
-" Run PHPUnit on method when the cursor is on the method body
-nmap <Leader>m va{%k$bbyiw:!vendor/bin/phpunit --colors=never --filter "<cr>
-
-" JSON Pretty print
-" TODO: find a way to map this to an available hotkey
-" :%!python -m json.tool
-
+" JSON Pretty print the current buffer
+nmap <Leader>pp :%!python -m json.tool<CR>
 
 
 
@@ -158,7 +173,7 @@ set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
 " let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$',
+  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|log\|tmp$',
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 
@@ -224,6 +239,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_eslint_exe='$(npm bin)/eslint'
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_blade_checkers = []
 let g:syntastic_html_checkers=['']
@@ -253,7 +269,7 @@ let g:EditorConfig_core_mode = 'external_command'
 let g:airline#extensions#branch#enabled = 1                                                         " We want the Git branch to show
 set noshowmode                                                                                      " We don't want to show the --INSERT-- message when on insert mode
 set laststatus=2                                                                                    " We want the status bar to always appear
-let g:airline_theme='solarized'
+" let g:airline_theme='solarized'
 
 " Adds comma as thousand separator to the line number, to make them human
 " readable
@@ -262,6 +278,7 @@ function! MyLineNumber()
     \    substitute(line('$'), '\d\@<=\(\(\d\{3\}\)\+\)$', ',&', 'g')
 endfunction
 
+" TODO: wrap this 2 alls in a check if airlines is already installed
 call airline#parts#define('linenr', {'function': 'MyLineNumber', 'accents': 'bold'})
 
 let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v'])
@@ -278,14 +295,15 @@ let g:javascript_plugin_flow = 1
 let g:tern_map_keys=1                                                                         " Enable keyboard shortcuts
 let g:tern_show_argument_hints='on_hold'                                                      " Show argument hints
 
+" Close when you're done autocompleting: https://github.com/ternjs/tern_for_vim/issues/21
+autocmd CompleteDone * pclose                                                                 
+
 
 
 
 
 "-------------------- Auto-Commands --------------------
 " Automatically source the .vimrc file on save
-
-autocmd BufWritePost .vimrc source %
 augroup autosourcing
 	autocmd!
 	autocmd BufWritePost .vimrc source %

@@ -30,9 +30,18 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'mattn/emmet-vim'
 Plugin 'Valloric/YouCompleteMe'                     " Run `./install.py --with-tern-completer` or something after installation
 Plugin 'ternjs/tern_for_vim'                        " Run `npm install` inside it's folder after installation
+
+" we will probably end up deleting this 3
 Plugin 'flazz/vim-colorschemes'
 Plugin 'felixhummel/setcolors.vim'                  " We want to easily alternate between available color schemes
 Plugin 'nightsense/vim-crunchbang'                  " Another colorscheme. Looks kinda dope tbh
+" ---
+
+Plugin 'tpope/vim-unimpaired'
+Plugin 'easymotion/vim-easymotion'                  " Move through file using letters instead of numbers
+Plugin 'tpope/vim-abolish'                          " Provide useful case-insensistive string replacing operations
+
+Plugin 'rakr/vim-one'                               " colorscheme `one`
 Bundle "daylerees/colour-schemes", { "rtp": "vim/" }
 
 " All of your Plugins must be added before the following line
