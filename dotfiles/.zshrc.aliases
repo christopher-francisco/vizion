@@ -44,10 +44,10 @@ alias cat=ccat
 
 # Change iTerm title bar color to match One-Dark theme
 # TODO: need to abstract these to support multiple themes
-echo -e "\033]6;1;bg;red;brightness;40\a"
-echo -e "\033]6;1;bg;green;brightness;44\a"
-echo -e "\033]6;1;bg;blue;brightness;52\a"
-clear
+# echo -e "\033]6;1;bg;red;brightness;40\a"
+# echo -e "\033]6;1;bg;green;brightness;44\a"
+# echo -e "\033]6;1;bg;blue;brightness;52\a"
+# clear
 
 # Put this value on the local aliases
 # export HOMEBREW_GITHUB_API_TOKEN=MY_API_TOKEN
