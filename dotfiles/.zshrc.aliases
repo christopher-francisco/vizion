@@ -30,8 +30,16 @@ alias tern:create='cp ~/.tern-project . && vim .tern-project'
 alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 
+alias gbm='git branch --merged | grep -v "\*"'
+alias gbmd='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
-export DEFAULT_USER=${whoami}
+alias gccount='git rev-list --count develop..' # commits count between current branch and develop
+
+alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}"'
+
+alias did="vim +'normal Go' +'r!date' ~/did.txt"
+
+export DEFAULT_USER=`whoami`
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -48,6 +56,10 @@ alias cat=ccat
 # echo -e "\033]6;1;bg;green;brightness;44\a"
 # echo -e "\033]6;1;bg;blue;brightness;52\a"
 # clear
+
+catp() {
+    cat package.json | grep $1
+}
 
 # Put this value on the local aliases
 # export HOMEBREW_GITHUB_API_TOKEN=MY_API_TOKEN

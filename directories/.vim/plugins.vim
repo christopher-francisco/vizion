@@ -4,45 +4,40 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'                       " let Vundle manage Vundle, required
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'VundleVim/Vundle.vim'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'ervandew/supertab'                          " Let's autocomplete with tabs. Delete after YCM works
-Plugin 'rking/ag.vim'                               " Probably replace with Ack.vim
+Plugin 'ervandew/supertab'                          " Let's autocomplete with tabs. Delete after YCM works. TODO: Do I have to delete this? i remember it not working if deleted??
+Plugin 'rking/ag.vim'                               " TODO: completely replace with Ack.vim
+Plugin 'Chun-Yang/vim-action-ag'                    " Let us search for text objects in normal and visual modes
 Plugin 'scrooloose/nerdtree'
 Plugin 'skwp/greplace.vim'
-Plugin 'tobyS/pdv'
-Plugin 'tobyS/vmustache'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-vinegar'
-Plugin 'vim-scripts/Align'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-unimpaired'                       " Read the docs, this is actually very good
+Plugin 'tpope/vim-abolish'                          " Provide useful case-insensistive string replacing operations
+Plugin 'tpope/vim-eunuch'                           " Sugar for UNIX commands
+Plugin 'tpope/vim-jdaddy'                           " JSON manipulation
+Plugin 'tpope/vim-capslock'                         " Software CAPS LOCK: `<C-G>c` in insert mode, `gC` in normal mode
+Plugin 'godlygeek/tabular'                          " Aligning
 Plugin 'vim-syntastic/syntastic'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-fugitive'
 Plugin 'mattn/emmet-vim'
 Plugin 'Valloric/YouCompleteMe'                     " Run `./install.py --with-tern-completer` or something after installation
 Plugin 'ternjs/tern_for_vim'                        " Run `npm install` inside it's folder after installation
-
-" we will probably end up deleting this 3
-Plugin 'flazz/vim-colorschemes'
-Plugin 'felixhummel/setcolors.vim'                  " We want to easily alternate between available color schemes
-Plugin 'nightsense/vim-crunchbang'                  " Another colorscheme. Looks kinda dope tbh
-" ---
-
-Plugin 'tpope/vim-unimpaired'
 Plugin 'easymotion/vim-easymotion'                  " Move through file using letters instead of numbers
-Plugin 'tpope/vim-abolish'                          " Provide useful case-insensistive string replacing operations
-
+Plugin 'flowtype/vim-flow'                          " Flow type. TODO: is this already in polyglot???
+Plugin 'AndrewRadev/splitjoin.vim'                  " Split and join with gS and gJ
+Plugin 'mileszs/ack.vim'                            " Use Ack
 Plugin 'rakr/vim-one'                               " colorscheme `one`
-Bundle "daylerees/colour-schemes", { "rtp": "vim/" }
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
