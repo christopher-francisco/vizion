@@ -38,6 +38,7 @@ Plugin 'flowtype/vim-flow'                          " Flow type. TODO: is this a
 Plugin 'AndrewRadev/splitjoin.vim'                  " Split and join with gS and gJ
 Plugin 'mileszs/ack.vim'                            " Use Ack
 Plugin 'rakr/vim-one'                               " colorscheme `one`
+Plugin 'tpope/vim-rhubarb'                          " Browser enterprise GitHub
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

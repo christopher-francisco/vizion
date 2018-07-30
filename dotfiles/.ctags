@@ -46,6 +46,7 @@
 --exclude=__test__
 --exclude=build
 --exclude=dist
+--exclude=coverage
 --exclude=*.bundle.*
 
 --regex-C=/$x/x/x/e/ ==================================================

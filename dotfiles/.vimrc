@@ -174,12 +174,14 @@ endfunction
 "/
 "/ CtrlP
 "/
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+let g:ctrlp_show_hidden = 1
 
 " let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|log\|tmp$',
+  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|log\|tmp\|javadoc$',
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 
@@ -328,6 +330,10 @@ let g:tern_show_argument_hints='on_hold'                                        
 " Close when you're done autocompleting: https://github.com/ternjs/tern_for_vim/issues/21
 autocmd CompleteDone * pclose                                                                 
 
+"/
+"/ vim-rhubarb
+"/
+let g:github_enterprise_urls = ['https://github.anaplan.com']
 
 
 

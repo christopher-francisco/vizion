@@ -50,6 +50,9 @@ bindkey '^ ' autosuggest-accept
 # Use ccat always
 alias cat=ccat
 
+# Use hub for git
+alias git=hub
+
 # Change iTerm title bar color to match One-Dark theme
 # TODO: need to abstract these to support multiple themes
 # echo -e "\033]6;1;bg;red;brightness;40\a"

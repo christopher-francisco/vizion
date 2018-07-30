@@ -108,6 +108,7 @@ brew_formulas = [
   'editorconfig',
   'grip',
   'heroku',
+  'hub',
   'jq',
   'neovim',
   'nvm',
