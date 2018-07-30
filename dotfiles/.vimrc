@@ -1,4 +1,5 @@
 set nocompatible              				" We want the latest Vim settings
+set mouse=a
 
 so ~/.vim/plugins.vim
 
@@ -146,9 +147,6 @@ nmap <Leader>f :tag<space>
 " See: http://stackoverflow.com/questions/11531073/how-do-you-sort-a-range-of-lines-by-length
 vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }'<cr>
 
-" Insert new line after every tag
-nmap <Leader>x :%s/\(<[^>]*>\)/\1\r/g
-
 " Write to a file faster
 nmap <Leader>wf :w<cr>
 
@@ -158,8 +156,16 @@ nmap <Leader>q :q<cr>
 " Saves and quit
 nmap <Leader>x :x<cr>
 
-" JSON Pretty print the current buffer
-nmap <Leader>pp :%!python -m json.tool<CR>
+" Enable folding by indent on the current file
+function! Fold()
+    let previous_method = &fdm
+
+    if previous_method ==? "manual"
+        setlocal fdm=syntax
+    else
+        setlocal fdm=manual
+    endif
+endfunction
 
 
 
@@ -240,6 +246,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_eslint_exe='$(npm bin)/eslint'
+" let g:syntastic_javascript_flow_exe = '$(npm bin)/flow'
+" let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_blade_checkers = []
 let g:syntastic_html_checkers=['']
@@ -289,6 +297,28 @@ let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v'])
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
 
+" augroup javascript_folding
+"     au!
+"     au FileType javascript setlocal foldmethod=syntax
+" augroup END
+
+"/
+"/ vim-flow
+"/
+let g:flow#enable = 0
+let g:flow#autoclose = 1
+
+" Use locally installed flow
+" see: https://github.com/flowtype/vim-flow/issues/24
+let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
+if matchstr(local_flow, "^\/\\w") == ''
+    let local_flow= getcwd() . "/" . local_flow
+endif
+if executable(local_flow)
+  let g:flow#flowpath = local_flow
+endif
+
+
 "/
 "/ tern_for_vim
 "/
@@ -308,6 +338,10 @@ augroup autosourcing
 	autocmd!
 	autocmd BufWritePost .vimrc source %
 augroup end
+
+autocmd BufNewFile,BufRead Dockerfile* set filetype=Dockerfile
+autocmd BufNewFile,BufRead *.conf set filetype=nginx
+autocmd BufNewFile,BufRead .env* set filetype=sh
 
 
 

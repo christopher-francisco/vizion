@@ -38,6 +38,10 @@ Remember to install Tmux Plugin Manager (tpm) and run `prefix + I` to install th
 Check TODO line on `dotfiles/.tmux.conf`. There's a thing for itallics and better mappings
 
 
+# Check layout for tmuxinator
+Run `tmux list-windows`
+
+
 ### ssh
 option to create a public/private key pair
 

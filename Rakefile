@@ -102,12 +102,13 @@ namespace :test do
   task :all => [:brew_install, :brew_cask_install]
 end
 
-
 brew_formulas = [
   'ccat',
   'ctags',
   'editorconfig',
+  'grip',
   'heroku',
+  'jq',
   'neovim',
   'nvm',
   'ruby',
