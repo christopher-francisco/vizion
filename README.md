@@ -27,20 +27,15 @@ rake
 Create and link a `.hushlogin` file to the home directory to remove the annoying "last login" message. See: https://ashokgelal.com/2017/01/04/til-iterm-hush-last-login/
 
 ### vim
-Figure out what to do with the bin/vim (macvim's vim) vs actual vim possible from homebrew?
-fix problem with vim airlines trying to load before installing the plugin
-install ycm and tern_for_vim after. Consider vim-plug
+ - [x] Figure out what to do with the bin/vim (macvim's vim) vs actual vim possible from homebrew
+ - [x] Fix problem with vim airlines trying to load before installing the plugin
+ - [ ] Install YCM and tern_for_vim automatically after installing plugins. Consider vim-plug.
 
 ### tmux
 
 Remember to install Tmux Plugin Manager (tpm) and run `prefix + I` to install the plugins listed in `.tmux.conf`. This doesn't exist yet in this repository.
 
 Check TODO line on `dotfiles/.tmux.conf`. There's a thing for itallics and better mappings
-
-
-# Check layout for tmuxinator
-Run `tmux list-windows`
-
 
 ### ssh
 option to create a public/private key pair
