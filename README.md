@@ -1,73 +1,53 @@
-# dev-machine
+# Provisioner
 
-This project is a Rakefile that will setup a development machine from scratch.
+Provisioner will provision (🔥👌😂💯) a MacOS machine from scratch. This setup is what I like to call the holy trinity, since it includes:
+ - [Oh My Zsh](https://ohmyz.sh/)
+ - [Vim](https://www.vim.org/)
+ - [Tmux](https://github.com/tmux/tmux)
 
-The development setup turns around the holy trinity:
+Several other tools are also installed and configured such as:
+ - [iTerm](https://www.iterm2.com/)
 
-- zsh
-- vim
-- tmux
-- iterm2 (not part of the trinity, but welcomed)
-
-It will also link dotfiles.
+Provisioner will symlink dotfiles to the home directory, and will assume your coding projects live in `~/Developer/code`.
 
 ### Installation
-Install this repo running
-```
-// insert here a SH command to create directory on ~/Developer/code/ruby/dev-machine, and clone this repo.
-```
+Easy peasy lemon squeezy. Just run:
 
-And then run
 ```
-rake
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/chris-fa/dev-machine/master/install.sh)"
 ```
 
-## Italics
+### Features
+ - Complete support for true colors and italics on iTerm, iTerm+Vim, iTerm+Tmux, iTerm+Tmux+Vim.
+ - Best mappings & plugins for Vim and Tmux
 
-### iTerm
-- [ ] Automatically run `tic ~/.iterm2/files/xterm-256color-italic.terminfo`
-- [ ] Have value `xterm-256color-italic` auto set on iTerm profile's Terminal tab, on "Report Terminal Type"
+## Known bugs and TODO
+### Rakefile
+Need a task to upgrade everything. Install should not fail because upgrading
 
-### Vim
-- [ ] Add `highlight Comment cterm=italic` to .vimrc after colorscheme
-
-### Tmux
-- [ ] Automatically run `tic ~/.iterm2/files/tmux.terminfo`
-
-
-## TODO
 ### .hushlogin
 Create and link a `.hushlogin` file to the home directory to remove the annoying "last login" message. See: https://ashokgelal.com/2017/01/04/til-iterm-hush-last-login/
 
-### vim
- - [x] Figure out what to do with the bin/vim (macvim's vim) vs actual vim possible from homebrew
- - [x] Fix problem with vim airlines trying to load before installing the plugin
- - [ ] Install YCM and tern_for_vim automatically after installing plugins. Consider vim-plug.
+### Vim
+ - [ ] Fix problem with vim airlines trying to load before installing the plugin
+ - [ ] Move to vim-plug
+ - [ ] Install YCM and tern_for_vim automatically after installing plugins (needs vim-plug)
 
-### tmux
+### Neovim
+ - [ ] Provision neovim
 
-Remember to install Tmux Plugin Manager (tpm) and run `prefix + I` to install the plugins listed in `.tmux.conf`. This doesn't exist yet in this repository.
+### Tmux
+ - [ ] Install Tmux Plugin Manager (tpm) and run `prefix + I` automatically when running rake (currently need to start & attach to tmux, and then run `prefix + I`)
 
-##### Italics
-- [ ] Check TODO line on `dotfiles/.tmux.conf`. There's a thing for itallics and better mappings
+### SSH
+ - [ ] Create a public/private key pair on install
 
-### ssh
-option to create a public/private key pair
+### iTerm2
+ - [ ] Automatically load color presets `directories/.iterm2/colors`
+ - [ ] Automatically load `directories/.iterm2/com.googlecode.iterm2.plist` (#4)
 
-### iterm2
-configure settings
-automatically load color presets from .iterm2
+### API Keys
+ - [ ] Input and automatically export API keys and export them to `.zshrc.alias.local`
 
-Configure the terminfo file in `directories/.iterm2/xterm-256color-itallic.terminfo` reading the comments on that file
-
-Add to rakefile a way to load `directories/.iterm2/com.googlecode.iterm2.plist` with the following commands:
-
-```bash
-# Specify the preferences directory
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Developer/code/ruby/dev-machine/directories/.iterm2"
-# Tell iTerm2 to use the custom preferences in the directory
-defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
-```
-
-### tokens
-reminder to add a githu homebrew token and similar
+### Support for italics
+ - [ ] Automatically do the setup (read `directories/.iterm2/files/README.md`)
