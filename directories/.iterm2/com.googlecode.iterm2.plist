@@ -1107,21 +1107,23 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>3149 541 445 77 1440 0 2560 1417 </string>
+	<string>804 33 445 77 0 0 1440 877 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>970 806 620 392 0 0 2560 1440 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 369 599 388 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1558 827 937 512 1440 0 2560 1417 </string>
+	<string>254 160 796 473 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1440 771 824 646 1440 0 2560 1417 </string>
+	<string>0 131 824 746 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2671 444 824 646 1440 0 2560 1417 </string>
+	<string>480 111 960 746 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>0 231 824 646 0 0 1440 877 </string>
+	<string>591 51 824 746 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>165 289 824 646 0 0 2560 1417 </string>
+	<string>34 56 752 796 0 0 1440 877 </string>
+	<key>NSWindow Frame iTerm Window 4</key>
+	<string>1650 473 824 796 1440 0 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1956,7 +1958,7 @@
 			<key>Use Tab Color</key>
 			<true/>
 			<key>Vertical Spacing</key>
-			<real>1.5</real>
+			<real>1.7407814853162649</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -2778,7 +2780,7 @@
 				<string>one-dark</string>
 			</array>
 			<key>Terminal Type</key>
-			<string>xterm-256color</string>
+			<string>xterm-256color-italic</string>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
@@ -3558,7 +3560,7 @@
 				<string>solarized-dark</string>
 			</array>
 			<key>Terminal Type</key>
-			<string>xterm-256color</string>
+			<string>xterm-256color-italic</string>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>

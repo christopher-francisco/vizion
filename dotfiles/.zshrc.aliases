@@ -4,7 +4,7 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 
-# Set italics on iTerm
+# Enable true colors and italic.
 export TERM=xterm-256color-italic
 
 # Navigation

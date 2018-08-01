@@ -25,39 +25,26 @@ set directory=~/.vim/swap//				" Put swap files out of the project root.
 
 
 "-------------------- Visuals --------------------
-" Apparently this line going before or after `colorscheme` depends on the
-" colorscheme. It'd be better just to abstract all this in a colorscheme file
-" and source it so that every colorscheme will have the call order it needs
-" set background=dark                                     " Set the background to dark
-
 set t_CO=256						" Use 256 colors on terminal Vim
 
-" Seems like this is used with solarized only?
-" let g:solarized_termtrans=1                             " Not sure what any of this do
-" let g:solarized_termcolors=256                          " Remove or comment if iTerm is using solarized scheme
-
-
 if (has("termguicolors"))
-set termguicolors
+    " Force true color on since vim can't detect it inside Tmux
+    let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+
+    " Enable true color. Without the lines above, results in no color when
+    " launched inside Tmux.
+    set termguicolors
 endif
 
-set t_8b=[48;2;%lu;%lu;%lum
-set t_8f=[38;2;%lu;%lu;%lum
-
-colorscheme one
-set background=dark                                     " Called after colorscheme due to `rakr/vim-one`
-
+set background=dark
 let g:one_allow_italics = 1
-let g:airline_theme='one'
+colorscheme one
 
-" @see https://github.com/rakr/vim-one/blob/08aca1b5d8cd83106a430f150aa77b4148f6cd5e/README.md#tmux-support
-" Specifically on section "Vim inside tmux"
-set t_8b=[48;2;%lu;%lu;%lum
-set t_8f=[38;2;%lu;%lu;%lum
+let g:airline_theme='one'
 
 " Disable `~` at end of buffer
 highlight EndOfBuffer ctermfg=bg guifg=bg
-highlight Comment cterm=italic
 
 
 
