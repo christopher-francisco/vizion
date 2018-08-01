@@ -6,7 +6,7 @@ so ~/.vim/plugins.vim
 syntax enable
 set backspace=indent,eol,start				" Make backspace behave normally.
 let mapleader=','					" The default is \, but a comma is better.
-" set number						" Show line number.
+set number						" Show line number.
 set noerrorbells visualbell t_vb=			" No bells when pressing wrong key.
 set autowriteall 					" Automatically write the file when switching buffers.
 set complete=.,w,b,u 					" Set our desiring autocompletion matching.
@@ -50,7 +50,7 @@ set background=dark                                     " Called after colorsche
 let g:one_allow_italics = 1
 let g:airline_theme='one'
 
-" ??
+" TODO: what is this?????
 set t_8b=[48;2;%lu;%lu;%lum
 set t_8f=[38;2;%lu;%lu;%lum
 
@@ -181,7 +181,7 @@ let g:ctrlp_show_hidden = 1
 
 " let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|log\|tmp\|javadoc$',
+  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|log\|tmp\|javadoc\|bundle$',
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 
