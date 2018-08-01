@@ -1,13 +1,23 @@
 # Export
-export PATH=~/bin:$PATH
+
+# Set the visual editor
 export VISUAL=vim
+
+# Set the editor for git
 export EDITOR="$VISUAL"
+
+# Add composer global executables to $PATH
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 
 # Enable true colors and italic.
 export TERM=xterm-256color-italic
 
+# We want oh-my-zsh to show `~` when on the home folder
+export DEFAULT_USER=`whoami`
+
 # Navigation
+# TODO: make a function instead, so that you type "code:<project>" and it navigates to
+# `~/Developer/code/<project>`
 alias code:home='cd ~/Developer/code'
 
 alias code:android='cd ~/Developer/code/android'
@@ -18,56 +28,51 @@ alias code:vagrant='cd ~/Developer/code/vagrant'
 
 alias code:vms='cd ~/Developer/vms'
 
-# Commands
+# CLI tools
 alias ls='ls -lh'
+alias ctags='`brew --prefix`/bin/ctags'                         # Use homebrew's CTags
+alias cat=ccat                                                  # Always use ccat
+alias git=hub                                                   # Always use hub
 
-# Coding
+# Quick alises
 alias phpunit='vendor/bin/phpunit'
 alias behat='vendor/bin/behat'
 alias phpcs='vendor/bin/phpcs'
-
-alias ctags='`brew --prefix`/bin/ctags'                         # Use homebrew's CTags
-
-alias tern:create='cp ~/.tern-project . && vim .tern-project'
-
 alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
-
 alias gbm='git branch --merged | grep -v "\*"'
 alias gbmd='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
-
 alias gccount='git rev-list --count develop..' # commits count between current branch and develop
-
 alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}"'
-
 alias did="vim +'normal Go' +'r!date' ~/did.txt"
 
-export DEFAULT_USER=`whoami`
-
+ # ZSH plugins
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh/site-functions/_tmuxinator
 
 bindkey '^ ' autosuggest-accept
 
-# Use ccat always
-alias cat=ccat
-
-# Use hub for git
-alias git=hub
-
 # Change iTerm title bar color to match One-Dark theme
 # TODO: need to abstract these to support multiple themes
-# echo -e "\033]6;1;bg;red;brightness;40\a"
-# echo -e "\033]6;1;bg;green;brightness;44\a"
-# echo -e "\033]6;1;bg;blue;brightness;52\a"
-# clear
+echo -e "\033]6;1;bg;red;brightness;40\a"
+echo -e "\033]6;1;bg;green;brightness;44\a"
+echo -e "\033]6;1;bg;blue;brightness;52\a"
+clear
 
+# Misc
 catp() {
     cat package.json | grep $1
 }
+# TODO: add a func for tmuxinator projects
 
+
+
+# TODO: automatically provission these values into .zshrc.alias.local by typing
+# them in the terminal when Rakefile executes
+#
 # Put this value on the local aliases
-# export HOMEBREW_GITHUB_API_TOKEN=MY_API_TOKEN
+# export HOMEBREW_GITHUB_API_TOKEN=MY_API_TOKEN=<github token>
+# export VIM_RHUBARB_GITHUB_API_TOKEN=<github token>
 
 . ~/.zshrc.aliases.local
