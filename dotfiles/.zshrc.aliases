@@ -33,6 +33,7 @@ alias ls='ls -lh'
 alias ctags='`brew --prefix`/bin/ctags'                         # Use homebrew's CTags
 alias cat=ccat                                                  # Always use ccat
 alias git=hub                                                   # Always use hub
+alias ssh='TERM=xterm-256color ssh'
 
 # Quick alises
 alias phpunit='vendor/bin/phpunit'

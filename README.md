@@ -25,9 +25,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/chris-fa/dev-machine/maste
 ### Rakefile
 Need a task to upgrade everything. Install should not fail because upgrading
 
-### .hushlogin
-Create and link a `.hushlogin` file to the home directory to remove the annoying "last login" message. See: https://ashokgelal.com/2017/01/04/til-iterm-hush-last-login/
-
 ### Vim
  - [ ] Fix problem with vim airlines trying to load before installing the plugin
  - [ ] Move to vim-plug
