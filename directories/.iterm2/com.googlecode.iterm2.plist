@@ -1107,19 +1107,19 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>890 146 445 77 0 0 1440 877 </string>
+	<string>3149 541 445 77 1440 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>970 806 620 392 0 0 2560 1440 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 369 599 388 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1600 92 796 473 0 0 2560 1440 </string>
+	<string>1558 827 937 512 1440 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1440 900 0 0 1440 877 </string>
+	<string>1440 771 824 646 1440 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>941 723 1280 574 0 0 2560 1417 </string>
+	<string>2671 444 824 646 1440 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>998 70 824 646 0 0 2560 1417 </string>
+	<string>0 231 824 646 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>165 289 824 646 0 0 2560 1417 </string>
 	<key>New Bookmarks</key>
@@ -1338,7 +1338,7 @@
 			<key>Badge Text</key>
 			<string>🔥👌🏻💯😂</string>
 			<key>Blinking Cursor</key>
-			<false/>
+			<true/>
 			<key>Blur</key>
 			<false/>
 			<key>Bold Color</key>
@@ -1875,7 +1875,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Retina 13</string>
+			<string>Menlo-Regular 13</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1938,9 +1938,11 @@
 				<string>one-dark</string>
 			</array>
 			<key>Terminal Type</key>
-			<string>xterm-256color</string>
+			<string>xterm-256color-italic</string>
 			<key>Transparency</key>
 			<real>0.0</real>
+			<key>Unicode Normalization</key>
+			<integer>0</integer>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -3649,7 +3651,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-04-20T14:36:43Z</date>
+	<date>2018-08-01T14:09:02Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
@@ -3677,7 +3679,7 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.1.5</string>
+	<string>3.1.7</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

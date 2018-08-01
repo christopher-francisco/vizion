@@ -50,17 +50,18 @@ set background=dark                                     " Called after colorsche
 let g:one_allow_italics = 1
 let g:airline_theme='one'
 
-" TODO: what is this?????
+" @see https://github.com/rakr/vim-one/blob/08aca1b5d8cd83106a430f150aa77b4148f6cd5e/README.md#tmux-support
+" Specifically on section "Vim inside tmux"
 set t_8b=[48;2;%lu;%lu;%lum
 set t_8f=[38;2;%lu;%lu;%lum
 
 " Disable `~` at end of buffer
 highlight EndOfBuffer ctermfg=bg guifg=bg
+highlight Comment cterm=italic
 
 
 
-
-set guifont=Fira\ Code:h13
+set guifont=Menlo:h13
 
 set guioptions-=e					" We don't want Gui tabs.
 set guioptions-=l                                       " Disable GUI scrollbars.

@@ -22,6 +22,19 @@ And then run
 rake
 ```
 
+## Italics
+
+### iTerm
+- [ ] Automatically run `tic ~/.iterm2/files/xterm-256color-italic.terminfo`
+- [ ] Have value `xterm-256color-italic` auto set on iTerm profile's Terminal tab, on "Report Terminal Type"
+
+### Vim
+- [ ] Add `highlight Comment cterm=italic` to .vimrc after colorscheme
+
+### Tmux
+- [ ] Automatically run `tic ~/.iterm2/files/tmux.terminfo`
+
+
 ## TODO
 ### .hushlogin
 Create and link a `.hushlogin` file to the home directory to remove the annoying "last login" message. See: https://ashokgelal.com/2017/01/04/til-iterm-hush-last-login/
@@ -35,7 +48,8 @@ Create and link a `.hushlogin` file to the home directory to remove the annoying
 
 Remember to install Tmux Plugin Manager (tpm) and run `prefix + I` to install the plugins listed in `.tmux.conf`. This doesn't exist yet in this repository.
 
-Check TODO line on `dotfiles/.tmux.conf`. There's a thing for itallics and better mappings
+##### Italics
+- [ ] Check TODO line on `dotfiles/.tmux.conf`. There's a thing for itallics and better mappings
 
 ### ssh
 option to create a public/private key pair

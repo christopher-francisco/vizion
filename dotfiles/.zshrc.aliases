@@ -4,6 +4,9 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 
+# Set italics on iTerm
+export TERM=xterm-256color-italic
+
 # Navigation
 alias code:home='cd ~/Developer/code'
 
