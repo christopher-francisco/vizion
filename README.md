@@ -27,8 +27,6 @@ Need a task to upgrade everything. Install should not fail because upgrading
 
 ### Vim
  - [ ] Fix problem with vim airlines trying to load before installing the plugin
- - [ ] Move to vim-plug
- - [ ] Install YCM and tern_for_vim automatically after installing plugins (needs vim-plug)
 
 ### Neovim
  - [ ] Provision neovim

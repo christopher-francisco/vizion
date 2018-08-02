@@ -29,7 +29,7 @@ alias code:vagrant='cd ~/Developer/code/vagrant'
 alias code:vms='cd ~/Developer/vms'
 
 # CLI tools
-alias ls='ls -lh'
+alias ls='ls -lah'
 alias ctags='`brew --prefix`/bin/ctags'                         # Use homebrew's CTags
 alias cat=ccat                                                  # Always use ccat
 alias git=hub                                                   # Always use hub
