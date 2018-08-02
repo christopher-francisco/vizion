@@ -214,6 +214,14 @@ namespace :install do
     end
   end
 
+  desc 'Set up true color and italics'
+  task :set_true_color_and_italics do
+    logger.write('Setting up true colors and italics')
+
+    installer.shell('tic -x ~/.iterm2/files/xterm-256color-italic.terminfo')
+    installer.shell('tic -x ~/.iterm2/files/tmux-256color.terminfo')
+  end
+
   task :all => [
     :pre_requisites,
     :brew_formulas,
@@ -222,7 +230,8 @@ namespace :install do
     :dotfiles,
     :directories,
     :tmux_plugin_manager,
-    :vim_plugs
+    :vim_plugs,
+    :set_true_color_and_italics
   ]
 end
 
