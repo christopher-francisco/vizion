@@ -28,6 +28,8 @@ alias code:vagrant='cd ~/Developer/code/vagrant'
 
 alias code:vms='cd ~/Developer/vms'
 
+alias vizion="cd ~/Developer/code/ruby/dev-machine"
+
 # CLI tools
 alias ls='ls -lah'
 alias ctags='`brew --prefix`/bin/ctags'                         # Use homebrew's CTags
