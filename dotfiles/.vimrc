@@ -169,7 +169,7 @@ let g:ctrlp_show_hidden = 1
 
 " let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|log\|tmp\|javadoc\|bundle$',
+  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|vendor\|log\|tmp\|javadoc\|bundle$',
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 
@@ -315,6 +315,16 @@ endif
 let g:tern_map_keys=1                                                                         " Enable keyboard shortcuts
 let g:tern_show_argument_hints='on_hold'                                                      " Show argument hints
 
+"/
+"/ emmet-vim
+"/
+" Make `.js` files expand `className` instead of `class`
+let g:user_emmet_settings = {
+\  'javascript': {
+\    'attribute_name': {'for': 'htmlFor', 'class': 'className'},
+\  },
+\}
+
 " Close when you're done autocompleting: https://github.com/ternjs/tern_for_vim/issues/21
 autocmd CompleteDone * pclose                                                                 
 
@@ -327,6 +337,9 @@ let g:github_enterprise_urls = ['https://github.anaplan.com']
 
 
 "-------------------- Auto-Commands --------------------
+"
+au BufNewFile,BufRead .env.* set filetype=sh
+
 " Automatically source the .vimrc file on save
 augroup autosourcing
 	autocmd!
@@ -453,3 +466,11 @@ autocmd FileType php noremap <Leader>nf :call PhpExpandClass()<CR>
 " Default OS X `Keyboard repeat` values
 " - Key repeat: 7
 " - Delay until repeat: 3
+"
+" f<char> to look forward
+" F<char> to look back
+" ; to look in same direction
+" , to look in opposite direction
+"
+" When on insert mode `jk` to Escape and immediately `l` to go to the 
+" previous spot. That is `jkl`
