@@ -102,52 +102,13 @@ namespace :test do
   task :all => [:brew_install, :brew_cask_install]
 end
 
-brew_formulas = [
-  'ccat',
-  'ctags',
-  'editorconfig',
-  'grip',
-  'heroku',
-  'hub',
-  'jq',
-  'neovim',
-  'nvm',
-  'ruby',
-  'the_silver_searcher',
-  'reattach-to-user-namespace',
-  'ripgrep',
-  'tmux',
-  'tmuxinator-completion',
-  'trash',
-  'tree',
-  'vim',
-  'wget',
-  'yarn',
-  'zsh',
-  'zsh-autosuggestions',
-  'zsh-completions',
-  'zsh-syntax-highlighting',
-]
+brew_formulas = File::readlines('./brew_formulas')
 
-brew_cask_formulas = [
-  'atom',
-  'docker',
-  'font-fira-code',
-  'google-chrome',
-  'iterm2',
-  'licecap',
-  'macvim',
-  'mysqlworkbench',
-  'sequel-pro',
-  'slack',
-  'spectacle',
-  'vagrant',
-  'virtualbox',
-  'visual-studio-code',
-]
+brew_cask_formulas = File::readlines('./brew_cask_formulas')
 
 npm_packages = [
   'create-react-app',
+  'typescript',
   'vtop',
 ]
 
