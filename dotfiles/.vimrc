@@ -1,7 +1,6 @@
 set nocompatible              				" We want the latest Vim settings
-set mouse=a
 
-so ~/.vim/plugins.vim
+so ~/.vim/plugs.vim
 
 syntax enable
 set backspace=indent,eol,start				" Make backspace behave normally.
@@ -20,6 +19,7 @@ set autoread                                            " Reload when changed on
 
 set backupdir=~/.vim/backup//				" Put backup files out of the project root.
 set directory=~/.vim/swap//				" Put swap files out of the project root.
+set mouse=a
 
 
 
@@ -169,7 +169,7 @@ let g:ctrlp_show_hidden = 1
 
 " let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|vendor\|log\|tmp\|javadoc\|bundle$',
+  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|vendor\|log\|tmp\|javadoc\|bundle\|plugged$',
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 

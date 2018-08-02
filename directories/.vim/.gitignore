@@ -1,2 +1,4 @@
-*
-!.gitignore
+.netrwhist
+plugged
+swap
+backup
