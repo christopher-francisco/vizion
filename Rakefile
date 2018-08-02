@@ -177,16 +177,9 @@ namespace :install do
   end
 
   # TODO:  Vim 8 (from MacVim) should be installed and accessible from the SHELL
-  desc 'Vundle'
-  task :vundle do
-    unless system('ls ~/.vim/bundle/Vundle.vim')
-      logger.write('Installing Vundle')
-      installer.shell('git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim')
-    else
-      logger.write('Vundle already installed. Skipping...')
-    end
-
-    installer.shell('vim +PluginInstall +qall')
+  desc 'Vim plugs'
+  task :vim_plugs do
+    installer.shell('vim +PlugInstall +qall')
   end
 
   desc 'Link dotfiles'
@@ -229,7 +222,7 @@ namespace :install do
     :dotfiles,
     :directories,
     :tmux_plugin_manager,
-    :vundle
+    :vim_plugs
   ]
 end
 
@@ -245,6 +238,8 @@ namespace :uninstall do
       end
     end
   end
+
+  # TODO: unlink directories?
 end
 
 task :default => 'install:all'
