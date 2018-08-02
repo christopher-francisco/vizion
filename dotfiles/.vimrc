@@ -16,10 +16,9 @@ set shiftwidth=4                                        " Width of indent in nor
 set autoindent                                          " New line keeps current indentation
 set linespace=15                                        " Macvim line height
 set autoread                                            " Reload when changed on disk
-
-set backupdir=~/.vim/backup//				" Put backup files out of the project root.
-set directory=~/.vim/swap//				" Put swap files out of the project root.
 set mouse=a
+set nobackup                                            " We don't want backups
+set noswapfile                                          " We don't want swap files
 
 
 
