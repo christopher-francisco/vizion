@@ -1,237 +1,214 @@
-class Installer
-  def initialize
-    @brew_not_installed = []
-    @brew_cask_not_installed = []
-    @shell_not_installed = []
-  end
-
-  def brew(formula)
-    unless system("brew install #{formula}")
-      @brew_not_installed.push(formula)
-    end
-  end
-
-  def brew_cask(formula)
-    # brew-cask doesn't return 1 when a formula is already installed
-    output = `brew cask install #{formula}`
-    if output.include?('already installed')
-      @brew_cask_not_installed.push(formula)
-    end
-  end
-
-  def npm(package)
-    Rake::FileUtilsExt.sh("npm install -g #{package}")
-  end
-
-  def shell(program, required = false)
-    if required
-      Rake::FileUtilsExt.sh(program)
-    else
-      unless system(program)
-        @shell_not_installed.push(program)
-      end
-    end
-  end
-end
-
-class Logger
-  def write(message)
-    puts message
-  end
-
-  def step(description)
-    description = "-- #{description} "
-    description = description.ljust(80, '-')
-    puts
-    puts "\e[32m#{description}\e[0m"
-  end
-end
-
-class Linker
-  def link(original, symlink)
-    if Dir.exist?(symlink) || File.exists?(symlink) || File.symlink?(symlink)
-      return false
-    else
-      Rake::FileUtilsExt.ln_s(original, symlink, :verbose => true)
-      return true
-    end
-  end
-
-  def unlink(symlink)
-    if File.symlink?(symlink)
-      Rake::FileUtilsExt.safe_unlink symlink, :verbose => true
-      return true
-    else
-      return false
-    end
-  end
-end
-
-######################################################################################################
-# Helper functions
-######################################################################################################
+require_relative 'installer.rb'
+require_relative 'linker.rb'
+require_relative 'logger.rb'
 
 logger = Logger.new
 installer = Installer.new
 linker = Linker.new
 
-######################################################################################################
-# Installation
-######################################################################################################
-
-test_brew_formulas = ['wget']
-test_brew_cask_formulas = ['atom']
-
-namespace :test do
-  desc 'Test brew'
-  task :brew_install do
-    test_brew_formulas.each do |formula|
-      logger.step(formula)
-      installer.brew(formula)
-    end
-  end
-
-  desc 'Test brew-cask'
-  task :brew_cask_install do
-    test_brew_cask_formulas.each do |formula|
-      logger.step(formula)
-      installer.brew_cask(formula)
-    end
-  end
-
-  task :all => [:brew_install, :brew_cask_install]
+def lines_from_file(file)
+  return File::readlines(file).map { |line| line.chomp } # We want to remove the "\n"
 end
 
-brew_formulas = File::readlines('./brew_formulas')
-
-brew_cask_formulas = File::readlines('./brew_cask_formulas')
-
-npm_packages = [
-  'create-react-app',
-  'typescript',
-  'vtop',
-]
+brew_formulas = lines_from_file('./brew_formulas')
+brew_cask_formulas = lines_from_file('./brew_cask_formulas')
+yarn_packages = lines_from_file('./yarn_packages')
 
 namespace :install do
+  desc 'Start step'
+  task :start do
+    logger.vizion_started '1.0.0'
+  end
+
   desc 'Install command line developer tools, Oh My Zshell, Brew'
-  task :pre_requisites do
-    output = `xcode-select -p` 
-    unless output.include?('Developer') # TODO: What does the string contains when it's not installed??
-      logger.write('Installing command lines developer tools. Might ask for password.')
-      installer.shell('xcode-select --install', true)
+  task :base do
+    logger.step 'Base', 'Installing XCode developer tools, oh-my-zshell and brew'
+
+    stdout, stderr, status = installer.sh 'xcode-select --install'
+
+    if status.success?
+      logger.xcode_tools_installed
     else
-      logger.write('Developer command line tools already installed. Skipping...')
+      if stderr.include? "already installed"
+        logger.xcode_tools_skipped
+      else
+        logger.xcode_tools_not_installed
+      end
     end
 
-    unless system('ls -a ~ | grep .oh-my-zsh')
-      logger.write('Installing Oh My Zshell')
-      installer.shell('sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"', true)
+    stdout, stderr, status = installer.sh 'ls -a ~ | grep .oh-my-zsh'
+
+    if status.success?
+      logger.oh_my_zsh_skipped
     else
-      logger.write('Oh My Zshell already installed. Skipping...')
+      stdout, stderr, status = installer.sh 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
+      if status.success?
+        logger.oh_my_zsh_installed
+      else
+        logger.oh_my_zsh_not_installed
+      end
     end
 
-    unless system('which brew')
-      logger.write('Installing Oh My Zshell')
-      installer.shell('/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"', true)
+    stdout, stderr, status = installer.sh 'which brew'
+
+    if status.success?
+      logger.brew_skipped
     else
-      logger.write('Brew installed. Skipping...')
+      stdout, stderr, status = installer.sh '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+      if status.success?
+        logger.brew_installed
+      else
+        logger.brew_not_installed
+      end
     end
   end
 
-  desc 'Install brew formulas'
-  task :brew_formulas do
+  desc 'Install the brew formulas skipping existing ones'
+  task :brew_install do
+    logger.step 'Brew', 'Installing brew formulas'
+
+    installed_packages = `brew list`.split
+
     brew_formulas.each do |formula|
-      logger.step(formula)
-      installer.brew(formula)
+      if installed_packages.include? formula
+        logger.brew_formula_skipped formula
+      else 
+        installer.brew_install formula
+      end
+    end
+  end
+
+  desc 'Install the brew formulas and check if the installed ones are up to date'
+  task :brew_install_with_version_check do
+    logger.step 'Brew', 'Installing brew formulas while checking for the versions'
+
+    brew_formulas.each do |formula|
+      installer.brew_install formula
     end
   end
 
   desc 'Install brew-cask formulas'
-  task :brew_cask_formulas do
+  task :brew_cask_install do
+    logger.step 'Brew Cask', 'Installing brew-cask formulas'
+
+    installed_packages = `brew cask list`.split
+
     brew_cask_formulas.each do |formula|
-      logger.step(formula)
-      installer.brew_cask(formula)
+      if installed_packages.include? formula
+        logger.brew_cask_formula_skipped formula
+      else
+        installer.brew_cask_install formula 
+      end
     end
   end
 
-  desc 'Install node and global npm packages'
-  task :node_and_npm do
-    logger.write('Installing latest version of node')
-    installer.shell('nvm install node')
+  desc 'Install Yarn global packages'
+  task :yarn_packages do
+    logger.step 'Yarn', 'Installing Yarn global packages'
 
-    npm_packages.each do |package|
-      installer.npm(package);
+    stdout, stderr, status = installer.sh 'yarn global list'
+
+    yarn_packages.each do |package|
+      if stdout.include? package
+        logger.yarn_package_skipped package
+      else
+        stdout, stderr, status = installer.sh "yarn global add #{package}"
+
+        if status.success?
+          logger.yarn_package_installed package
+        else
+          logger.yarn_package_not_installed package
+        end
+      end
     end
   end
 
-  desc 'Tmux Plugin Manager'
+  desc 'Install Tmux Plugin Manager'
   task :tmux_plugin_manager do
-    unless system('ls ~/.tmux/plugins/tpm')
-      logger.write('Installing Tmux Plugin Manager')
-      installer.shell('git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm')
+    logger.step 'TPM', 'Installing Tmux Plugin Manager'
+
+    stdout, stderr, status = installer.sh 'ls ~/.tmux/plugins/tpm'
+
+    if status.success?
+      logger.tmux_plugin_manager_skipped
     else
-      logger.write('Tmux Plugin Manager already installed. Skipping...')
+      installer.shell('git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm')
+      logger.tmux_plugin_manager_installed
     end
 
     # TODO: run prefix+I
   end
 
-  # TODO:  Vim 8 (from MacVim) should be installed and accessible from the SHELL
   desc 'Vim plugs'
   task :vim_plugs do
-    installer.shell('vim +PlugInstall +qall')
+    logger.step 'Vim', 'Installing vim plugs'
+
+    installer.sh 'vim +PlugInstall +qall'
+    logger.vim_plugs_installed
   end
 
   desc 'Link dotfiles'
   task :dotfiles do
-    logger.write('Linking dotfiles')
+    logger.step 'Dotfiles', 'Linking dotfiles to the home folder'
 
     projectDir = File.dirname(__FILE__)
     dotfiles = Dir.entries('./dotfiles').select {|f| !File.directory? f}
 
-    logger.write("There are #{dotfiles.count} dotfiles")
+    logger.dotfile_count dotfiles.count
 
-    dotfiles.each do |filename|
-      unless linker.link("#{projectDir}/dotfiles/#{filename}", "#{Dir.home}/#{filename}")
-        logger.write("Unable to link #{filename}, a file, directory or a symlink already exist with the same name.")
+    dotfiles.each do |dotfile|
+      if linker.link("#{projectDir}/dotfiles/#{dotfile}", "#{Dir.home}/#{dotfile}")
+        logger.dotfile_linked dotfile
+      else
+        logger.dotfile_not_linked dotfile
       end
     end
   end
 
   desc 'Link directories'
   task :directories do
-    logger.write('Linking directories')
+    logger.step 'Directories', 'Linking directories to the home folder'
 
     projectDir = File.dirname(__FILE__)
     directories = Dir.entries('./directories').select {|f| !(f =='.' || f == '..')}
 
-    logger.write("There are #{directories.count} directories")
+    logger.directory_count directories.count
 
-    directories.each do |dirname|
-      unless linker.link("#{projectDir}/directories/#{dirname}", "#{Dir.home}/#{dirname}")
-        logger.write("Unable to link #{dirname}, a file, directory or a symlink already exist with the same name.")
+    directories.each do |directory|
+      if linker.link("#{projectDir}/directories/#{directory}", "#{Dir.home}/#{directory}")
+        logger.directory_linked directory
+      else
+        logger.directory_not_linked directory
       end
     end
   end
 
-  desc 'Set up true color and italics'
-  task :set_true_color_and_italics do
-    logger.write('Setting up true colors and italics')
+  desc 'Set up visuals'
+  task :visuals do
+    logger.step 'Visuals', 'Setting up visuals'
 
-    installer.shell('tic -x ~/.iterm2/files/xterm-256color-italic.terminfo')
-    installer.shell('tic -x ~/.iterm2/files/tmux-256color.terminfo')
+    installer.sh 'tic -x ~/.iterm2/files/xterm-256color-italic.terminfo'
+    installer.sh 'tic -x ~/.iterm2/files/tmux-256color.terminfo'
+    logger.true_colors_and_italics_configured
+  end
+
+  desc 'End step'
+  task :end do
+    logger.vizion_ended
   end
 
   task :all => [
-    :pre_requisites,
-    :brew_formulas,
-    :brew_cask_formulas,
-    :node_and_npm,
+    :start,
+    :base,
+    :brew_install,
+    :brew_cask_install,
+    :yarn_packages,
     :dotfiles,
     :directories,
     :tmux_plugin_manager,
     :vim_plugs,
-    :set_true_color_and_italics
+    :visuals,
+    :end
   ]
 end
 
