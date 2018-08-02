@@ -15,6 +15,9 @@ export TERM=xterm-256color-italic
 # We want oh-my-zsh to show `~` when on the home folder
 export DEFAULT_USER=`whoami`
 
+# We want the default protocol of `hub` to be ssh for clone/push
+export HUB_PROTOCOL=ssh
+
 # Navigation
 # TODO: make a function instead, so that you type "code:<project>" and it navigates to
 # `~/Developer/code/<project>`
@@ -69,13 +72,21 @@ catp() {
 }
 # TODO: add a func for tmuxinator projects
 
-
-
 # TODO: automatically provission these values into .zshrc.alias.local by typing
 # them in the terminal when Rakefile executes
+
+# Put this value on the local aliases:
+
+# # GitHub token for homebrew
+# export HOMEBREW_GITHUB_API_TOKEN=MY_API_TOKEN=
 #
-# Put this value on the local aliases
-# export HOMEBREW_GITHUB_API_TOKEN=MY_API_TOKEN=<github token>
-# export VIM_RHUBARB_GITHUB_API_TOKEN=<github token>
+# # GitHub token for vim-rhubarb
+# export VIM_RHUBARB_GITHUB_API_TOKEN=
+#
+# # GitHub token for hub
+# export GITHUB_TOKEN=
+#
+# # Default HOST for hub. Use when using Enterprise GitHub
+# export GITHUB_HOST=
 
 . ~/.zshrc.aliases.local

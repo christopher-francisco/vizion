@@ -8,7 +8,7 @@ let mapleader=','					" The default is \, but a comma is better.
 set number						" Show line number.
 set noerrorbells visualbell t_vb=			" No bells when pressing wrong key.
 set autowriteall 					" Automatically write the file when switching buffers.
-set complete=.,w,b,u 					" Set our desiring autocompletion matching.
+set complete=.,w,b,u 					" TODO: do we need this with YCM? - Set our desiring autocompletion matching.
 set tabstop=8                                           " The width of the tab key
 set expandtab                                           " Use spaces instead of tabs
 set softtabstop=4                                       " Width of indent in insert mode
@@ -47,7 +47,7 @@ highlight EndOfBuffer ctermfg=bg guifg=bg
 
 
 
-set guifont=Menlo:h13
+set guifont=Fira\ Code\ Retina:h13
 
 set guioptions-=e					" We don't want Gui tabs.
 set guioptions-=l                                       " Disable GUI scrollbars.
@@ -55,9 +55,6 @@ set guioptions-=L
 set guioptions-=r
 set guioptions-=R
 set guioptions+=c                                       " We want to get rid of popup bullshit
-
-" Fake a custom left padding for each window
-set foldcolumn=2
 
 " hi LineNr ctermbg=none
 " hi vertsplit ctermfg=bg ctermbg=bg
@@ -168,7 +165,7 @@ let g:ctrlp_show_hidden = 1
 
 " let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|vendor\|log\|tmp\|javadoc\|bundle\|plugged$',
+  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|vendor\|log$\|tmp\|javadoc\|bundle\|plugged$',
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 
@@ -218,7 +215,7 @@ nnoremap <leader>d :call pdv#DocumentWithSnip()<CR>
 "/
 "/ Ultisnips
 "/
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
@@ -242,6 +239,7 @@ let g:syntastic_blade_checkers = []
 let g:syntastic_html_checkers=['']
 let g:syntastic_php_checkers=['php', 'phpcs']
 let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
+let g:syntastic_java_checkers = []
 
 function! SyntasticCheckHook(errors)
     if !empty(a:errors)
