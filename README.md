@@ -17,6 +17,13 @@ Easy peasy lemon squeezy. Just run:
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/chris-fa/dev-machine/master/install.sh)"
 ```
 
+##### Temporal manual steps
+1. `touch ~/.zshrc.aliases.local`
+2. Read last section of `~/.zshrc.aliases and put tokens in there`
+3. `cp -n ~/.grip/settings.py.example ~/.grip/settings.py; vim ~/.grip/settings.py`
+4. Open that file and put your credentials
+
+
 ### Features
  - Complete support for true colors and italics on iTerm, iTerm+Vim, iTerm+Tmux, iTerm+Tmux+Vim.
  - Best mappings & plugins for Vim and Tmux
@@ -42,6 +49,12 @@ Need a task to upgrade everything. Install should not fail because upgrading
 
 ### Tmux
  - [ ] Install Tmux Plugin Manager (tpm) and run `prefix + I` automatically when running rake (currently need to start & attach to tmux, and then run `prefix + I`)
+
+### Zsh
+ - [ ] Auto setup .zshrc.aliases.local
+
+### Grip
+ - [ ] Automatically set up your username and token
 
 ### SSH
  - [ ] Create a public/private key pair on install
