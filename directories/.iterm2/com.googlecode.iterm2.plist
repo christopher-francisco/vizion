@@ -1338,7 +1338,7 @@
 				<real>1</real>
 			</dict>
 			<key>Badge Text</key>
-			<string>🔥👌🏻💯😂</string>
+			<string></string>
 			<key>Blinking Cursor</key>
 			<true/>
 			<key>Blur</key>
@@ -1877,7 +1877,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Menlo-Regular 13</string>
+			<string>FiraCode-Retina 13</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -3653,7 +3653,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-08-01T14:09:02Z</date>
+	<date>2018-08-02T14:09:03Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>

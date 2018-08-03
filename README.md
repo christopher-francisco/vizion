@@ -21,6 +21,15 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/chris-fa/dev-machine/maste
  - Complete support for true colors and italics on iTerm, iTerm+Vim, iTerm+Tmux, iTerm+Tmux+Vim.
  - Best mappings & plugins for Vim and Tmux
 
+## Troubleshooting
+>Hub returns *422 Invalid value for "base"* when running `hub pull-request`.
+
+(As discussed in this issue)[https://github.com/github/hub/issues/154#issuecomment-410277347], just set the base branch of the remote:
+
+```
+git remote set-head origin -a
+```
+
 ## Known bugs and TODO
 ### Rakefile
 Need a task to upgrade everything. Install should not fail because upgrading
