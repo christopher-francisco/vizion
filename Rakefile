@@ -157,13 +157,19 @@ namespace :install do
       installer.shell('git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm')
       logger.tmux_plugin_manager_installed
     end
-
-    # TODO: run prefix+I
   end
 
-  desc 'Vim plugs'
+  desc 'Install Tmux plugins'
+  task :tmux_plugins do
+    logger.step 'Tmux Plugins', 'Installing Tmux plugins'
+
+    installer.sh '~/.tmux/plugins/tpm/bin/install_plugins'
+    logger.tmux_plugins_installed
+  end
+
+  desc 'Install Vim plugs'
   task :vim_plugs do
-    logger.step 'Vim', 'Installing vim plugs'
+    logger.step 'Vim plugs', 'Installing Vim plugs'
 
     installer.sh 'vim +PlugInstall +qall'
     logger.vim_plugs_installed
@@ -230,6 +236,7 @@ namespace :install do
     :dotfiles,
     :directories,
     :tmux_plugin_manager,
+    :tmux_plugins,
     :vim_plugs,
     :visuals,
     :end

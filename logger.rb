@@ -247,10 +247,18 @@ class Logger
   end
 
   #####################################################################
-  # Vim
+  # Tmux plugins
+  #####################################################################
+  def tmux_plugins_installed
+    self.write " #{self.check} #{self.highlight_y "Tmux plugins"}" +
+      " #{self.highlight "installed"}"
+  end
+
+  #####################################################################
+  # Vim plugs
   #####################################################################
   def vim_plugs_installed
-    self.write " #{self.check} #{self.highlight_y "Vim Plugs"}" +
+    self.write " #{self.check} #{self.highlight_y "Vim plugs"}" +
       " #{self.highlight "installed"}"
   end
 
