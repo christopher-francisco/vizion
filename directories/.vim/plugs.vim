@@ -34,5 +34,7 @@ Plug 'easymotion/vim-easymotion'                  " Move through file using lett
 Plug 'AndrewRadev/splitjoin.vim'                  " Split and join with gS and gJ
 Plug 'mileszs/ack.vim'                            " Use Ack
 Plug 'rakr/vim-one'                               " colorscheme `one`
+Plug 'tmux-plugins/vim-tmux-focus-events'         " Fix FocusGained event when running inside tmux
+Plug 'tmux-plugins/vim-tmux'                      " Convenient commands for when editing .tmux.conf
 
 call plug#end()
