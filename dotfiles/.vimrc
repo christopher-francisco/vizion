@@ -247,10 +247,6 @@ function! SyntasticCheckHook(errors)
     endif
 endfunction
 
-"/
-"/ Align
-"/
-noremap <leader>l :Align
 "
 "/
 "/ editorconfig-vim
@@ -305,13 +301,6 @@ if executable(local_flow)
   let g:flow#flowpath = local_flow
 endif
 
-
-"/
-"/ tern_for_vim
-"/
-let g:tern_map_keys=1                                                                         " Enable keyboard shortcuts
-let g:tern_show_argument_hints='on_hold'                                                      " Show argument hints
-
 "/
 "/ emmet-vim
 "/
@@ -322,30 +311,31 @@ let g:user_emmet_settings = {
 \  },
 \}
 
-" Close when you're done autocompleting: https://github.com/ternjs/tern_for_vim/issues/21
-autocmd CompleteDone * pclose                                                                 
-
 "/
 "/ vim-rhubarb
 "/
 let g:github_enterprise_urls = ['https://github.anaplan.com']
+
+"/
+"/ vim-polyglot
+"/
+let g:polyglot_disabled = ['tmux']
 
 
 
 
 "-------------------- Auto-Commands --------------------
 "
-au BufNewFile,BufRead .env.* set filetype=sh
+autocmd BufNewFile,BufRead Dockerfile* set filetype=Dockerfile
+autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
+autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
+autocmd BufNewFile,BufRead .env* set filetype=sh
 
 " Automatically source the .vimrc file on save
 augroup autosourcing
 	autocmd!
 	autocmd BufWritePost .vimrc source %
 augroup end
-
-autocmd BufNewFile,BufRead Dockerfile* set filetype=Dockerfile
-autocmd BufNewFile,BufRead *.conf set filetype=nginx
-autocmd BufNewFile,BufRead .env* set filetype=sh
 
 
 
