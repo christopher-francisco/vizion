@@ -327,8 +327,8 @@ let g:polyglot_disabled = ['tmux']
 "-------------------- Auto-Commands --------------------
 "
 autocmd BufNewFile,BufRead Dockerfile* set filetype=Dockerfile
-autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
-autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
+autocmd BufNewFile,BufRead *tmux.conf* setf tmux
+autocmd BufNewFile,BufRead *nginx.conf* setf nginx
 autocmd BufNewFile,BufRead .env* set filetype=sh
 
 " Automatically source the .vimrc file on save

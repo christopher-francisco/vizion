@@ -75,6 +75,13 @@ gitPrOpen() {
 alias git:pr:url=gitPrUrl
 alias git:pr:open=gitPrOpen
 
+printColors() {
+    for i in {0..255}; do printf "\x1b[38;5;${i}mcolor%-5i\x1b[0m" $i ; if ! (( ($i + 1 ) % 8 )); then echo ; fi ; done
+}
+printBgColors() {
+    for i in {0..255}; do printf "\x1b[48;5;${i}m     %-5i\x1b[0m" $i ; if ! (( ($i + 1 ) % 8 )); then echo ; fi ; done
+}
+
  # ZSH plugins
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

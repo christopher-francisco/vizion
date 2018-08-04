@@ -33,7 +33,8 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --java-completer' } " We wa
 Plug 'easymotion/vim-easymotion'                  " Move through file using letters instead of numbers
 Plug 'AndrewRadev/splitjoin.vim'                  " Split and join with gS and gJ
 Plug 'mileszs/ack.vim'                            " Use Ack
-Plug 'rakr/vim-one'                               " colorscheme `one`
+Plug 'rakr/vim-one'                               " colorscheme one
+Plug 'morhetz/gruvbox'                            " colorscheme gruvbox
 Plug 'tmux-plugins/vim-tmux-focus-events'         " Fix FocusGained event when running inside tmux
 Plug 'tmux-plugins/vim-tmux'                      " Convenient commands for when editing .tmux.conf
 
