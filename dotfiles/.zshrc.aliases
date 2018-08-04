@@ -52,7 +52,7 @@ alias gccount='git rev-list --count develop..' # commits count between current b
 alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}"'
 alias did="vim +'normal Go' +'r!date' ~/did.txt"
 
-gitPRNumber() {
+gitPrUrl() {
     branchName=$(git rev-parse --abbrev-ref HEAD)
     prNumber=$(git pr list | grep $branchName | rg -e "#(\d+)" -r '$1' -o)
 
@@ -62,9 +62,18 @@ gitPRNumber() {
     fi
 
     url=$(git browse -u -- pull/NUMBER | sed "s/NUMBER/$prNumber/g")
-    open $url
+    echo $url
 }
-alias git:pr=gitPRNumber
+gitPrOpen() {
+    url=$(gitPrUrl)
+    if [ $? != 0 ]; then
+        echo "There is no PR open for this branch"
+        return 1
+    fi
+    open $()
+}
+alias git:pr:url=gitPrUrl
+alias git:pr:open=gitPrOpen
 
  # ZSH plugins
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
