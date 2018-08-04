@@ -10,9 +10,10 @@ def lines_from_file(file)
   return File::readlines(file).map { |line| line.chomp } # We want to remove the "\n"
 end
 
-brew_formulas = lines_from_file('./brew_formulas')
-brew_cask_formulas = lines_from_file('./brew_cask_formulas')
-yarn_packages = lines_from_file('./yarn_packages')
+brew_taps = lines_from_file('./definitions/brew_taps')
+brew_formulas = lines_from_file('./definitions/brew_formulas')
+brew_cask_formulas = lines_from_file('./definitions/brew_cask_formulas')
+yarn_packages = lines_from_file('./definitions/yarn_packages')
 
 namespace :install do
   desc 'Start step'
@@ -24,7 +25,7 @@ namespace :install do
   task :base do
     logger.step 'Base', 'Installing XCode developer tools, oh-my-zshell and brew'
 
-    stdout, stderr, status = installer.sh 'xcode-select --install'
+    _, stderr, status = installer.sh 'xcode-select --install'
 
     if status.success?
       logger.xcode_tools_installed
@@ -36,12 +37,12 @@ namespace :install do
       end
     end
 
-    stdout, stderr, status = installer.sh 'ls -a ~ | grep .oh-my-zsh'
+    _, stderr, status = installer.sh 'ls -a ~ | grep .oh-my-zsh'
 
     if status.success?
       logger.oh_my_zsh_skipped
     else
-      stdout, stderr, status = installer.sh 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
+      _, stderr, status = installer.sh 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
       if status.success?
         logger.oh_my_zsh_installed
       else
@@ -49,16 +50,37 @@ namespace :install do
       end
     end
 
-    stdout, stderr, status = installer.sh 'which brew'
+    _, stderr, status = installer.sh 'which brew'
 
     if status.success?
       logger.brew_skipped
     else
-      stdout, stderr, status = installer.sh '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+      _, stderr, status = installer.sh '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
       if status.success?
         logger.brew_installed
       else
         logger.brew_not_installed
+      end
+    end
+  end
+
+  desc 'Tap brew third party repos'
+  task :brew_tap do
+    logger.step 'Brew Tap', 'Tapping brew taps'
+
+    tapped_taps = `brew tap`.split
+
+    brew_taps.each do |tap|
+      if tapped_taps.include? tap
+        logger.brew_tap_skipped tap
+      else
+        _, _, status = installer.sh "brew tap #{tap}"
+
+        if status.success?
+          logger.brew_tap_success tap
+        else
+          logger.brew_tap_failed tap
+        end
       end
     end
   end
@@ -106,13 +128,13 @@ namespace :install do
   task :yarn_packages do
     logger.step 'Yarn', 'Installing Yarn global packages'
 
-    stdout, stderr, status = installer.sh 'yarn global list'
+    stdout, _, status = installer.sh 'yarn global list'
 
     yarn_packages.each do |package|
       if stdout.include? package
         logger.yarn_package_skipped package
       else
-        stdout, stderr, status = installer.sh "yarn global add #{package}"
+        stdout, _, status = installer.sh "yarn global add #{package}"
 
         if status.success?
           logger.yarn_package_installed package
@@ -127,7 +149,7 @@ namespace :install do
   task :tmux_plugin_manager do
     logger.step 'TPM', 'Installing Tmux Plugin Manager'
 
-    stdout, stderr, status = installer.sh 'ls ~/.tmux/plugins/tpm'
+    _, _, status = installer.sh 'ls ~/.tmux/plugins/tpm'
 
     if status.success?
       logger.tmux_plugin_manager_skipped
@@ -194,12 +216,14 @@ namespace :install do
 
   desc 'End step'
   task :end do
+    logger.blank_line
     logger.vizion_ended
   end
 
   task :all => [
     :start,
     :base,
+    :brew_tap,
     :brew_install,
     :brew_cask_install,
     :yarn_packages,

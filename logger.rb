@@ -26,7 +26,7 @@ class Logger
   end
 
   def step step, description 
-    self.write ""
+    self.blank_line
     self.write "[b:blue] [black]#{step} [clear] #{description}" 
   end
 
@@ -70,8 +70,11 @@ class Logger
   end
 
   def vizion_ended
-    self.write ''
     self.write 'Done'
+  end
+
+  def blank_line
+    self.write ''
   end
 
   #####################################################################
@@ -123,7 +126,25 @@ class Logger
   end
 
   #####################################################################
-  # Brew Logs
+  # Brew
+  #####################################################################
+  def brew_tap_skipped tap
+    self.write " #{self.dot} #{self.highlight_y tap}" +
+      " #{self.highlight "found"} and #{self.highlight "skipped"}"
+  end
+
+  def brew_tap_success tap
+    self.write " #{self.check} #{self.highlight_y tap}" +
+      " #{self.highlight "tapped"}"
+  end
+
+  def brew_tap_failed tap
+    self.write " #{self.cross} #{self.highlight_y tap} tap" +
+      " #{self.highlight "failed"}"
+  end
+
+  #####################################################################
+  # Brew
   #####################################################################
   def brew_formula_skipped formula
     self.write " #{self.dot} #{self.highlight_y formula}" +
@@ -157,7 +178,7 @@ class Logger
   end
 
   #####################################################################
-  # Brew Cask Logs
+  # Brew Cask
   #####################################################################
   def brew_cask_formula_skipped formula
     self.write " #{self.dot} #{self.highlight_y formula}" +

@@ -72,10 +72,6 @@ class Installer
     end
   end
 
-  def npm(package)
-    Rake::FileUtilsExt.sh("npm install -g #{package}")
-  end
-
   def sh command
     return Open3.capture3 command
   end
