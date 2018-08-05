@@ -14,7 +14,6 @@ set expandtab                                           " Use spaces instead of 
 set softtabstop=4                                       " Width of indent in insert mode
 set shiftwidth=4                                        " Width of indent in normal mode
 set autoindent                                          " New line keeps current indentation
-set linespace=15                                        " Macvim line height
 set autoread                                            " Reload when changed on disk
 set mouse=a
 set nobackup                                            " We don't want backups
@@ -49,7 +48,8 @@ highlight EndOfBuffer ctermfg=bg guifg=bg
 
 
 
-set guifont=Fira\ Code\ Retina:h13
+set guifont=Fira\ Code\ Retina:h14
+set linespace=12                                        " Macvim line height
 
 set guioptions-=e					" We don't want Gui tabs.
 set guioptions-=l                                       " Disable GUI scrollbars.
@@ -336,7 +336,7 @@ autocmd BufNewFile,BufRead .env* set filetype=sh
 " Automatically source the .vimrc file on save
 augroup autosourcing
 	autocmd!
-	autocmd BufWritePost .vimrc source %
+	autocmd BufWritePost .vimrc,.gvimrc source % | AirlineRefresh
 augroup end
 
 
