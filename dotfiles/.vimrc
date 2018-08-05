@@ -19,7 +19,6 @@ set mouse=a
 set nobackup                                            " We don't want backups
 set noswapfile                                          " We don't want swap files
 set cursorline                                          " We want to highlight the cursor horizontally
-set cursorcolumn                                        " We want to highlight the cursor vertically
 
 
 
