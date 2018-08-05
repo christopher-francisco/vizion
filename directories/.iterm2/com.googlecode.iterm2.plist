@@ -3671,9 +3671,9 @@
 	<key>TabViewType</key>
 	<integer>0</integer>
 	<key>TerminalMargin</key>
-	<integer>12</integer>
+	<integer>0</integer>
 	<key>TerminalVMargin</key>
-	<integer>12</integer>
+	<integer>0</integer>
 	<key>UseBorder</key>
 	<false/>
 	<key>UseLionStyleFullscreen</key>
