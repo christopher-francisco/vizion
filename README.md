@@ -31,7 +31,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/chris-fa/dev-machine/maste
 ## Troubleshooting
 >Hub returns *422 Invalid value for "base"* when running `hub pull-request`.
 
-(As discussed in this issue)[https://github.com/github/hub/issues/154#issuecomment-410277347], just set the base branch of the remote:
+[As discussed in this issue](https://github.com/github/hub/issues/154#issuecomment-410277347), just set the base branch of the remote:
 
 ```
 git remote set-head origin -a
@@ -47,9 +47,6 @@ Need a task to upgrade everything. Install should not fail because upgrading
 ### Neovim
  - [ ] Provision neovim
 
-### Tmux
- - [ ] Install Tmux Plugin Manager (tpm) and run `prefix + I` automatically when running rake (currently need to start & attach to tmux, and then run `prefix + I`)
-
 ### Zsh
  - [ ] Auto setup .zshrc.aliases.local
 
@@ -61,10 +58,6 @@ Need a task to upgrade everything. Install should not fail because upgrading
 
 ### iTerm2
  - [ ] Automatically load color presets `directories/.iterm2/colors`
- - [ ] Automatically load `directories/.iterm2/com.googlecode.iterm2.plist` (#4)
 
 ### API Keys
  - [ ] Input and automatically export API keys and export them to `.zshrc.alias.local`
-
-### Support for italics
- - [ ] Automatically do the setup (read `directories/.iterm2/files/README.md`)
