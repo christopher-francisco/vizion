@@ -1065,7 +1065,7 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Developer/code/ruby/dev-machine/directories</string>
+	<string>~/Downloads</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
 	<key>NSNavPanelExpandedSizeForSaveMode</key>
@@ -1085,7 +1085,7 @@
 	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
 	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
 	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
-	DIAIgAlRMSNAdKGdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	DIAIgAlRMSNAdKAAAAAAANIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
 	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
 	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
 	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
@@ -1107,23 +1107,21 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>804 33 445 77 0 0 1440 877 </string>
+	<string>539 191 445 77 0 0 1280 777 </string>
+	<key>NSWindow Frame Preferences</key>
+	<string>269 301 606 456 0 0 1280 777 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>970 806 620 392 0 0 2560 1440 </string>
-	<key>NSWindow Frame SessionsPreferences</key>
-	<string>269 369 599 388 0 0 1440 877 </string>
+	<string>330 288 620 392 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>254 160 796 473 0 0 1440 900 </string>
+	<string>281 84 796 473 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 131 824 746 0 0 1440 877 </string>
+	<string>0 31 824 746 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>480 111 960 746 0 0 1440 877 </string>
+	<string>0 150 650 627 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>591 51 824 746 0 0 1440 877 </string>
+	<string>0 150 650 627 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>34 56 752 796 0 0 1440 877 </string>
-	<key>NSWindow Frame iTerm Window 4</key>
-	<string>1650 473 824 796 1440 0 2560 1417 </string>
+	<string>256 99 650 627 0 0 1280 777 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1879,7 +1877,7 @@
 			<key>Normal Font</key>
 			<string>FiraCode-Retina 13</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -3585,10 +3583,12 @@
 			<string>/Users/christopherfrancisco</string>
 		</dict>
 	</array>
+	<key>NoSyncConfirmBeta</key>
+	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>E1D253A8-DCBC-4EB9-BCE8-B26E4EF46AFD</string>
+	<string>D23F325A-DBAA-4F8F-A0F6-FC243B3FEAF4</string>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -3596,7 +3596,11 @@
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>528826348.886639</real>
+	<real>486428182.53670102</real>
+	<key>NoSyncTimeOfLastPromo</key>
+	<real>480982881.85345101</real>
+	<key>NoSyncTimeOfLastPromoDownload</key>
+	<real>486328916.31563699</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>PMPrintingExpandedStateForPrint2</key>
@@ -3637,7 +3641,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>~/Developer/code/ruby/dev-machine/directories/.iterm2</string>
+	<string>~/.iterm2</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -3649,13 +3653,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final.xml?shard=5</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=49</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-08-02T14:09:03Z</date>
-	<key>SUSendProfileInfo</key>
-	<false/>
+	<date>2018-08-04T02:09:40Z</date>
 	<key>ShowFullScreenTabBar</key>
 	<true/>
 	<key>ShowNewOutputIndicator</key>

@@ -211,6 +211,16 @@ namespace :install do
     end
   end
 
+  desc 'Sets up iTerm2 profile'
+  task :iterm2_profile do
+    logger.step 'iTerm2', 'Setting iTerm2 profile'
+
+    installer.sh 'defaults write com.googlecode.iterm2.plist NoSyncNeverRemindPrefsChangesLostForFile_selection -int 0'
+    installer.sh 'defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true'
+    installer.sh 'defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iterm2"'
+    logger.iterm2_configured
+  end
+
   desc 'Set up visuals'
   task :visuals do
     logger.step 'Visuals', 'Setting up visuals'
@@ -238,6 +248,7 @@ namespace :install do
     :tmux_plugin_manager,
     :tmux_plugins,
     :vim_plugs,
+    :iterm2_profile,
     :visuals,
     :end
   ]
