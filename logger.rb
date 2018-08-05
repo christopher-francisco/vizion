@@ -297,6 +297,23 @@ class Logger
   end
 
   #####################################################################
+  # Oh My Zsh Themes
+  #####################################################################
+  def oh_my_zsh_theme_count count
+    self.write "There are #{self.highlight_b count} oh_my_zsh_themes to be linked"
+  end
+
+  def oh_my_zsh_theme_linked theme
+    self.write " #{self.check} #{self.highlight_y theme}" +
+      " #{self.highlight "linked"}"
+  end
+
+  def oh_my_zsh_theme_not_linked theme
+    self.write " #{self.dot} #{self.highlight_y theme}" +
+      " #{self.highlight "not linked. A file, directory or symlink already exist"}"
+  end
+
+  #####################################################################
   # iTerm2
   #####################################################################
   def iterm2_configured

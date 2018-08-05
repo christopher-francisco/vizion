@@ -1,0 +1,9 @@
+[submodule "oh-my-zsh-themes/windows-zsh-theme"]
+	path = oh-my-zsh-themes/windows-zsh-theme
+	url = https://github.com/juliavallina/windows-zsh-theme
+[submodule "oh-my-zsh-themes/sobole-zsh-theme"]
+	path = oh-my-zsh-themes/sobole-zsh-theme
+	url = https://github.com/sobolevn/sobole-zsh-theme
+[submodule "oh-my-zsh-themes/oxide"]
+	path = oh-my-zsh-themes/oxide
+	url = https://github.com/dikiaap/dotfiles

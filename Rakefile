@@ -94,7 +94,7 @@ namespace :install do
     brew_formulas.each do |formula|
       if installed_packages.include? formula
         logger.brew_formula_skipped formula
-      else 
+      else
         installer.brew_install formula
       end
     end
@@ -119,7 +119,7 @@ namespace :install do
       if installed_packages.include? formula
         logger.brew_cask_formula_skipped formula
       else
-        installer.brew_cask_install formula 
+        installer.brew_cask_install formula
       end
     end
   end
@@ -210,6 +210,28 @@ namespace :install do
       end
     end
   end
+  
+  desc 'Link oh-my-zsh Themes'
+  task :oh_my_zsh_themes do
+    logger.step 'oh-my-zsh', 'Linking oh-my-zsh themes'
+
+    themesDir = "#{Dir.home}/.oh-my-zsh/custom/themes"
+    themes = Dir.glob 'oh-my-zsh-themes/**/*.zsh-theme', File::FNM_DOTMATCH
+
+    FileUtils.mkdir_p themesDir
+
+    logger.oh_my_zsh_theme_count themes.count
+
+    themes.each do |themePath|
+      theme = File.basename(themePath)
+
+      if linker.link "#{Dir.pwd}/#{themePath}", "#{themesDir}/#{theme}"
+        logger.oh_my_zsh_theme_linked theme
+      else
+        logger.oh_my_zsh_theme_not_linked theme
+      end
+    end
+  end
 
   desc 'Sets up iTerm2 profile'
   task :iterm2_profile do
@@ -245,6 +267,7 @@ namespace :install do
     :yarn_packages,
     :dotfiles,
     :directories,
+    :oh_my_zsh_themes,
     :tmux_plugin_manager,
     :tmux_plugins,
     :vim_plugs,
