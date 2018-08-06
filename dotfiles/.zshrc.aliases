@@ -34,11 +34,11 @@ alias code:vms='cd ~/Developer/vms'
 alias vizion="cd ~/Developer/code/ruby/dev-machine"
 
 # CLI tools
-alias ls='ls -lah'
 alias ctags='`brew --prefix`/bin/ctags'                         # Use homebrew's CTags
 alias cat=ccat                                                  # Always use ccat
 alias git=hub                                                   # Always use hub
 alias ssh='TERM=xterm-256color ssh'
+alias v='vim .'
 
 # Quick alises
 alias phpunit='vendor/bin/phpunit'
@@ -88,13 +88,6 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh/site-functions/_tmuxinator
 
 bindkey '^ ' autosuggest-accept
-
-# Change iTerm title bar color to match One-Dark theme
-# TODO: need to abstract these to support multiple themes
-# echo -e "\033]6;1;bg;red;brightness;40\a"
-# echo -e "\033]6;1;bg;green;brightness;44\a"
-# echo -e "\033]6;1;bg;blue;brightness;52\a"
-# clear
 
 # Misc
 catp() {
