@@ -7,3 +7,21 @@
 [submodule "oh-my-zsh-themes/oxide"]
 	path = oh-my-zsh-themes/oxide
 	url = https://github.com/dikiaap/dotfiles
+[submodule "oh-my-zsh-themes/cordial"]
+	path = oh-my-zsh-themes/cordial
+	url = https://github.com/stevelacy/cordial-zsh-theme
+[submodule "oh-my-zsh-themes/gitster"]
+	path = oh-my-zsh-themes/gitster
+	url = https://github.com/shashankmehta/dotfiles
+[submodule "oh-my-zsh-themes/hyperzsh"]
+	path = oh-my-zsh-themes/hyperzsh
+	url = https://github.com/tylerreckart/hyperzsh
+[submodule "oh-my-zsh-themes/node"]
+	path = oh-my-zsh-themes/node
+	url = https://github.com/skuridin/oh-my-zsh-node-theme
+[submodule "oh-my-zsh-themes/spaceship"]
+	path = oh-my-zsh-themes/spaceship
+	url = https://github.com/denysdovhan/spaceship-prompt
+[submodule "oh-my-zsh-themes/lambda-pure"]
+	path = oh-my-zsh-themes/lambda-pure
+	url = https://github.com/marszall87/lambda-pure
