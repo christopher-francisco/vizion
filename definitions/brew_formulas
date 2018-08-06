@@ -3,7 +3,7 @@ ctags
 editorconfig
 gawk
 grip
-heroku
+heroku --without-node
 hub
 jq
 neovim
@@ -18,7 +18,7 @@ trash
 tree
 vim
 wget
-yarn
+yarn --without-node
 zsh
 zsh-autosuggestions
 zsh-completions
