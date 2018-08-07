@@ -2,6 +2,7 @@ ccat
 ctags
 editorconfig
 gawk
+gist
 grip
 heroku --without-node
 hub

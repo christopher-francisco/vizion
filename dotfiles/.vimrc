@@ -159,8 +159,7 @@ endfunction
 "/
 "/ CtrlP
 "/
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+set wildignore+=*/.git/*,*/tmp/*,*.so,*.swp,*.zip,*.class     " MacOSX/Linux
 
 let g:ctrlp_show_hidden = 1
 
@@ -178,6 +177,21 @@ let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:20'
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 
+" We want to use ripgrep
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+endif
+
+
+"/
+"/ Ack
+"/
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
+endif
+
 
 
 "/
@@ -194,8 +208,6 @@ nmap <C-n> :NERDTreeToggle<cr>
 "/
 "/ Greplace.vim
 "/
-set grepprg=ag                                          " Use Ag for search
-
 let g:grep_cmd_opts = '--line-numbers --noheading'
 
 "/
