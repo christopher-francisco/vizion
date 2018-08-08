@@ -70,7 +70,7 @@ gitPrOpen() {
         echo "There is no PR open for this branch"
         return 1
     fi
-    open $()
+    open $url
 }
 alias git:pr:url=gitPrUrl
 alias git:pr:open=gitPrOpen
