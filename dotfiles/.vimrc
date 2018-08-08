@@ -15,10 +15,16 @@ set softtabstop=4                                       " Width of indent in ins
 set shiftwidth=4                                        " Width of indent in normal mode
 set autoindent                                          " New line keeps current indentation
 set autoread                                            " Reload when changed on disk
-set mouse=a
 set nobackup                                            " We don't want backups
 set noswapfile                                          " We don't want swap files
 set cursorline                                          " We want to highlight the cursor horizontally
+
+" Mouse
+set ttyfast
+set mouse=a
+if !has('nvim')
+    set ttymouse=xterm2
+endif
 
 
 
