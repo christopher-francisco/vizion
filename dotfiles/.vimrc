@@ -248,12 +248,31 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_eslint_exe='$(npm bin)/eslint'
-" let g:syntastic_javascript_flow_exe = '$(npm bin)/flow'
-" let g:syntastic_javascript_checkers = ['eslint', 'flow']
+
+
+" HACK: getting them to work with the local binary:
+" For this we need to change the `_exe` to the binary, and the `_exec` to ANY
+" valid binary (in this case, /bin/ls).
+"
+" NOTE: This breaks when switching between projects, since `npm bin` is ran
+" only once per .vimrc being sourced, but we don't really change between
+" projects, do we? we just open a new vim instance
+"
+" NOTE2: the `/bin/ls` apparently works only on stylelint?
+
+" We get the absolute path for the npm local binaries, and strip the trailing \n
+let npm_bin = substitute(system('npm bin'), '\n\+$', '', '')
+
+let g:syntastic_scss_stylelint_exec = '/bin/ls'
+let g:syntastic_scss_stylelint_exe = npm_bin . '/stylelint'
+let g:syntastic_scss_checkers = ['stylelint']
+
+" let g:syntastic_javascript_eslint_exec = '/bin/ls'
+let g:syntastic_javascript_eslint_exec = npm_bin . '/eslint'
 let g:syntastic_javascript_checkers = ['eslint']
+
 let g:syntastic_blade_checkers = []
 let g:syntastic_html_checkers=['']
 let g:syntastic_php_checkers=['php', 'phpcs']
@@ -340,6 +359,11 @@ let g:github_enterprise_urls = ['https://github.anaplan.com']
 "/
 let g:polyglot_disabled = ['tmux']
 
+"/
+"/ YouCompleteMe
+"/
+" let g:ycm_log_level = 'debug'
+let g:ycm_filepath_blacklist = {}
 
 
 
