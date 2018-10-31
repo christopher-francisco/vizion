@@ -1,0 +1,72 @@
+snippet imp "Adds an ES6 import statement" b
+import $1 from '$2';$0
+endsnippet
+
+snippet arrf "Creates an arrow function" i
+const ${1:myArrowFunction} = ${2:(${3:myArg})} => ${4:{
+	$5$0
+}}$0;
+endsnippet
+
+# This snippet ends with a `);` because the majority of the times, that's what
+# we wanna put there.
+snippet afi "Creates an inline anonymous arrow function" i
+${1:(${2})} => ${0:${VISUAL}}${3:);}
+endsnippet
+
+# This snippet ends with a `);` because the majority of the times, that's what
+# we wanna put there.
+snippet afm "Creates an multiline anonymous arrow function" i
+${1:(${2})} => {
+	${0:${VISUAL}} 
+}${3:);}
+endsnippet
+
+
+snippet desc "Create a describe() block" b
+describe('${1:context}', () => {
+	${0:${VISUAL}}
+});
+endsnippet
+
+snippet it "creates an it() block" b
+it('${1:specification}', () => {
+	${0:${VISUAL:throw new Error('Specification not implemented');}}
+});
+endsnippet
+
+snippet ita "creates an async it() block" b
+it('${1:specification}', async () => {
+	${0:${VISUAL:throw new Error('Specification not implemented');}}
+});
+endsnippet
+
+snippet theni "Creates an inline .then() block" i
+.then(${1:(${2})} => ${3:${VISUAL}})${0:;}
+endsnippet
+
+snippet thenm "Creates an multiline .then() block" i
+.then(${1:(${2})} => {
+	${3:${VISUAL}}
+})${0:;}
+endsnippet
+
+snippet catchi "Creates an inline .catch() block" i
+.catch(err => ${1:${VISUAL}})${0:;}
+endsnippet
+
+snippet catchm "Creates an multiline .catch() block" i
+.catch(err => {
+	${1:${VISUAL}}
+})${0:;}
+endsnippet
+
+snippet bAllm "Creates an inline beforeAll block" i
+beforeAll(() => {
+	${0:${VISUAL}}
+});
+endsnippet
+
+snippet aAlli "Creates an inline afterAll block" i
+afterAll(() => ${0:${VISUAL}});
+endsnippet

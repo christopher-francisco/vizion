@@ -20,13 +20,21 @@ set noswapfile                                          " We don't want swap fil
 set cursorline                                          " We want to highlight the cursor horizontally
 
 " Mouse
+set mouse=nicr
+" This was supposed to handle mouse in nvim and vim, but none of it worked and
+" then some weird scroll mouse problem appeared. I'll handle this later
+" set ttyfast
+" if !has('nvim')
+    " set ttymouse=xterm2
+" endif
+
+
+" Attempt to make it faster, since it's running slow
+" @see https://github.com/tmux/tmux/issues/353
+set nonumber
+set nocursorline
+set lazyredraw
 set ttyfast
-set mouse=a
-if !has('nvim')
-    set ttymouse=xterm2
-endif
-
-
 
 
 "-------------------- Visuals --------------------
@@ -94,7 +102,7 @@ set fillchars+=vert:\
 
 
 "-------------------- Search --------------------
-set hlsearch                                            " Highlight all matched terms.
+" set hlsearch                                            " Highlight all matched terms.
 set incsearch                                           " Incrementally highlight as we type.
 
 
@@ -121,22 +129,10 @@ nnoremap j gj
 
 "-------------------- Mappings --------------------
 " Back to normal mode from insert mode
-imap jk <esc>
+inoremap jk <Esc>
 
 " Make it easy to edit the .vimrc file
-nmap <Leader>v :tabedit $MYVIMRC<cr>
-nmap <Leader>s :e ~/.vim/snippets/
-
-" Add highlight removal
-nmap <Leader><space> :nohlsearch<cr>
-
-" Quickly browse any tag/symbol in the project.
-" Tip: run `ctags -R` to regenerate the index.
-nmap <Leader>f :tag<space>
-
-" Sort PHP use statements
-" See: http://stackoverflow.com/questions/11531073/how-do-you-sort-a-range-of-lines-by-length
-vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }'<cr>
+nmap <Leader>ve :tabedit $MYVIMRC<cr>
 
 " Write to a file faster
 nmap <Leader>wf :w<cr>
@@ -144,19 +140,15 @@ nmap <Leader>wf :w<cr>
 " Quits a window faster
 nmap <Leader>q :q<cr>
 
-" Saves and quit
-nmap <Leader>x :x<cr>
+" We want to clear highlight search when pressing Enter
+" nnoremap <silent> <CR> :noh<CR>
 
-" Enable folding by indent on the current file
-function! Fold()
-    let previous_method = &fdm
+" We want to open files relative to the current file
+map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+map <Leader>t :tabe <C-R>=expand("%:p:h") . "/" <CR>
+map <Leader>s :split <C-R>=expand("%:p:h") . "/" <CR>
+map <Leader>vs :vsplit <C-R>=expand("%:p:h") . "/" <CR>
 
-    if previous_method ==? "manual"
-        setlocal fdm=syntax
-    else
-        setlocal fdm=manual
-    endif
-endfunction
 
 
 
@@ -167,9 +159,6 @@ endfunction
 "/
 set wildignore+=*/.git/*,*/tmp/*,*.so,*.swp,*.zip,*.class     " MacOSX/Linux
 
-let g:ctrlp_show_hidden = 1
-
-" let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|vendor\|log$\|tmp\|javadoc\|bundle\|plugged$',
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
@@ -182,21 +171,19 @@ nmap <C-p><C-m> :CtrlPMRUFiles<cr>
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:20'
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
+let g:ctrlp_show_hidden = 1
 
 " We want to use ripgrep
-if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-endif
+set grepprg=rg\ --color=never
+let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+let g:ctrlp_use_caching = 0
+
 
 
 "/
 "/ Ack
 "/
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep'
-endif
+let g:ackprg = 'rg --vimgrep'
 
 
 
@@ -207,37 +194,41 @@ let NERDTreeHijackNetrw = 0                             " Prevent NERDTree to co
 let NERDTreeShowHidden = 1                              " Show hidden files
 let NERDTreeIgnore = ['\.DS_Store$']                    " Hide files with .DS_Store extension
 
-"Make NERDTree easier to toggle.
-nmap <D-1> :NERDTreeToggle<cr>
-nmap <C-n> :NERDTreeToggle<cr>
-
 "/
 "/ Greplace.vim
 "/
-let g:grep_cmd_opts = '--line-numbers --noheading'
+" FIXME: this plugin broke after ripgrep update
+" let g:grep_cmd_opts = '--line-numbers --noheading'
 
 "/
-"/ vim-php-cs-fixer.vim
+"/ YouCompleteMe
 "/
-let g:php_cs_fixer_level = "psr2"
-let g:php_cs_fixer_verbose = 1
 
-nnoremap <silent><leader>pf :call PhpCsFixerFixFile()<CR>
+" We want filepath completion on .jsx files
+let g:ycm_filepath_blacklist = {}
 
-"/
-"/ pdv
-"/
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+" FIXME: This is an attempt to fix the problem where the Esc causes an error about window not closed
+let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
 
-nnoremap <leader>d :call pdv#DocumentWithSnip()<CR>
+" Debugging
+let g:ycm_server_keep_log_files = 1
+let g:ycm_log_level = 'debug'
 
 "/
 "/ Ultisnips
 "/
+" Attempting to autocomplete with tab, and navigate ultisnip with Ctrl-J
 let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" Open snippets on a vertical split
+let g:UltiSnipsEditSplit='vertical'
+
+" Fixes the problem where snippets are created in the project's directory
+" rather than in the root. @see https://github.com/SirVer/ultisnips/issues/711
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
 "/
 "/ syntastic
@@ -251,30 +242,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-
-" HACK: getting them to work with the local binary:
-" For this we need to change the `_exe` to the binary, and the `_exec` to ANY
-" valid binary (in this case, /bin/ls).
-"
-" NOTE: This breaks when switching between projects, since `npm bin` is ran
-" only once per .vimrc being sourced, but we don't really change between
-" projects, do we? we just open a new vim instance
-"
-" NOTE2: the `/bin/ls` apparently works only on stylelint?
-
-" We get the absolute path for the npm local binaries, and strip the trailing \n
-let npm_bin = substitute(system('npm bin'), '\n\+$', '', '')
-
-let g:syntastic_scss_stylelint_exec = '/bin/ls'
-let g:syntastic_scss_stylelint_exe = npm_bin . '/stylelint'
 let g:syntastic_scss_checkers = ['stylelint']
-
-" let g:syntastic_javascript_eslint_exec = '/bin/ls'
-let g:syntastic_javascript_eslint_exec = npm_bin . '/eslint'
 let g:syntastic_javascript_checkers = ['eslint']
-
 let g:syntastic_blade_checkers = []
-let g:syntastic_html_checkers=['']
+let g:syntastic_html_checkers=[]
 let g:syntastic_php_checkers=['php', 'phpcs']
 let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
 let g:syntastic_java_checkers = []
@@ -290,7 +261,8 @@ endfunction
 "/ editorconfig-vim
 "/
 let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'
-let g:EditorConfig_core_mode = 'external_command'
+" let g:EditorConfig_core_mode = 'external_command'
+let g:EditorConfig_core_mode = 'python_external'
 
 "/
 "/ vim-airline
@@ -298,7 +270,6 @@ let g:EditorConfig_core_mode = 'external_command'
 let g:airline#extensions#branch#enabled = 1                                                         " We want the Git branch to show
 set noshowmode                                                                                      " We don't want to show the --INSERT-- message when on insert mode
 set laststatus=2                                                                                    " We want the status bar to always appear
-" let g:airline_theme='solarized'
 
 " Adds comma as thousand separator to the line number, to make them human
 " readable
@@ -318,26 +289,11 @@ let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v'])
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
 
-" augroup javascript_folding
-"     au!
-"     au FileType javascript setlocal foldmethod=syntax
-" augroup END
-
 "/
 "/ vim-flow
 "/
 let g:flow#enable = 0
 let g:flow#autoclose = 1
-
-" Use locally installed flow
-" see: https://github.com/flowtype/vim-flow/issues/24
-let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
-if matchstr(local_flow, "^\/\\w") == ''
-    let local_flow= getcwd() . "/" . local_flow
-endif
-if executable(local_flow)
-  let g:flow#flowpath = local_flow
-endif
 
 "/
 "/ emmet-vim
@@ -352,6 +308,7 @@ let g:user_emmet_settings = {
 "/
 "/ vim-rhubarb
 "/
+" TODO: load this from an ENV variable?
 let g:github_enterprise_urls = ['https://github.anaplan.com']
 
 "/
@@ -360,10 +317,26 @@ let g:github_enterprise_urls = ['https://github.anaplan.com']
 let g:polyglot_disabled = ['tmux']
 
 "/
-"/ YouCompleteMe
+"/ tagbar
 "/
-" let g:ycm_log_level = 'debug'
-let g:ycm_filepath_blacklist = {}
+" FIXME: this isn't working, the plugin isn't even installed
+let g:tagbar_type_javascript = {
+    \ 'ctagstype' : 'JavaScript',
+    \ 'kinds'     : [
+        \ 'o:objects',
+        \ 'f:functions',
+        \ 'a:arrays',
+        \ 's:strings'
+    \ ]
+\ }
+
+"/
+"/ vim-markdown-preview
+"/
+let vim_markdown_preview_github=1
+let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_browser='Google Chrome'
+
 
 
 
@@ -373,6 +346,7 @@ autocmd BufNewFile,BufRead Dockerfile* set filetype=Dockerfile
 autocmd BufNewFile,BufRead *tmux.conf* setf tmux
 autocmd BufNewFile,BufRead *nginx.conf* setf nginx
 autocmd BufNewFile,BufRead .env* set filetype=sh
+autocmd BufNewFile,BufRead *.snippets set list
 
 " Automatically source the .vimrc file on save
 augroup autosourcing
@@ -385,6 +359,16 @@ augroup end
 
 
 "-------------------- Functions --------------------
+" Enable folding by indent on the current file
+function! Fold()
+    let previous_method = &fdm
+
+    if previous_method ==? "manual"
+        setlocal fdm=syntax
+    else
+        setlocal fdm=manual
+    endif
+endfunction
 
 function! IPhpInsertUse()
     call PhpInsertUse()
@@ -504,3 +488,8 @@ autocmd FileType php noremap <Leader>nf :call PhpExpandClass()<CR>
 "
 " When on insert mode `jk` to Escape and immediately `l` to go to the 
 " previous spot. That is `jkl`
+
+" Cycling
+" We use Tab and S-Tab for cycling between completion list
+" We use C-j to expand an Ultisnip snippet
+" We use C-j and C-k to move between Ultisnips tabstops

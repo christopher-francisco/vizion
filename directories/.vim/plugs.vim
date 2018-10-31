@@ -1,13 +1,16 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'SirVer/ultisnips'                           " TODO: Do we need supertab for this?
-Plug 'honza/vim-snippets'                         " TODO: Does this work with ultisnip??
-Plug 'arnaud-lb/vim-php-namespace'
+Plug 'vim-scripts/BufOnly.vim'                    " Delete all buffers but the current one
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'ervandew/supertab'                          " Let's autocomplete with tabs. Delete after YCM works. TODO: Do I have to delete this? i remember it not working if deleted??
+Plug 'ervandew/supertab'                          " We want to use Ultisnips with YCM
 Plug 'rking/ag.vim'                               " TODO: completely replace with Ack.vim
-Plug 'Chun-Yang/vim-action-ag'                    " Let us search for text objects in normal and visual modes
+Plug 'Chun-Yang/vim-action-ag'                    " TODO: repace with vim-action-ack
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'airblade/vim-gitgutter'
+" Plug 'majutsushi/tagbar'
+Plug 'tommcdo/vim-exchange'                       " Exchange with `cx{motion}`
 Plug 'skwp/greplace.vim'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
@@ -33,9 +36,12 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --java-completer' } " We wa
 Plug 'easymotion/vim-easymotion'                  " Move through file using letters instead of numbers
 Plug 'AndrewRadev/splitjoin.vim'                  " Split and join with gS and gJ
 Plug 'mileszs/ack.vim'                            " Use Ack
+Plug 'joshdick/vim-action-ack'                    " Use `gai[w|']` or `ga` to search text object on Ack
 Plug 'rakr/vim-one'                               " colorscheme one
 Plug 'morhetz/gruvbox'                            " colorscheme gruvbox
 Plug 'tmux-plugins/vim-tmux-focus-events'         " Fix FocusGained event when running inside tmux
 Plug 'tmux-plugins/vim-tmux'                      " Convenient commands for when editing .tmux.conf
+Plug 'JamshedVesuna/vim-markdown-preview', { 'for': 'md' }
+Plug 'qpkorr/vim-bufkill'                         " We want to delete a buffer without closing the split
 
 call plug#end()
