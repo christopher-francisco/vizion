@@ -1,6 +1,6 @@
-# Provisioner
+# Vizion
 
-Provisioner will provision (🔥👌😂💯) a MacOS machine from scratch. This setup is what I like to call the holy trinity, since it includes:
+Vizion will provizion (🔥👌😂💯) a MacOS machine from scratch. This setup is what I like to call the holy trinity, since it includes:
  - [Oh My Zsh](https://ohmyz.sh/)
  - [Vim](https://www.vim.org/)
  - [Tmux](https://github.com/tmux/tmux)
@@ -14,7 +14,7 @@ Provisioner will symlink dotfiles to the home directory, and will assume your co
 Easy peasy lemon squeezy. Just run:
 
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/chris-fa/dev-machine/master/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/chris-fa/vizion/master/install.sh)"
 ```
 
 ##### Temporal manual steps
