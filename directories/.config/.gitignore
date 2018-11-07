@@ -2,3 +2,5 @@
 !.gitignore
 !nvim
 !nvim/*
+!karabiner
+!karabiner/*
