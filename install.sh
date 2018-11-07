@@ -6,6 +6,6 @@ fi
 
 echo "Installing vizion"
 mkdir -p ~/Developer/code && cd "$_"
-git clone https://github.com/chris-fa/vizion
+git clone https://github.com/chris-fran/vizion
 cd vizion
 rake
