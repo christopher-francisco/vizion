@@ -4,8 +4,8 @@ if [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; then
   xcode-select --install
 fi
 
-echo "Installing dev-machine"
+echo "Installing vizion"
 mkdir -p ~/Developer/code && cd "$_"
-git clone https://github.com/chris-fa/dev-machine
-cd dev-machine
+git clone https://github.com/chris-fa/vizion
+cd vizion
 rake
