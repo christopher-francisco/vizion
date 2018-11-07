@@ -130,6 +130,7 @@ nnoremap j gj
 "-------------------- Mappings --------------------
 " Back to normal mode from insert mode
 inoremap jk <Esc>
+inoremap kj <Esc>
 
 " Make it easy to edit the .vimrc file
 nmap <Leader>ve :tabedit $MYVIMRC<cr>

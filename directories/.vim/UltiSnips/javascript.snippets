@@ -35,6 +35,12 @@ it('${1:specification}', () => {
 });
 endsnippet
 
+snippet xit "creates an xit() block" b
+xit('${1:specification}', () => {
+	${VISUAL:throw new Error('Specification not implemented');}
+});$0
+endsnippet
+
 snippet ita "creates an async it() block" b
 it('${1:specification}', async () => {
 	${0:${VISUAL:throw new Error('Specification not implemented');}}
