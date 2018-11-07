@@ -1,11 +1,9 @@
 ccat
-ctags
 --HEAD universal-ctags/universal-ctags/universal-ctags
 editorconfig
 gawk
 gist
 grip
-heroku --without-node
 hub
 jq
 neovim
@@ -13,7 +11,6 @@ nvm
 reattach-to-user-namespace
 ripgrep
 ruby
-the_silver_searcher
 tmux
 tmuxinator-completion
 trash

@@ -1,4 +1,7 @@
 @storybook/cli
 create-react-app
 gatsby-cli
+eslint
+stylelint
+serve
 typescript
