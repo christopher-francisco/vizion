@@ -31,7 +31,7 @@ alias code:vagrant='cd ~/Developer/code/vagrant'
 
 alias code:vms='cd ~/Developer/vms'
 
-alias vizion="cd ~/Developer/code/ruby/dev-machine"
+alias vizion="cd ~/Developer/code/vizion"
 
 # CLI tools
 alias cat=ccat                                                  # Always use ccat
