@@ -4,8 +4,6 @@
 [core]
 	editor = vim
         excludesfile = ~/.gitignore
-[hub]
-	protocol = https
 [include]
 	path = ~/.gitconfig.local
 [filter "lfs"]
