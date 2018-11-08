@@ -32,7 +32,7 @@ Plug 'flowtype/vim-flow'                          " Flow type. TODO: is this alr
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mattn/emmet-vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --java-completer' } " We want completion
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --java-completer' } " We want completion
 Plug 'easymotion/vim-easymotion'                  " Move through file using letters instead of numbers
 Plug 'AndrewRadev/splitjoin.vim'                  " Split and join with gS and gJ
 Plug 'mileszs/ack.vim'                            " Use Ack

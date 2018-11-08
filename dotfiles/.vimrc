@@ -204,6 +204,7 @@ let NERDTreeIgnore = ['\.DS_Store$']                    " Hide files with .DS_St
 "/
 "/ YouCompleteMe
 "/
+let g:ycm_server_python_interpreter = '/usr/local/bin/python3' " We tell YCM to use python3
 
 " We want filepath completion on .jsx files
 let g:ycm_filepath_blacklist = {}

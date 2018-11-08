@@ -22,6 +22,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/chris-fran/vizion/master/i
 2. Read last section of `~/.zshrc.aliases and put tokens in there`
 3. `cp -n ~/.grip/settings.py.example ~/.grip/settings.py; vim ~/.grip/settings.py`
 4. Open that file and put your credentials
+5. run `pip3 install --user --upgrade neovim`
 
 
 ### Features

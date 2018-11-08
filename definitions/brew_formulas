@@ -1,4 +1,5 @@
 ccat
+cmake
 --HEAD universal-ctags/universal-ctags/universal-ctags
 editorconfig
 gawk
@@ -8,6 +9,7 @@ hub
 jq
 neovim
 nvm
+python
 reattach-to-user-namespace
 ripgrep
 ruby
