@@ -41,7 +41,9 @@ Plug 'rakr/vim-one'                               " colorscheme one
 Plug 'morhetz/gruvbox'                            " colorscheme gruvbox
 Plug 'tmux-plugins/vim-tmux-focus-events'         " Fix FocusGained event when running inside tmux
 Plug 'tmux-plugins/vim-tmux'                      " Convenient commands for when editing .tmux.conf
-Plug 'JamshedVesuna/vim-markdown-preview', { 'for': 'md' }
+Plug 'JamshedVesuna/vim-markdown-preview', { 'for': 'markdown' }
 Plug 'qpkorr/vim-bufkill'                         " We want to delete a buffer without closing the split
+Plug 'peitalin/vim-jsx-typescript'                " Use this until polyglot supports it
+Plug 'vim-scripts/turbo.vim'
 
 call plug#end()

@@ -1,5 +1,5 @@
 snippet imp "Adds an ES6 import statement" b
-import $1 from '$2';$0
+import ${2:{ $3 }} from '$1';$0
 endsnippet
 
 snippet arrf "Creates an arrow function" i
@@ -48,13 +48,13 @@ it('${1:specification}', async () => {
 endsnippet
 
 snippet theni "Creates an inline .then() block" i
-.then(${1:(${2})} => ${3:${VISUAL}})${0:;}
+	.then(${1:(${2})} => ${3:${VISUAL}})$0
 endsnippet
 
 snippet thenm "Creates an multiline .then() block" i
-.then(${1:(${2})} => {
-	${3:${VISUAL}}
-})${0:;}
+	.then(${1:(${2})} => {
+		${3:${VISUAL}}
+	})${0:;}
 endsnippet
 
 snippet catchi "Creates an inline .catch() block" i
@@ -75,4 +75,133 @@ endsnippet
 
 snippet aAlli "Creates an inline afterAll block" i
 afterAll(() => ${0:${VISUAL}});
+endsnippet
+
+snippet require "Creates a CommonJS require block" i
+const ${1:${VISUAL}} = require('$1');
+endsnippet
+
+snippet requireD "Creates a CommonJS require block with different name" i
+const ${1} = require('${2}');
+endsnippet
+
+snippet route "Creates a new express route" i
+const express = require('express');
+
+const router = express.Router();
+
+${0:${VISUAL}}
+
+module.exports = router;
+endsnippet
+
+snippet ssnapshot "Creates a serialized snapshot test file" b
+/* eslint-disable import/no-extraneous-dependencies */
+import React from 'react';
+import { shallow } from 'enzyme';
+import initStoryshots from '@storybook/addon-storyshots';
+
+import $1 from './$1';
+
+describe('<$1 />', () => {
+	initStoryshots({
+		suite: 'Serialized Snapshots',
+		storyKindRegex: /^$1$/,
+		renderer: shallow,
+	});$0
+});
+endsnippet
+
+snippet wssnapshot "Creates a wrapped serialized snapshot test file" b
+/* eslint-disable import/no-extraneous-dependencies */
+import React from 'react';
+import { shallow } from 'enzyme';
+import initStoryshots from '@storybook/addon-storyshots';
+
+import $1 from './$1';
+import { $3 } from '$2test-helpers/intl-enzyme';
+import compose from '$2utils/compose';
+
+describe('<$1 />', () => {
+	initStoryshots({
+		suite: 'Serialized Snapshots',
+		storyKindRegex: /^$1$/,
+		renderer: (node, options) => shallow(
+			compose($3)(node),
+			options
+		),
+	});$0
+});
+endsnippet
+
+snippet isnapshot "Creates an image snapshot test file" b
+/* eslint-disable import/no-extraneous-dependencies */
+import initStoryshots from '@storybook/addon-storyshots';
+import { imageSnapshot } from '@storybook/addon-storyshots-puppeteer';
+
+import { defaultImageSnapshotsOptions } from '$2test-helpers/storyshots';
+
+describe('<$1 />', () => {
+	initStoryshots({
+		suite: 'Image Snapshots',
+		storyKindRegex: /^$1$/,
+		test: imageSnapshot({
+			...defaultImageSnapshotsOptions,
+		}),
+	});$0
+});
+endsnippet
+
+snippet ssadd "Creates an Storybook .add()"
+	.add('$1', () => (
+		$0
+	))
+endsnippet
+
+snippet ffcomp "Creates a functional component file"
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const $1 = ${2:({ ${3} })} => (
+	${6:<div>foo</div>}$0
+);
+
+${4:$1.propTypes = {
+	$5
+};}
+
+export default $1;
+endsnippet
+
+snippet fcomp "Creates a functional component"
+const $1 = ${2:({ ${3} })} => (
+	${6:<div>foo</div>}
+);
+
+${4:$1.propTypes = {
+	$5
+};}
+$0
+endsnippet
+
+snippet fscope "Create an scoped function"
+const $1 = (function() {
+	${2:${VISUAL}}
+	return $3;
+})();${0}
+endsnippet
+
+snippet story "Creates a storybook story" i
+/* eslint-disable import/no-extraneous-dependencies */
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+
+import $1 from '$2';
+
+const defaultProps = {
+	$3
+};
+
+storiesOf('$1', module)
+	.add('default', () => $4);
 endsnippet

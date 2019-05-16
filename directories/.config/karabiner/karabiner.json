@@ -375,7 +375,7 @@
                 }
             ],
             "name": "Built In",
-            "selected": false,
+            "selected": true,
             "simple_modifications": [
                 {
                     "from": {
@@ -508,7 +508,7 @@
                 }
             ],
             "name": "Mechanical",
-            "selected": true,
+            "selected": false,
             "simple_modifications": [
                 {
                     "from": {
@@ -516,14 +516,6 @@
                     },
                     "to": {
                         "key_code": "left_control"
-                    }
-                },
-                {
-                    "from": {
-                        "key_code": "left_option"
-                    },
-                    "to": {
-                        "key_code": "left_command"
                     }
                 },
                 {
@@ -540,6 +532,14 @@
                     },
                     "to": {
                         "key_code": "escape"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "left_option"
+                    },
+                    "to": {
+                        "key_code": "left_command"
                     }
                 }
             ],
