@@ -26,6 +26,9 @@ export DEFAULT_USER=`whoami`
 # We want the default protocol of `hub` to be ssh for clone/push
 export HUB_PROTOCOL=ssh
 
+# ZFZ uses rg
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!{.git,node_modules}"'
+
 # Navigation
 # TODO: make a function instead, so that you type "code:<project>" and it navigates to
 # `~/Developer/code/<project>`

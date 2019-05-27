@@ -135,7 +135,8 @@ inoremap jk <Esc>
 inoremap kj <Esc>
 
 " Make it easy to edit the .vimrc file
-nmap <Leader>ve :tabedit $MYVIMRC<cr>
+" nmap <Leader>ve :tabedit $MYVIMRC<cr>
+nmap <Leader>ve :tabedit ~/.vimrc<cr>
 
 " Write to a file faster
 nmap <Leader>w :w<cr>
@@ -159,6 +160,7 @@ map <Leader>vs :vsplit <C-R>=expand("%:p:h") . "/" <CR>
 "-------------------- Plugins --------------------
 "/
 "/ CtrlP
+" @deprecated - uninstalled in favor of FZF
 "/
 set wildignore+=*/.git/*,*/tmp/*,*.so,*.swp,*.zip,*.class     " MacOSX/Linux
 
@@ -167,9 +169,9 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 
-let g:ctrlp_map = '<c-p><c-p>'
-nmap <C-p><C-e> :CtrlPBufTag<cr>
-nmap <C-p><C-m> :CtrlPMRUFiles<cr>
+" let g:ctrlp_map = '<c-p><c-p>'
+" nmap <C-p><C-e> :CtrlPBufTag<cr>
+" nmap <C-p><C-m> :CtrlPMRUFiles<cr>
 
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:20'
 let g:ctrlp_max_files=0
@@ -214,8 +216,8 @@ let g:ycm_filepath_blacklist = {}
 
 " FIXME: This is an attempt to fix the problem where the Esc causes an error about window not closed
 " NONEOFTHISWORKED
-" let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " Debugging
 let g:ycm_server_keep_log_files = 1
@@ -349,6 +351,12 @@ let vim_markdown_preview_toggle=1
 let vim_markdown_preview_github=1
 let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_browser='Google Chrome'
+
+"/
+"/ FZF
+"/
+nmap <C-m><C-m> :Files<cr>
+nmap <C-m><C-t> :BTags<cr>
 
 
 
