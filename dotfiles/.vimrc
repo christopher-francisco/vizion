@@ -311,7 +311,7 @@ let g:user_emmet_settings = {
 "/ vim-rhubarb
 "/
 " TODO: load this from an ENV variable?
-let g:github_enterprise_urls = ['https://github.anaplan.com']
+let g:github_enterprise_urls = []
 
 "/
 "/ vim-polyglot
