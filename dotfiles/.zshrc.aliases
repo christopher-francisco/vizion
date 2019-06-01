@@ -1,7 +1,3 @@
-# NVM Setup
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
-
 # Export
 
 # Set the visual editor
@@ -13,6 +9,14 @@ export EDITOR="$VISUAL"
 # Add composer global executables to $PATH
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 
+# FIXME: #31 - We add homebrew's ruby because MacOS's ruby needs sudo.
+# We also add the location of the gems.
+#
+# We shouldn't be using homebrew's ruby since it's a keg-only formulae
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="/usr/local/lib/ruby/gems/2.5.0/bin:$PATH"
+export PATH="/usr/local/opt/node@8/bin:$PATH"
+
 # Enable true colors and italic.
 export TERM=xterm-256color-italic
 
@@ -21,6 +25,9 @@ export DEFAULT_USER=`whoami`
 
 # We want the default protocol of `hub` to be ssh for clone/push
 export HUB_PROTOCOL=ssh
+
+# ZFZ uses rg
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!{.git,node_modules}"'
 
 # Navigation
 # TODO: make a function instead, so that you type "code:<project>" and it navigates to

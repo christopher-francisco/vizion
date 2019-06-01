@@ -103,7 +103,8 @@ set fillchars+=vert:\
 
 "-------------------- Search --------------------
 " set hlsearch                                            " Highlight all matched terms.
-set incsearch                                           " Incrementally highlight as we type.
+" set incsearch                                           " Incrementally highlight as we type.
+set nohlsearch
 
 
 
@@ -127,16 +128,26 @@ nnoremap j gj
 
 
 
+"---------------------- Other options ----------------------
+" We want to use ripgrep
+set grepprg=rg
+let g:grep_cmd_opts = '--color=never --hidden'
+
+
+
+
+
 "-------------------- Mappings --------------------
 " Back to normal mode from insert mode
 inoremap jk <Esc>
 inoremap kj <Esc>
 
 " Make it easy to edit the .vimrc file
-nmap <Leader>ve :tabedit $MYVIMRC<cr>
+" nmap <Leader>ve :tabedit $MYVIMRC<cr>
+nmap <Leader>ve :tabedit ~/.vimrc<cr>
 
 " Write to a file faster
-nmap <Leader>wf :w<cr>
+nmap <Leader>w :w<cr>
 
 " Quits a window faster
 nmap <Leader>q :q<cr>
@@ -157,6 +168,7 @@ map <Leader>vs :vsplit <C-R>=expand("%:p:h") . "/" <CR>
 "-------------------- Plugins --------------------
 "/
 "/ CtrlP
+" @deprecated - uninstalled in favor of FZF
 "/
 set wildignore+=*/.git/*,*/tmp/*,*.so,*.swp,*.zip,*.class     " MacOSX/Linux
 
@@ -165,17 +177,15 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 
-let g:ctrlp_map = '<c-p><c-p>'
-nmap <C-p><C-e> :CtrlPBufTag<cr>
-nmap <C-p><C-m> :CtrlPMRUFiles<cr>
+" let g:ctrlp_map = '<c-p><c-p>'
+" nmap <C-p><C-e> :CtrlPBufTag<cr>
+" nmap <C-p><C-m> :CtrlPMRUFiles<cr>
 
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:20'
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 let g:ctrlp_show_hidden = 1
 
-" We want to use ripgrep
-set grepprg=rg\ --color=never
 let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
 let g:ctrlp_use_caching = 0
 
@@ -198,24 +208,29 @@ let NERDTreeIgnore = ['\.DS_Store$']                    " Hide files with .DS_St
 "/
 "/ Greplace.vim
 "/
-" FIXME: this plugin broke after ripgrep update
-" let g:grep_cmd_opts = '--line-numbers --noheading'
 
 "/
 "/ YouCompleteMe
 "/
+" let g:loaded_youcompleteme = 1 " tmp disable
 let g:ycm_server_python_interpreter = '/usr/local/bin/python3' " We tell YCM to use python3
 
 " We want filepath completion on .jsx files
 let g:ycm_filepath_blacklist = {}
 
 " FIXME: This is an attempt to fix the problem where the Esc causes an error about window not closed
+" NONEOFTHISWORKED
 let g:ycm_autoclose_preview_window_after_completion = 1
 " let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " Debugging
 let g:ycm_server_keep_log_files = 1
 let g:ycm_log_level = 'debug'
+
+nmap <Leader>gt :YcmCompleter GoTo<cr>
+nmap <Leader>gr :YcmCompleter GoToReferences<cr>
+nmap <Leader>rn :YcmCompleter RefactorRename 
+nmap <Leader>fi :YcmCompleter FixIt<cr>
 
 "/
 "/ Ultisnips
@@ -234,6 +249,7 @@ let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
 "/
 "/ syntastic
+"/ FIXME: sourcing multiple times causes this to show "multiple lines"
 "/
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -335,9 +351,18 @@ let g:tagbar_type_javascript = {
 "/
 "/ vim-markdown-preview
 "/
+let vim_markdown_preview_toggle=1
 let vim_markdown_preview_github=1
 let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_browser='Google Chrome'
+
+"/
+"/ FZF
+"/
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!{.git,node_modules}"'
+nmap <C-m><C-m> :Files<cr>
+nmap <C-m><C-t> :BTags<cr>
+
 
 
 
@@ -356,13 +381,17 @@ augroup autosourcing
 	autocmd BufWritePost .vimrc,.gvimrc source % | AirlineRefresh
 augroup end
 
+augroup custom_commands
+    autocmd!
+    autocmd VimEnter * if !exists(":Fold") | command Fold execute "call ToggleFold()" | endif
+augroup end
 
 
 
 
 "-------------------- Functions --------------------
 " Enable folding by indent on the current file
-function! Fold()
+function! ToggleFold()
     let previous_method = &fdm
 
     if previous_method ==? "manual"
@@ -495,3 +524,9 @@ autocmd FileType php noremap <Leader>nf :call PhpExpandClass()<CR>
 " We use Tab and S-Tab for cycling between completion list
 " We use C-j to expand an Ultisnip snippet
 " We use C-j and C-k to move between Ultisnips tabstops
+
+" Project search & replace
+" :args *.txt
+" :vimgrep /Vimcasts\.\zscom/g ##
+" :cdo %s/Vimcasts\.\zscom/org/ge
+" :cdo update
