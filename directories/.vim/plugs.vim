@@ -5,11 +5,8 @@ Plug 'SirVer/ultisnips'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ervandew/supertab'                          " We want to use Ultisnips with YCM
-Plug 'rking/ag.vim'                               " TODO: completely replace with Ack.vim
-Plug 'Chun-Yang/vim-action-ag'                    " TODO: repace with vim-action-ack
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'airblade/vim-gitgutter'
-" Plug 'majutsushi/tagbar'
 Plug 'tommcdo/vim-exchange'                       " Exchange with `cx{motion}`
 Plug 'skwp/greplace.vim'
 Plug 'tpope/vim-sensible'
@@ -35,8 +32,6 @@ Plug 'mattn/emmet-vim'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --java-completer' } " We want completion
 Plug 'easymotion/vim-easymotion'                  " Move through file using letters instead of numbers
 Plug 'AndrewRadev/splitjoin.vim'                  " Split and join with gS and gJ
-Plug 'mileszs/ack.vim'                            " Use Ack
-Plug 'joshdick/vim-action-ack'                    " Use `gai[w|']` or `ga` to search text object on Ack
 Plug 'rakr/vim-one'                               " colorscheme one
 Plug 'morhetz/gruvbox'                            " colorscheme gruvbox
 Plug 'tmux-plugins/vim-tmux-focus-events'         " Fix FocusGained event when running inside tmux
