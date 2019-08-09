@@ -9,8 +9,8 @@ set number						" Show line number.
 set noerrorbells visualbell t_vb=			" No bells when pressing wrong key.
 set autowriteall 					" Automatically write the file when switching buffers.
 set complete=.,w,b,u 					" TODO: do we need this with YCM? - Set our desiring autocompletion matching.
-set tabstop=8                                           " The width of the tab key
 set expandtab                                           " Use spaces instead of tabs
+set tabstop=8                                           " The width of the tab key
 set softtabstop=4                                       " Width of indent in insert mode
 set shiftwidth=4                                        " Width of indent in normal mode
 set autoindent                                          " New line keeps current indentation
@@ -18,6 +18,7 @@ set autoread                                            " Reload when changed on
 set nobackup                                            " We don't want backups
 set noswapfile                                          " We don't want swap files
 set cursorline                                          " We want to highlight the cursor horizontally
+set encoding=UTF-8
 
 " Mouse
 set mouse=nicr
@@ -131,7 +132,7 @@ nnoremap j gj
 "---------------------- Other options ----------------------
 " We want to use ripgrep
 set grepprg=rg
-let g:grep_cmd_opts = '--color=never --hidden'
+let g:grep_cmd_opts = '--line-number --no-heading --color=never --hidden'
 
 
 
@@ -145,6 +146,7 @@ inoremap kj <Esc>
 " Make it easy to edit the .vimrc file
 " nmap <Leader>ve :tabedit $MYVIMRC<cr>
 nmap <Leader>ve :tabedit ~/.vimrc<cr>
+nmap <Leader>vp :tabedit ~/.vim/plugs.vim<cr>
 
 " Write to a file faster
 nmap <Leader>w :w<cr>
@@ -360,8 +362,54 @@ let vim_markdown_preview_browser='Google Chrome'
 "/ FZF
 "/
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!{.git,node_modules}"'
-nmap <C-m><C-m> :Files<cr>
-nmap <C-m><C-t> :BTags<cr>
+" nmap <C-p><C-p> :Files<cr>
+nmap <C-p><C-p> :call FZFWithDevIcons()<cr>
+nmap <C-p><C-t> :BTags<cr>
+
+"/
+"/ vim-devicons
+"/
+function! FZFWithDevIcons()
+  let l:fzf_files_options = ' -m --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up --preview "bat --theme=One\ Dark --color always --style numbers {2..}"'
+
+  function! s:files()
+    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+    return s:prepend_icon(l:files)
+  endfunction
+
+  function! s:prepend_icon(candidates)
+    let result = []
+    for candidate in a:candidates
+      let filename = fnamemodify(candidate, ':p:t')
+      let icon = WebDevIconsGetFileTypeSymbol(filename, isdirectory(filename))
+      call add(result, printf("%s %s", icon, candidate))
+    endfor
+
+    return result
+  endfunction
+
+  function! s:edit_file(items)
+    let items = a:items
+    let i = 1
+    let ln = len(items)
+    while i < ln
+      let item = items[i]
+      let parts = split(item, ' ')
+      let file_path = get(parts, 1, '')
+      let items[i] = file_path
+      let i += 1
+    endwhile
+    call s:Sink(items)
+  endfunction
+
+  let opts = fzf#wrap({})
+  let opts.source = <sid>files()
+  let s:Sink = opts['sink*']
+  let opts['sink*'] = function('s:edit_file')
+  let opts.options .= l:fzf_files_options
+  call fzf#run(opts)
+
+endfunction
 
 
 
@@ -370,10 +418,11 @@ nmap <C-m><C-t> :BTags<cr>
 "-------------------- Auto-Commands --------------------
 "
 autocmd BufNewFile,BufRead Dockerfile* set filetype=Dockerfile
-autocmd BufNewFile,BufRead *tmux.conf* setf tmux
-autocmd BufNewFile,BufRead *nginx.conf* setf nginx
+autocmd BufNewFile,BufRead *tmux.conf* set filetype=tmux
+autocmd BufNewFile,BufRead *nginx.conf* set filetype=nginx
 autocmd BufNewFile,BufRead .env* set filetype=sh
 autocmd BufNewFile,BufRead *.snippets set list
+autocmd BufNewFile,BufRead .env-cmdrc set filetype=json
 
 " Automatically source the .vimrc file on save
 augroup autosourcing

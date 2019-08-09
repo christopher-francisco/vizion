@@ -211,6 +211,9 @@
                 }
             ],
             "name": "Drevo Calibur",
+            "parameters": {
+                "delay_milliseconds_before_open_device": 1000
+            },
             "selected": false,
             "simple_modifications": [
                 {
@@ -378,6 +381,9 @@
                 }
             ],
             "name": "Built In",
+            "parameters": {
+                "delay_milliseconds_before_open_device": 1000
+            },
             "selected": true,
             "simple_modifications": [
                 {
@@ -513,6 +519,9 @@
                 }
             ],
             "name": "Mechanical",
+            "parameters": {
+                "delay_milliseconds_before_open_device": 1000
+            },
             "selected": false,
             "simple_modifications": [
                 {

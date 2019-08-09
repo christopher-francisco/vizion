@@ -2,8 +2,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-scripts/BufOnly.vim'                    " Delete all buffers but the current one
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ervandew/supertab'                          " We want to use Ultisnips with YCM
@@ -48,5 +46,6 @@ Plug 'qpkorr/vim-bufkill'                         " We want to delete a buffer w
 Plug 'peitalin/vim-jsx-typescript'                " Use this until polyglot supports it
 Plug 'vim-scripts/turbo.vim'                      " Turbo C colors
 Plug 'sjl/gundo.vim'
+Plug 'ryanoasis/vim-devicons'                     " We want glyphs
 
 call plug#end()
