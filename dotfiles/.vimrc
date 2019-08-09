@@ -60,8 +60,6 @@ let g:airline_theme='one'
 " Disable `~` at end of buffer
 highlight EndOfBuffer ctermfg=bg guifg=bg
 
-
-
 set guifont=Fira\ Code\ Retina:h14
 set linespace=12                                        " Macvim line height
 
@@ -326,12 +324,6 @@ let g:user_emmet_settings = {
 \}
 
 "/
-"/ vim-rhubarb
-"/
-" TODO: load this from an ENV variable?
-let g:github_enterprise_urls = []
-
-"/
 "/ vim-polyglot
 "/
 let g:polyglot_disabled = ['tmux']
@@ -465,6 +457,14 @@ endfunction
 autocmd FileType php inoremap <Leader>nf <Esc>:call IPhpExpandClass()<CR>
 autocmd FileType php noremap <Leader>nf :call PhpExpandClass()<CR>
 
+
+
+
+
+"------------------------- Local Configuration ------------------------
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
 
 
 
