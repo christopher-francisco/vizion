@@ -33,13 +33,6 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!{.git,node_modules}"'
 # TODO: make a function instead, so that you type "code:<project>" and it navigates to
 # `~/Developer/code/<project>`
 alias code:home='cd ~/Developer/code'
-
-alias code:android='cd ~/Developer/code/android'
-alias code:chef='cd ~/Developer/code/chef'
-alias code:ios='cd ~/Developer/code/ios'
-alias code:php='cd ~/Developer/code/php'
-alias code:vagrant='cd ~/Developer/code/vagrant'
-
 alias code:vms='cd ~/Developer/vms'
 
 alias vizion="cd ~/Developer/code/vizion"
@@ -50,14 +43,10 @@ alias git=hub                                                   # Always use hub
 alias ssh='TERM=xterm-256color ssh'
 alias v='vim .'
 
+alias nv='nvim .'
+alias nvp='nvim -c "call FZFWithDevIcons()"'
+
 # Quick alises
-alias phpunit='vendor/bin/phpunit'
-alias behat='vendor/bin/behat'
-alias phpcs='vendor/bin/phpcs'
-alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
-alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
-alias gbm='git branch --merged | grep -v "\*"'
-alias gbmd='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 alias gccount='git rev-list --count develop..' # commits count between current branch and develop
 alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}"'
 alias did="vim +'normal Go' +'r!date' ~/did.txt"
