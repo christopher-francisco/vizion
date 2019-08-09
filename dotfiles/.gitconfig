@@ -1,11 +1,13 @@
-[user]
-	name = Christopher Francisco
-	email = christopher.f.almanza@gmail.com
+[include]
+	path = ~/.gitconfig.local
+
+[includeIf "gitdir:~/Developer/code/enterprise/"]
+	path = ~/.gitconfig.enterprise
+
 [core]
 	editor = vim
         excludesfile = ~/.gitignore
-[include]
-	path = ~/.gitconfig.local
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

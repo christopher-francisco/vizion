@@ -423,6 +423,7 @@ autocmd BufNewFile,BufRead *nginx.conf* set filetype=nginx
 autocmd BufNewFile,BufRead .env* set filetype=sh
 autocmd BufNewFile,BufRead *.snippets set list
 autocmd BufNewFile,BufRead .env-cmdrc set filetype=json
+autocmd BufNewFile,BufRead .gitconfig* set filetype=gitconfig
 
 " Automatically source the .vimrc file on save
 augroup autosourcing
