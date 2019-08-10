@@ -296,10 +296,24 @@ function! MyLineNumber()
     \    substitute(line('$'), '\d\@<=\(\(\d\{3\}\)\+\)$', ',&', 'g')
 endfunction
 
+function! GetGitHubInstance()
+    let github = $GITHUB_INSTANCE
+
+    if (github != "") 
+        let text = " | " . github . " "
+    else
+        let text = ""
+    endif
+
+    return text
+endfunction
+
 " TODO: wrap this 2 alls in a check if airlines is already installed
 call airline#parts#define('linenr', {'function': 'MyLineNumber', 'accents': 'bold'})
 
-let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v'])
+call airline#parts#define_function('github-instance', 'GetGitHubInstance')
+
+let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v', 'github-instance'])
 
 "/
 "/ vim-javascript

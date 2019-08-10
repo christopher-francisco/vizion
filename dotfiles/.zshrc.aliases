@@ -92,6 +92,19 @@ bindkey '^ ' autosuggest-accept
 catp() {
     cat package.json | grep $1
 }
+
+# cd hoook to initialize tokens for cloud/enterprise GitHub
+chpwd() {
+    case $PWD in
+        (*/Developer/code/enterprise*)
+            type useEnterpriseGitHub > /dev/null && useEnterpriseGitHub
+            ;;
+        *)
+            type useCloudGitHub > /dev/null && useCloudGitHub
+            ;;
+    esac
+}
+
 # TODO: add a func for tmuxinator projects
 
 # TODO: automatically provission these values into .zshrc.alias.local by typing
