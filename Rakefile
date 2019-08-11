@@ -290,7 +290,17 @@ namespace :uninstall do
     end
   end
 
-  # TODO: unlink directories?
+  desc 'directories'
+  task :directories do
+    logger.write('Unlinking directories')
+    directories = Dir.children('./directories')
+
+    directories.each do |dirname|
+      unless linker.unlink("#{Dir.home}/#{dirname}")
+        logger.write("Unable to unlink #{dirname}, it doesn't exist.")
+      end
+    end
+  end
 end
 
 task :default => 'install:all'
