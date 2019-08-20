@@ -95,6 +95,10 @@ catp() {
 
 # cd hoook to initialize tokens for cloud/enterprise GitHub
 chpwd() {
+    setGithubVersion
+}
+
+setGithubVersion() {
     case $PWD in
         (*/Developer/code/enterprise*)
             type useEnterpriseGitHub > /dev/null && useEnterpriseGitHub
@@ -125,3 +129,6 @@ chpwd() {
 # export GITHUB_HOST=
 
 . ~/.zshrc.aliases.local
+
+# We call this on source
+setGithubVersion

@@ -300,7 +300,7 @@ function! GetGitHubInstance()
     let github = $GITHUB_INSTANCE
 
     if (github != "") 
-        let text = " | " . github . " "
+        let text = github
     else
         let text = ""
     endif
@@ -313,7 +313,12 @@ call airline#parts#define('linenr', {'function': 'MyLineNumber', 'accents': 'bol
 
 call airline#parts#define_function('github-instance', 'GetGitHubInstance')
 
-let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v', 'github-instance'])
+
+function! AirlineInit()
+    let g:airline_section_b = airline#section#create_left(['github-instance', 'hunks', 'branch'])
+    let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v'])
+endfunction
+autocmd User AirlineAfterInit call AirlineInit()
 
 "/
 "/ vim-javascript
