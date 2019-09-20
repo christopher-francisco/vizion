@@ -77,12 +77,8 @@ snippet aAlli "Creates an inline afterAll block" i
 afterAll(() => ${0:${VISUAL}});
 endsnippet
 
-snippet require "Creates a CommonJS require block" i
-const ${1:${VISUAL}} = require('$1');
-endsnippet
-
-snippet requireD "Creates a CommonJS require block with different name" i
-const ${1} = require('${2}');
+snippet req "Creates a CommonJS require block" i
+const ${2:${VISUAL}} = require('$1');
 endsnippet
 
 snippet route "Creates a new express route" i
