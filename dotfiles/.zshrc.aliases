@@ -109,6 +109,21 @@ setGithubVersion() {
     esac
 }
 
+createEditorConfig() {
+  ls .editorconfig > /dev/null 2>&1 
+  if [ $? != 0 ]; then
+    echo "root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2" >> .editorconfig
+  else
+    echo ".editorconfig file found. Nothing was changed."
+  fi
+}
+
 # TODO: add a func for tmuxinator projects
 
 # TODO: automatically provission these values into .zshrc.alias.local by typing

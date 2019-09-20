@@ -10,15 +10,16 @@ set noerrorbells visualbell t_vb=			" No bells when pressing wrong key.
 set autowriteall 					" Automatically write the file when switching buffers.
 set complete=.,w,b,u 					" TODO: do we need this with YCM? - Set our desiring autocompletion matching.
 set expandtab                                           " Use spaces instead of tabs
-set tabstop=8                                           " The width of the tab key
-set softtabstop=4                                       " Width of indent in insert mode
-set shiftwidth=4                                        " Width of indent in normal mode
+set tabstop=2                                           " The width of the tab key
+set softtabstop=2                                       " Width of indent in insert mode
+set shiftwidth=0                                        " Width of indent in normal mode
 set autoindent                                          " New line keeps current indentation
 set autoread                                            " Reload when changed on disk
 set nobackup                                            " We don't want backups
 set noswapfile                                          " We don't want swap files
 set cursorline                                          " We want to highlight the cursor horizontally
 set encoding=UTF-8
+set signcolumn=yes                                      " Always show the gutter
 
 " Mouse
 set mouse=nicr
@@ -32,10 +33,9 @@ set mouse=nicr
 
 " Attempt to make it faster, since it's running slow
 " @see https://github.com/tmux/tmux/issues/353
-set nonumber
 set nocursorline
 set lazyredraw
-set ttyfast
+" set ttyfast
 
 
 "-------------------- Visuals --------------------
@@ -55,6 +55,7 @@ set background=dark
 let g:one_allow_italics = 1
 colorscheme one
 
+" let g:rigel_airline = 1
 let g:airline_theme='one'
 
 " Disable `~` at end of buffer
@@ -73,11 +74,16 @@ set guioptions+=c                                       " We want to get rid of 
 " hi LineNr ctermbg=none
 " hi vertsplit ctermfg=bg ctermbg=bg
 
+" gui_running not working on nvim
+hi vertsplit guifg=bg guibg=#363C48
+
 " Get rid of split borders on terminal vim
 " Gets rid of the horizontal bar when splitting windows
 if has("gui_running")
     hi LineNr guibg=bg
-    hi vertsplit guifg=bg guibg=bg
+    " hi vertsplit guifg=bg guibg=bg
+    " hi vertsplit guifg=bg guibg=#272C35
+    hi vertsplit guifg=bg guibg=#363C48
     hi foldcolumn guibg=bg
 
     " hi StatusLine guifg=bg guibg=bg
@@ -161,6 +167,8 @@ map <Leader>t :tabe <C-R>=expand("%:p:h") . "/" <CR>
 map <Leader>s :split <C-R>=expand("%:p:h") . "/" <CR>
 map <Leader>vs :vsplit <C-R>=expand("%:p:h") . "/" <CR>
 
+" Find FIXMEs quickly
+nmap <Leader>fm :Rg FIXME<cr>
 
 
 
@@ -212,7 +220,9 @@ let NERDTreeIgnore = ['\.DS_Store$']                    " Hide files with .DS_St
 "/
 "/ YouCompleteMe
 "/
-" let g:loaded_youcompleteme = 1 " tmp disable
+" Disable YCM
+" let g:loaded_youcompleteme = 0
+
 let g:ycm_server_python_interpreter = '/usr/local/bin/python3' " We tell YCM to use python3
 
 " We want filepath completion on .jsx files
@@ -226,6 +236,10 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 " Debugging
 let g:ycm_server_keep_log_files = 1
 let g:ycm_log_level = 'debug'
+
+" Symbols
+let g:ycm_error_symbol = '✘'
+let g:ycm_warning_symbol = '⚠'
 
 nmap <Leader>gt :YcmCompleter GoTo<cr>
 nmap <Leader>gr :YcmCompleter GoToReferences<cr>
@@ -350,16 +364,9 @@ let g:polyglot_disabled = ['tmux']
 "/
 "/ tagbar
 "/
-" FIXME: this isn't working, the plugin isn't even installed
-let g:tagbar_type_javascript = {
-    \ 'ctagstype' : 'JavaScript',
-    \ 'kinds'     : [
-        \ 'o:objects',
-        \ 'f:functions',
-        \ 'a:arrays',
-        \ 's:strings'
-    \ ]
-\ }
+" Focus the tag bar when opening it
+let g:tagbar_autofocus = 1 
+
 
 "/
 "/ vim-markdown-preview
@@ -421,6 +428,25 @@ function! FZFWithDevIcons()
   call fzf#run(opts)
 
 endfunction
+
+"/
+"/ ale
+"/
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+
+let g:ale_fixers = {
+\ 'javascript': ['stylelint', 'eslint'],
+\}
+
+" let g:ale_fix_on_save = 1
+
+" Only run linters named in ale_linters settings.
+let g:ale_linters_explicit = 1
+
+"/
+"/ vim-gitgutter
+"/
 
 
 

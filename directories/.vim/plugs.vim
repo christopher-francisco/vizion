@@ -4,11 +4,10 @@ Plug 'vim-scripts/BufOnly.vim'                    " Delete all buffers but the c
 Plug 'SirVer/ultisnips'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'ervandew/supertab'                          " We want to use Ultisnips with YCM
+Plug 'ervandew/supertab'                          " We want to use Ultisnips with YCM. FIXME: I think I'm no longer using this?
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'airblade/vim-gitgutter'
 Plug 'tommcdo/vim-exchange'                       " Exchange with `cx{motion}`
-Plug 'skwp/greplace.vim'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -22,7 +21,7 @@ Plug 'tpope/vim-jdaddy'                           " JSON manipulation
 Plug 'tpope/vim-capslock'                         " Software CAPS LOCK: `<C-G>c` in insert mode, `gC` in normal mode
 Plug 'tpope/vim-rhubarb'                          " Browser enterprise GitHub
 Plug 'godlygeek/tabular'                          " Aligning
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'flowtype/vim-flow'                          " Flow type. TODO: is this already in polyglot???
@@ -42,5 +41,8 @@ Plug 'peitalin/vim-jsx-typescript'                " Use this until polyglot supp
 Plug 'vim-scripts/turbo.vim'                      " Turbo C colors
 Plug 'sjl/gundo.vim'
 Plug 'ryanoasis/vim-devicons'                     " We want glyphs
+Plug 'dense-analysis/ale'                         " Might replace syntastic
+Plug 'Rigellute/rigel'                            " Colorscheme rigel
+Plug 'majutsushi/tagbar'
 
 call plug#end()
