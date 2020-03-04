@@ -128,24 +128,16 @@ indent_size = 2" >> .editorconfig
   fi
 }
 
+# Create enterprise directory if it doesn't exist
+mkdir -p ~/Developer/code/enterprise
+
 # TODO: add a func for tmuxinator projects
 
-# TODO: automatically provission these values into .zshrc.alias.local by typing
-# them in the terminal when Rakefile executes
+. ~/.zshrc.tokens
 
-# Put this value on the local aliases:
-
-# # GitHub token for homebrew
-# export HOMEBREW_GITHUB_API_TOKEN=MY_API_TOKEN=
-#
-# # GitHub token for vim-rhubarb
-# export VIM_RHUBARB_GITHUB_API_TOKEN=
-#
-# # GitHub token for hub
-# export GITHUB_TOKEN=
-#
-# # Default HOST for hub. Use when using Enterprise GitHub
-# export GITHUB_HOST=
+if [[ ! -e ~/.zshrc.aliases.local ]]; then
+  touch ~/.zshrc.aliases.local
+fi
 
 . ~/.zshrc.aliases.local
 
