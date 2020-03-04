@@ -201,3 +201,30 @@ const defaultProps = {
 storiesOf('$1', module)
 	.add('default', () => $4);
 endsnippet
+
+snippet Given "Creates a Given" i
+Given(
+	/$1/,
+	async function ($2) {
+		$0
+	},
+);
+endsnippet
+
+snippet When "Creates a When" i
+When(
+	/$1/,
+	async function ($2) {
+		$0
+	},
+);
+endsnippet
+
+snippet Then "Creates a Then" i
+Then(
+	/$1/,
+	async function ($2) {
+		$0
+	},
+);
+endsnippet
