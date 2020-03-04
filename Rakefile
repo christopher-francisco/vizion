@@ -264,6 +264,13 @@ namespace :install do
     logger.write "Gitconfig local configured"
   end
 
+  desc 'Setup github tokens and rhubarb'
+    installer.shell './scripts/setup_tokens.sh', true
+    installer.shell './scripts/setup-rhubarb.sh', true
+    logger.write "Gitconfig local configured"
+  task :github_tokens_and_rhubarb
+end
+
   desc 'End step'
   task :end do
     logger.blank_line
