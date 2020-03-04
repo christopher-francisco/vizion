@@ -15,7 +15,7 @@ reattach-to-user-namespace
 ripgrep
 ruby
 tmux
-tmuxinator-completion
+tmuxinator
 trash
 tree
 vim
