@@ -41,7 +41,11 @@ alias vizion="cd ~/Developer/code/vizion"
 alias cat=ccat                                                  # Always use ccat
 alias git=hub                                                   # Always use hub
 alias ssh='TERM=xterm-256color ssh'
-alias v='vim .'
+alias vim='nvim'
+alias v='nvim .'
+alias vs='nvim $(fzf)'
+alias nvs='nvim $(fzf)'
+alias mux=tmuxinator
 
 alias nv='nvim .'
 alias nvp='nvim -c "call FZFWithDevIcons()"'
