@@ -258,6 +258,12 @@ namespace :install do
     logger.write "Grip settings configured"
   end
 
+  desc 'Gitconfig local setup'
+  task :gitconfig_local_setup do
+    installer.shell './scripts/setup_gitconfig.sh local', true
+    logger.write "Gitconfig local configured"
+  end
+
   desc 'End step'
   task :end do
     logger.blank_line
@@ -280,6 +286,7 @@ namespace :install do
     :iterm2_profile,
     :visuals,
     :grip_settings,
+    :gitconfig_local_setup,
     :end
   ]
 end
