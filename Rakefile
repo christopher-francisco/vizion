@@ -252,6 +252,12 @@ namespace :install do
     logger.true_colors_and_italics_configured
   end
 
+  desc 'Grip settings'
+  task :grip_settings do
+    installer.shell './scripts/setup_grip.sh', true
+    logger.write "Grip settings configured"
+  end
+
   desc 'End step'
   task :end do
     logger.blank_line
@@ -273,6 +279,7 @@ namespace :install do
     :vim_plugs,
     :iterm2_profile,
     :visuals,
+    :grip_settings,
     :end
   ]
 end
