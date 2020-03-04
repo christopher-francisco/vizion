@@ -17,15 +17,6 @@ Easy peasy lemon squeezy. Just run:
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/chris-fran/vizion/master/install.sh)"
 ```
 
-##### Temporal manual steps
-1. `touch ~/.zshrc.aliases.local`
-2. Read last section of `~/.zshrc.aliases and put tokens in there`
-3. `cp -n ~/.grip/settings.py.example ~/.grip/settings.py; vim ~/.grip/settings.py`
-4. Open that file and put your credentials
-5. run `pip3 install --user --upgrade neovim`
-6. Create a `.gitconfig.local` and set name and email
-6. (Optional) create a `~/Developer/code/enterprise/` directory and a `~/.gitconfig.enterprise` git config file to override defaults
-
 ### GitHub Hub for Enterprise
 
 The confusing part is the `GITHUB_HOST` vs the whitelisting with `git config --global --add hub.host MY.GIT.ORG`. It goes like this:
@@ -72,20 +63,5 @@ Need a task to upgrade everything. Install should not fail because upgrading
 ### Vim
  - [ ] Fix problem with vim airlines trying to load before installing the plugin
 
-### Neovim
- - [ ] Provision neovim
-
-### Zsh
- - [ ] Auto setup .zshrc.aliases.local
-
-### Grip
- - [ ] Automatically set up your username and token
-
 ### SSH
  - [ ] Create a public/private key pair on install
-
-### iTerm2
- - [ ] Automatically load color presets `directories/.iterm2/colors`
-
-### API Keys
- - [ ] Input and automatically export API keys and export them to `.zshrc.alias.local`
