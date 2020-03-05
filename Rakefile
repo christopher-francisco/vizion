@@ -10,9 +10,6 @@ def lines_from_file(file)
   return File::readlines(file).map { |line| line.chomp } # We want to remove the "\n"
 end
 
-brew_taps = lines_from_file('./definitions/brew_taps')
-brew_formulas = lines_from_file('./definitions/brew_formulas')
-brew_cask_formulas = lines_from_file('./definitions/brew_cask_formulas')
 yarn_packages = lines_from_file('./definitions/yarn_packages')
 
 namespace :install do
@@ -64,64 +61,10 @@ namespace :install do
     end
   end
 
-  desc 'Tap brew third party repos'
-  task :brew_tap do
-    logger.step 'Brew Tap', 'Tapping brew taps'
-
-    tapped_taps = `brew tap`.split
-
-    brew_taps.each do |tap|
-      if tapped_taps.include? tap
-        logger.brew_tap_skipped tap
-      else
-        _, _, status = installer.sh "brew tap #{tap}"
-
-        if status.success?
-          logger.brew_tap_success tap
-        else
-          logger.brew_tap_failed tap
-        end
-      end
-    end
-  end
-
-  desc 'Install the brew formulas skipping existing ones'
-  task :brew_install do
-    logger.step 'Brew', 'Installing brew formulas'
-
-    installed_packages = `brew list`.split
-
-    brew_formulas.each do |formula|
-      if installed_packages.include? formula
-        logger.brew_formula_skipped formula
-      else
-        installer.brew_install formula
-      end
-    end
-  end
-
-  desc 'Install the brew formulas and check if the installed ones are up to date'
-  task :brew_install_with_version_check do
-    logger.step 'Brew', 'Installing brew formulas while checking for the versions'
-
-    brew_formulas.each do |formula|
-      installer.brew_install formula
-    end
-  end
-
-  desc 'Install brew-cask formulas'
-  task :brew_cask_install do
-    logger.step 'Brew Cask', 'Installing brew-cask formulas'
-
-    installed_packages = `brew cask list`.split
-
-    brew_cask_formulas.each do |formula|
-      if installed_packages.include? formula
-        logger.brew_cask_formula_skipped formula
-      else
-        installer.brew_cask_install formula
-      end
-    end
+  desc 'Install brew packages'
+  task :brew_packages do
+    installer.shell 'brew bundle install', true
+    logger.write "Brew packages installed"
   end
 
   desc 'Install Yarn global packages'
@@ -265,11 +208,11 @@ namespace :install do
   end
 
   desc 'Setup github tokens and rhubarb'
+  task :github_tokens_and_rhubarb do
     installer.shell './scripts/setup_tokens.sh', true
     installer.shell './scripts/setup-rhubarb.sh', true
     logger.write "Gitconfig local configured"
-  task :github_tokens_and_rhubarb
-end
+  end
 
   desc 'End step'
   task :end do
@@ -280,9 +223,7 @@ end
   task :all => [
     :start,
     :base,
-    :brew_tap,
-    :brew_install,
-    :brew_cask_install,
+    :brew_packages,
     :yarn_packages,
     :dotfiles,
     :directories,

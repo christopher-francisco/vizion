@@ -44,5 +44,7 @@ Plug 'ryanoasis/vim-devicons'                     " We want glyphs
 Plug 'dense-analysis/ale'                         " Might replace syntastic
 Plug 'Rigellute/rigel'                            " Colorscheme rigel
 Plug 'majutsushi/tagbar'
+Plug 'jez/vim-github-hub'                         " Filetype for github/hub
+Plug 'bfontaine/Brewfile.vim'
 
 call plug#end()
