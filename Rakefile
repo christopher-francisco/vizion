@@ -214,6 +214,12 @@ namespace :install do
     logger.write "Gitconfig local configured"
   end
 
+  desc 'Setup SSH keys'
+  task :setup_ssh_keys do
+    installer.shell './scripts/setup_ssh_keys.sh', true
+    logger.write "SSH keys configured"
+  end
+
   desc 'End step'
   task :end do
     logger.blank_line
@@ -235,6 +241,7 @@ namespace :install do
     :visuals,
     :grip_settings,
     :gitconfig_local_setup,
+    :setup_ssh_keys,
     :end
   ]
 end
