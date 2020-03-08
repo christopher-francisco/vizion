@@ -201,10 +201,10 @@ namespace :install do
     logger.write "Grip settings configured"
   end
 
-  desc 'Gitconfig local setup'
-  task :gitconfig_local_setup do
+  desc 'Gitconfig setup'
+  task :gitconfig_setup do
     installer.shell './scripts/setup_gitconfig.sh local', true
-    logger.write "Gitconfig local configured"
+    logger.write "Gitconfig configured"
   end
 
   desc 'Setup github tokens and rhubarb'
@@ -240,7 +240,7 @@ namespace :install do
     :iterm2_profile,
     :visuals,
     :grip_settings,
-    :gitconfig_local_setup,
+    :gitconfig_setup,
     :setup_ssh_keys,
     :end
   ]
