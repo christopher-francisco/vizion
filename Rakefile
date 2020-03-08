@@ -210,7 +210,7 @@ namespace :install do
   desc 'Setup github tokens and rhubarb'
   task :github_tokens_and_rhubarb do
     installer.shell './scripts/setup_tokens.sh', true
-    installer.shell './scripts/setup-rhubarb.sh', true
+    installer.shell './scripts/setup_rhubarb.sh', true
     logger.write "Gitconfig local configured"
   end
 
