@@ -64,4 +64,4 @@ Need a task to upgrade everything. Install should not fail because upgrading
  - [ ] Fix problem with vim airlines trying to load before installing the plugin
 
 ### SSH
- - [ ] Create a public/private key pair on install
+ - [ ] Add ssh keys to agent
