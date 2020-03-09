@@ -46,5 +46,6 @@ Plug 'Rigellute/rigel'                            " Colorscheme rigel
 Plug 'majutsushi/tagbar'
 Plug 'jez/vim-github-hub'                         " Filetype for github/hub
 Plug 'bfontaine/Brewfile.vim'
+Plug 'christoomey/vim-tmux-navigator'             " Navigate between vim and tmux panes seamlessly
 
 call plug#end()
