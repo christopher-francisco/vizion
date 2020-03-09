@@ -11,6 +11,7 @@ def lines_from_file(file)
 end
 
 yarn_packages = lines_from_file('./definitions/yarn_packages')
+cargo_packages = lines_from_file('./definitions/cargo_packages')
 
 namespace :install do
   desc 'Start step'
@@ -86,6 +87,15 @@ namespace :install do
         end
       end
     end
+  end
+
+  desc 'Install Cargo global packages'
+  task :cargo_packages do
+    cargo_packages.each do |package|
+      installer.sh "cargo install #{package} --quiet"
+    end
+
+    logger.write "Installed Cargo packages"
   end
 
   desc 'Install Tmux Plugin Manager'
@@ -231,6 +241,7 @@ namespace :install do
     :base,
     :brew_packages,
     :yarn_packages,
+    :cargo_packages,
     :dotfiles,
     :directories,
     :oh_my_zsh_themes,

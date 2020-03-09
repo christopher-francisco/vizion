@@ -382,26 +382,31 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!{.git,node_modules}"'
 nmap <C-p><C-p> :call FZFWithDevIcons()<cr>
 nmap <C-p><C-t> :BTags<cr>
 
+"/ @see https://github.com/junegunn/fzf.vim#example-advanced-ripgrep-integration
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+
+
+
+
 "/
 "/ vim-devicons
 "/
+" https://github.com/ryanoasis/vim-devicons/issues/106#issuecomment-578685009
 function! FZFWithDevIcons()
-  let l:fzf_files_options = ' -m --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up --preview "bat --theme=One\ Dark --color always --style numbers {2..}"'
+  let l:fzf_files_options = ' -m --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up --preview "bat --color always --style numbers {2..}"'
 
   function! s:files()
-    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
-    return s:prepend_icon(l:files)
-  endfunction
-
-  function! s:prepend_icon(candidates)
-    let result = []
-    for candidate in a:candidates
-      let filename = fnamemodify(candidate, ':p:t')
-      let icon = WebDevIconsGetFileTypeSymbol(filename, isdirectory(filename))
-      call add(result, printf("%s %s", icon, candidate))
-    endfor
-
-    return result
+    let l:files = split(system($FZF_DEFAULT_COMMAND.'| devicon-lookup'), '\n')
+    return l:files
   endfunction
 
   function! s:edit_file(items)
@@ -424,8 +429,11 @@ function! FZFWithDevIcons()
   let opts['sink*'] = function('s:edit_file')
   let opts.options .= l:fzf_files_options
   call fzf#run(opts)
-
 endfunction
+
+
+
+
 
 "/
 "/ ale
@@ -434,17 +442,31 @@ let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 
 let g:ale_fixers = {
-\ 'javascript': ['stylelint', 'eslint'],
+\ 'javascript': ['eslint'],
+\ 'scss': ['stylelint'],
 \}
 
-" let g:ale_fix_on_save = 1
+let g:ale_linters = {
+\ 'javascript': ['eslint'],
+\ 'scss': ['stylelint'],
+\}
+
+let g:ale_fix_on_save = 1
 
 " Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1
+let g:ale_fixers_explicit = 1
 
 "/
 "/ vim-gitgutter
 "/
+
+
+"/
+"/ vim-tmux-navigator
+"/
+" Disable tmux navigator when zooming the Vim pane
+let g:tmux_navigator_disable_when_zoomed = 1
 
 
 

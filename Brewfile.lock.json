@@ -555,6 +555,27 @@
             }
           }
         }
+      },
+      "rust": {
+        "version": "1.41.0_1",
+        "bottle": {
+          "cellar": ":any",
+          "prefix": "/usr/local",
+          "files": {
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/rust-1.41.0_1.catalina.bottle.tar.gz",
+              "sha256": "e5aafa87b134aff16659a2b2fb2898cc2ac6b88d1bab32590aa1ab9ed1c8ca8f"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/rust-1.41.0_1.mojave.bottle.tar.gz",
+              "sha256": "f98f829754ade2e0b17cd8ae339c2a5fdf63699ed5f5e8bb92647c152d658312"
+            },
+            "high_sierra": {
+              "url": "https://homebrew.bintray.com/bottles/rust-1.41.0_1.high_sierra.bottle.tar.gz",
+              "sha256": "f8ff3fd81fffd4b2e79f8d5af414f88091d7403cacc91224efaeea68af39c440"
+            }
+          }
+        }
       }
     },
     "cask": {
