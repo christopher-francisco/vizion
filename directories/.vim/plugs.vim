@@ -47,5 +47,8 @@ Plug 'majutsushi/tagbar'
 Plug 'jez/vim-github-hub'                         " Filetype for github/hub
 Plug 'bfontaine/Brewfile.vim'
 Plug 'christoomey/vim-tmux-navigator'             " Navigate between panes/splits
+Plug 'wellle/context.vim'                         " Hover the context on top of the file
+Plug 'camspiers/lens.vim'                         " Auto-resize of splits
+Plug 'camspiers/animate.vim'
 
 call plug#end()

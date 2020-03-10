@@ -393,9 +393,7 @@ endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
-
-
-
+map <space> :RG<CR>
 
 "/
 "/ vim-devicons
@@ -431,10 +429,6 @@ function! FZFWithDevIcons()
   call fzf#run(opts)
 endfunction
 
-
-
-
-
 "/
 "/ ale
 "/
@@ -467,6 +461,22 @@ let g:ale_fixers_explicit = 1
 "/
 " Disable tmux navigator when zooming the Vim pane
 let g:tmux_navigator_disable_when_zoomed = 1
+
+"/
+"/ context.vim
+"/
+let g:context_enabled = 1
+let g:context_presenter = 'nvim-float'
+
+"/
+"/ animate.vim
+"/
+let g:animate#duration = 200.0
+
+"/
+"/ lens.vim
+"/
+let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
 
 
 
