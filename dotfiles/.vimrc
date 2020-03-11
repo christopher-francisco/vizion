@@ -174,48 +174,7 @@ nmap <Leader>fm :Rg FIXME<cr>
 
 
 "-------------------- Plugins --------------------
-"/
-"/ CtrlP
-" @deprecated - uninstalled in favor of FZF
-"/
 set wildignore+=*/.git/*,*/tmp/*,*.so,*.swp,*.zip,*.class     " MacOSX/Linux
-
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|vendor\|log$\|tmp\|javadoc\|bundle\|plugged$',
-  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
-  \ }
-
-" let g:ctrlp_map = '<c-p><c-p>'
-" nmap <C-p><C-e> :CtrlPBufTag<cr>
-" nmap <C-p><C-m> :CtrlPMRUFiles<cr>
-
-let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:20'
-let g:ctrlp_max_files=0
-let g:ctrlp_max_depth=40
-let g:ctrlp_show_hidden = 1
-
-let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-let g:ctrlp_use_caching = 0
-
-
-
-"/
-"/ Ack
-"/
-let g:ackprg = 'rg --vimgrep'
-
-
-
-"/
-"/ NerdTree
-"/
-let NERDTreeHijackNetrw = 0                             " Prevent NERDTree to conflict with vinegar.vim
-let NERDTreeShowHidden = 1                              " Show hidden files
-let NERDTreeIgnore = ['\.DS_Store$']                    " Hide files with .DS_Store extension
-
-"/
-"/ Greplace.vim
-"/
 
 "/
 "/ YouCompleteMe
@@ -260,33 +219,6 @@ let g:UltiSnipsEditSplit='vertical'
 " Fixes the problem where snippets are created in the project's directory
 " rather than in the root. @see https://github.com/SirVer/ultisnips/issues/711
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
-
-"/
-"/ syntastic
-"/ FIXME: sourcing multiple times causes this to show "multiple lines"
-"/
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_scss_checkers = ['stylelint']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_blade_checkers = []
-let g:syntastic_html_checkers=[]
-let g:syntastic_php_checkers=['php', 'phpcs']
-let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
-let g:syntastic_java_checkers = []
-
-function! SyntasticCheckHook(errors)
-    if !empty(a:errors)
-        let g:syntastic_loc_list_height = min([len(a:errors), 10])
-    endif
-endfunction
 
 "
 "/
@@ -333,18 +265,6 @@ endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 
 "/
-"/ vim-javascript
-"/
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_flow = 1
-
-"/
-"/ vim-flow
-"/
-let g:flow#enable = 0
-let g:flow#autoclose = 1
-
-"/
 "/ emmet-vim
 "/
 " Make `.js` files expand `className` instead of `class`
@@ -365,7 +285,6 @@ let g:polyglot_disabled = ['tmux']
 " Focus the tag bar when opening it
 let g:tagbar_autofocus = 1 
 
-
 "/
 "/ vim-markdown-preview
 "/
@@ -380,6 +299,7 @@ let vim_markdown_preview_browser='Google Chrome'
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!{.git,node_modules}"'
 " nmap <C-p><C-p> :Files<cr>
 nmap <C-p><C-p> :call FZFWithDevIcons()<cr>
+nmap <C-space> :call FZFWithDevIcons()<cr>
 nmap <C-p><C-t> :BTags<cr>
 
 "/ @see https://github.com/junegunn/fzf.vim#example-advanced-ripgrep-integration
@@ -436,7 +356,7 @@ let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 
 let g:ale_fixers = {
-\ 'javascript': ['eslint'],
+\ 'javascript': ['eslint', 'prettier'],
 \ 'scss': ['stylelint'],
 \}
 
@@ -445,7 +365,7 @@ let g:ale_linters = {
 \ 'scss': ['stylelint'],
 \}
 
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 
 " Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1
@@ -461,22 +381,6 @@ let g:ale_fixers_explicit = 1
 "/
 " Disable tmux navigator when zooming the Vim pane
 let g:tmux_navigator_disable_when_zoomed = 1
-
-"/
-"/ context.vim
-"/
-let g:context_enabled = 1
-let g:context_presenter = 'nvim-float'
-
-"/
-"/ animate.vim
-"/
-let g:animate#duration = 200.0
-
-"/
-"/ lens.vim
-"/
-let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
 
 
 
