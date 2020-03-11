@@ -52,8 +52,14 @@ Then we just call the bash function as soon as we enter the repo. Since we're ex
 
 [As discussed in this issue](https://github.com/github/hub/issues/154#issuecomment-410277347), just set the base branch of the remote:
 
-```
+```bash
 git remote set-head origin -a
+```
+
+> Tmux plugins won't load
+[Install `gawk`](https://github.com/tmux-plugins/tpm/issues/146)
+```bash
+brew install gawk
 ```
 
 ## Known bugs and TODO
