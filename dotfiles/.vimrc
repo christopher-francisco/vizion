@@ -135,8 +135,7 @@ nnoremap j gj
 
 "---------------------- Other options ----------------------
 " We want to use ripgrep
-set grepprg=rg
-let g:grep_cmd_opts = '--line-number --no-heading --color=never --hidden'
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 
 
 
@@ -177,33 +176,116 @@ nmap <Leader>fm :Rg FIXME<cr>
 set wildignore+=*/.git/*,*/tmp/*,*.so,*.swp,*.zip,*.class     " MacOSX/Linux
 
 "/
-"/ YouCompleteMe
+"/ coc.nvim
 "/
-" Disable YCM
-" let g:loaded_youcompleteme = 0
+set hidden " TextEdit might fail if hidden is not set.
+set nobackup " Some servers have issues with backup files, see #649.
+set nowritebackup
+set cmdheight=2 " Give more space for displaying messages.
+set updatetime=300 " Faster experience
+set signcolumn=yes " Always show the signcolumn
 
-let g:ycm_server_python_interpreter = '/usr/local/bin/python3' " We tell YCM to use python3
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
 
-" We want filepath completion on .jsx files
-let g:ycm_filepath_blacklist = {}
+inoremap <silent><expr> <c-space> coc#refresh()
 
-" FIXME: This is an attempt to fix the problem where the Esc causes an error about window not closed
-" NONEOFTHISWORKED
-let g:ycm_autoclose_preview_window_after_completion = 1
-" let g:ycm_autoclose_preview_window_after_insertion = 1
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" Debugging
-let g:ycm_server_keep_log_files = 1
-let g:ycm_log_level = 'debug'
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-" Symbols
-let g:ycm_error_symbol = '✘'
-let g:ycm_warning_symbol = '⚠'
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-nmap <Leader>gt :YcmCompleter GoTo<cr>
-nmap <Leader>gr :YcmCompleter GoToReferences<cr>
-nmap <Leader>rn :YcmCompleter RefactorRename 
-nmap <Leader>fi :YcmCompleter FixIt<cr>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Introduce function text object
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Mappings using CoCList:
+" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+"
+" Find symbol of current document.
+" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" jsonc on coc-settings.json
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" Things to note about coc.nvim
+"   * Must 'confirm completion' in order for auto-import to work `<C-y>`.
+"   * Run `:CocRebuild` after upgrading node to rebuild modules.
+"   * Use `CocList diagnostics` instead of location lists
+"   * Use `set signcolumn=auto:2` or `"diagnostic.signOffset": 9999999`
+"     to make coc signs higher priority
+
+" Use coc-diagnostics for linting and formatting with eslint/prettier
+
+" let g:ycm_error_symbol = '✘'
+" let g:ycm_warning_symbol = '⚠'
+
+" nmap <Leader>gt :YcmCompleter GoTo<cr>
+" nmap <Leader>gr :YcmCompleter GoToReferences<cr>
+" nmap <Leader>rn :YcmCompleter RefactorRename 
+" nmap <Leader>fi :YcmCompleter FixIt<cr>
 
 "/
 "/ Ultisnips
@@ -357,12 +439,17 @@ let g:ale_sign_warning = '⚠'
 
 let g:ale_fixers = {
 \ 'javascript': ['eslint', 'prettier'],
+\ 'typescript': ['eslint', 'prettier'],
 \ 'scss': ['stylelint'],
 \}
 
 let g:ale_linters = {
+\ 'typescript': ['eslint'],
 \ 'javascript': ['eslint'],
 \ 'scss': ['stylelint'],
+\ 'cucumber': ['gherkin-lint'],
+\ 'feature': ['gherkin-lint'],
+\ 'gherkin': ['gherkin-lint'],
 \}
 
 let g:ale_fix_on_save = 0
@@ -402,40 +489,26 @@ augroup autosourcing
 	autocmd BufWritePost .vimrc,.gvimrc source % | AirlineRefresh
 augroup end
 
-augroup custom_commands
-    autocmd!
-    autocmd VimEnter * if !exists(":Fold") | command Fold execute "call ToggleFold()" | endif
-augroup end
-
 
 
 
 "-------------------- Functions --------------------
-" Enable folding by indent on the current file
-function! ToggleFold()
-    let previous_method = &fdm
+function Pnpm(cmd, package, ...)
+  let cmd = a:cmd
+  let package = a:package
+  let dir = " -C " . expand('%:h') . " "
+  let flags = ''
 
-    if previous_method ==? "manual"
-        setlocal fdm=syntax
-    else
-        setlocal fdm=manual
-    endif
+  if len(a:000)
+    let flags = " " . join(a:000)
+  endif
+
+  let cmd = "pnpm " . cmd . dir . package . flags
+
+  execute "!".cmd
 endfunction
 
-function! IPhpInsertUse()
-    call PhpInsertUse()
-    call feedkeys('a',  'n')
-endfunction
-autocmd FileType php inoremap <Leader>n <Esc>:call IPhpInsertUse()<CR>
-autocmd FileType php noremap <Leader>n :call PhpInsertUse()<CR>'
-
-function! IPhpExpandClass()
-    call PhpExpandClass()
-    call feedkeys('a', 'n')
-endfunction
-autocmd FileType php inoremap <Leader>nf <Esc>:call IPhpExpandClass()<CR>
-autocmd FileType php noremap <Leader>nf :call PhpExpandClass()<CR>
-
+command! -nargs=* Pnpm call Pnpm(<f-args>)
 
 
 

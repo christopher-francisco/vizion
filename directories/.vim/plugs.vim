@@ -25,7 +25,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mattn/emmet-vim'
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --java-completer' } " We want completion
 Plug 'easymotion/vim-easymotion'                  " Move through file using letters instead of numbers
 Plug 'AndrewRadev/splitjoin.vim'                  " Split and join with gS and gJ
 Plug 'rakr/vim-one'                               " colorscheme one
@@ -43,5 +42,7 @@ Plug 'majutsushi/tagbar'
 Plug 'jez/vim-github-hub'                         " Filetype for github/hub
 Plug 'bfontaine/Brewfile.vim'
 Plug 'christoomey/vim-tmux-navigator'             " Navigate between panes/splits
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
 
 call plug#end()

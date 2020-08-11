@@ -6,6 +6,9 @@ export VISUAL=vim
 # Set the editor for git
 export EDITOR="$VISUAL"
 
+# Local binaries
+export PATH="$PATH:$HOME/bin"
+
 # Add cargo binaries
 export PATH="$PATH:$HOME/.cargo/bin"
 
@@ -31,6 +34,7 @@ export BAT_THEME="TwoDark"
 # TODO: make a function instead, so that you type "code:<project>" and it navigates to
 # `~/Developer/code/<project>`
 alias code:home='cd ~/Developer/code'
+alias code:enterprise='cd ~/Developer/code/enterprise'
 alias code:vms='cd ~/Developer/vms'
 
 alias vizion="cd ~/Developer/code/vizion"
@@ -52,6 +56,11 @@ alias nvp='nvim -c "call FZFWithDevIcons()"'
 alias gccount='git rev-list --count develop..' # commits count between current branch and develop
 alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}"'
 alias did="vim +'normal Go' +'r!date' ~/did.txt"
+
+alias dnav='git config --global delta.navigate true'
+alias dnonav='git config --global delta.navigate false'
+alias dvsp='git config --global delta.side-by-side true'
+alias dsp='git config --global delta.side-by-side false'
 
 gitPrUrl() {
     branchName=$(git rev-parse --abbrev-ref HEAD)
@@ -132,6 +141,8 @@ indent_size = 2" >> .editorconfig
 
 # Create enterprise directory if it doesn't exist
 mkdir -p ~/Developer/code/enterprise
+
+export N_PREFIX=$HOME
 
 # TODO: add a func for tmuxinator projects
 

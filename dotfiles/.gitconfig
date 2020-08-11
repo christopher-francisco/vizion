@@ -1,15 +1,19 @@
 [include]
 	path = ~/.gitconfig.local
+	path = ~/.gitconfig.git-delta
 
 [includeIf "gitdir:~/Developer/code/enterprise/"]
 	path = ~/.gitconfig.enterprise
 
 [core]
 	editor = vim
-        excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[delta]
+	side-by-side = false
+	navigate = false
