@@ -53,7 +53,7 @@ namespace :install do
     if status.success?
       logger.brew_skipped
     else
-      _, stderr, status = installer.sh '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+      _, stderr, status = installer.sh '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
       if status.success?
         logger.brew_installed
       else
