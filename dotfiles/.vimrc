@@ -178,7 +178,7 @@ set wildignore+=*/.git/*,*/tmp/*,*.so,*.swp,*.zip,*.class     " MacOSX/Linux
 "/
 "/ coc.nvim
 "/
-set hidden " TextEdit might fail if hidden is not set.
+" set hidden " TextEdit might fail if hidden is not set.
 set nobackup " Some servers have issues with backup files, see #649.
 set nowritebackup
 set cmdheight=2 " Give more space for displaying messages.

@@ -45,4 +45,6 @@ Plug 'christoomey/vim-tmux-navigator'             " Navigate between panes/split
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
 
+Plug 'jeetsukumaran/vim-indentwise'
+
 call plug#end()
