@@ -14,7 +14,7 @@ Provisioner will symlink dotfiles to the home directory, and will assume your co
 Easy peasy lemon squeezy. Just run:
 
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/chris-fran/vizion/master/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/christopher-francisco/vizion/master/install.sh)"
 ```
 
 ### GitHub Hub for Enterprise
