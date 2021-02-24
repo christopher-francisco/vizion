@@ -71,3 +71,10 @@ Need a task to upgrade everything. Install should not fail because upgrading
 
 ### SSH
  - [ ] Add ssh keys to agent
+
+### GPG
+ - Copying the key to clipboard
+```
+$ gpg --list-secret-keys --keyid-format LONG
+$ gpg --armor --export FINGERPRINT | pbcopy
+```

@@ -239,7 +239,7 @@ namespace :install do
   task :all => [
     :start,
     :base,
-    :brew_packages,
+    # :brew_packages,
     :yarn_packages,
     :cargo_packages,
     :dotfiles,
@@ -247,7 +247,7 @@ namespace :install do
     :oh_my_zsh_themes,
     :tmux_plugin_manager,
     :tmux_plugins,
-    :vim_plugs,
+    # :vim_plugs,
     :iterm2_profile,
     :visuals,
     :grip_settings,

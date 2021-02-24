@@ -1,5 +1,10 @@
 set nocompatible              				" We want the latest Vim settings
 
+"/
+"/ vim-polyglot
+"/
+let g:polyglot_disabled = ['tmux']
+
 so ~/.vim/plugs.vim
 
 syntax enable
@@ -137,6 +142,9 @@ nnoremap j gj
 " We want to use ripgrep
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 
+" Python executable for python3 pynvim extension
+let g:python3_host_prog = '/usr/local/bin/python3'
+
 
 
 
@@ -167,7 +175,7 @@ map <Leader>s :split <C-R>=expand("%:p:h") . "/" <CR>
 map <Leader>vs :vsplit <C-R>=expand("%:p:h") . "/" <CR>
 
 " Find FIXMEs quickly
-nmap <Leader>fm :Rg FIXME<cr>
+nmap <Leader>fm :grep "FIXME"<cr>
 
 
 
@@ -356,10 +364,6 @@ let g:user_emmet_settings = {
 \  },
 \}
 
-"/
-"/ vim-polyglot
-"/
-let g:polyglot_disabled = ['tmux']
 
 "/
 "/ tagbar
@@ -509,6 +513,10 @@ function Pnpm(cmd, package, ...)
 endfunction
 
 command! -nargs=* Pnpm call Pnpm(<f-args>)
+
+
+"--- Colemak ---
+" source ~/.vimrc.tarmak1
 
 
 

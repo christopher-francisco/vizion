@@ -2,7 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-scripts/BufOnly.vim'                    " Delete all buffers but the current one
 Plug 'SirVer/ultisnips'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'ervandew/supertab'                          " We want to use Ultisnips with YCM. FIXME: I think I'm no longer using this?
 Plug 'airblade/vim-gitgutter'
