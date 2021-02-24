@@ -1,0 +1,18 @@
+" }}}
+" Up/down/left/right {{{
+    nnoremap n j|xnoremap n j|onoremap n j|
+    nnoremap e k|xnoremap e k|onoremap e k|
+    nnoremap e k|xnoremap e k|onoremap e k|
+" }}}
+
+" }}}
+" Up/down/left/right {{{
+    nnoremap k n|xnoremap k n|onoremap k n|
+" }}}
+"
+" remap change split
+" remap ESC
+
+" Back to normal mode from insert mode
+inoremap ne <Esc>
+inoremap en <Esc>
