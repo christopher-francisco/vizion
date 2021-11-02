@@ -42,6 +42,10 @@ set nocursorline
 set lazyredraw
 " set ttyfast
 
+" netrw copy and move
+" This will cause pwd to change for the whole vim instance, so commands like
+" C-space will be broken
+" let g:netrw_keepdir=-1
 
 "-------------------- Visuals --------------------
 set t_CO=256						" Use 256 colors on terminal Vim
@@ -142,9 +146,6 @@ nnoremap j gj
 " We want to use ripgrep
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 
-" Python executable for python3 pynvim extension
-let g:python3_host_prog = '/usr/local/bin/python3'
-
 
 
 
@@ -175,7 +176,7 @@ map <Leader>s :split <C-R>=expand("%:p:h") . "/" <CR>
 map <Leader>vs :vsplit <C-R>=expand("%:p:h") . "/" <CR>
 
 " Find FIXMEs quickly
-nmap <Leader>fm :grep "FIXME"<cr>
+nmap <Leader>fm :Rg FIXME<cr>
 
 
 
@@ -192,6 +193,7 @@ set nowritebackup
 set cmdheight=2 " Give more space for displaying messages.
 set updatetime=300 " Faster experience
 set signcolumn=yes " Always show the signcolumn
+let g:coc_disable_transparent_cursor = 1
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -277,6 +279,16 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 " jsonc on coc-settings.json
 autocmd FileType json syntax match Comment +\/\/.\+$+
+
+
+
+" coc-prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+
 
 " Things to note about coc.nvim
 "   * Must 'confirm completion' in order for auto-import to work `<C-y>`.
@@ -364,7 +376,6 @@ let g:user_emmet_settings = {
 \  },
 \}
 
-
 "/
 "/ tagbar
 "/
@@ -442,14 +453,10 @@ let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 
 let g:ale_fixers = {
-\ 'javascript': ['eslint', 'prettier'],
-\ 'typescript': ['eslint', 'prettier'],
 \ 'scss': ['stylelint'],
 \}
 
 let g:ale_linters = {
-\ 'typescript': ['eslint'],
-\ 'javascript': ['eslint'],
 \ 'scss': ['stylelint'],
 \ 'cucumber': ['gherkin-lint'],
 \ 'feature': ['gherkin-lint'],
@@ -515,10 +522,6 @@ endfunction
 command! -nargs=* Pnpm call Pnpm(<f-args>)
 
 
-"--- Colemak ---
-" source ~/.vimrc.tarmak1
-
-
 
 
 "------------------------- Local Configuration ------------------------
@@ -527,6 +530,9 @@ if filereadable(expand('~/.vimrc.local'))
 endif
 
 
+" not sure why I need this???
+set tw=0                                                " No auto line break
+set wm=0                                                " No auto line break
 
 
 " Put 
@@ -640,3 +646,6 @@ endif
 " :vimgrep /Vimcasts\.\zscom/g ##
 " :cdo %s/Vimcasts\.\zscom/org/ge
 " :cdo update
+"
+" coc-nvim settings
+" Use CocConfig

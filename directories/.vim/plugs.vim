@@ -43,7 +43,9 @@ Plug 'jez/vim-github-hub'                         " Filetype for github/hub
 Plug 'bfontaine/Brewfile.vim'
 Plug 'christoomey/vim-tmux-navigator'             " Navigate between panes/splits
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
+
+" chadtree kills netrw: https://github.com/ms-jpq/chadtree/issues/220
+" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
 Plug 'jeetsukumaran/vim-indentwise'
 

@@ -1,7 +1,7 @@
 # Export
 
 # Set the visual editor
-export VISUAL=vim
+export VISUAL=nvim
 
 # Set the editor for git
 export EDITOR="$VISUAL"
@@ -43,7 +43,6 @@ alias vizion="cd ~/Developer/code/vizion"
 alias cat=ccat                                                  # Always use ccat
 alias git=hub                                                   # Always use hub
 alias ssh='TERM=xterm-256color ssh'
-alias vim='nvim'
 alias v='nvim .'
 alias vs='nvim $(fzf)'
 alias nvs='nvim $(fzf)'
