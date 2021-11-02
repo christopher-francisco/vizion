@@ -44,8 +44,8 @@ create_key() {
   ssh-keygen -t rsa -b 4096 -C $email -f $filename -N $passphrase -q
 
   touch $passphrase_filename
-  echo '#!/bin/sh' >> ~/.ssh/$passphrase_filename
-  echo "echo '$passphrase'" >> ~/.ssh/$passphrase_filename
+  echo '#!/bin/sh' >> $passphrase_filename
+  echo "echo '$passphrase'" >> $passphrase_filename
 
   DISPLAY=1 SSH_ASKPASS="$passphrase_filename" ssh-add -K $filename < /dev/null
 
@@ -57,7 +57,7 @@ main() {
   $passphrase_filename=$(create_key)
 
   if [[ 0 -eq $? ]]; then
-    echo "Personal SSH key created and added to agent. Save it to your password manager: ~/.ssh/$passphrase_filename"
+    echo "Personal SSH key created and added to agent. Save it to your password manager: $passphrase_filename"
   else
     echo "Did not create Personal key"
   fi
@@ -70,7 +70,7 @@ main() {
     passphrase_filename_enterprise=$(create_key $enterprise_name)
 
     if [[ 0 -eq $? ]]; then
-      echo "Enterprise SSH key created and added to agent. Save it to your password manager: ~/.ssh/$passphrase_filename_enterprise"
+      echo "Enterprise SSH key created and added to agent. Save it to your password manager: $passphrase_filename_enterprise"
     else
       echo "Did not create Enterprise key"
     fi
