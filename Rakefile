@@ -38,31 +38,11 @@ namespace :install do
         logger.oh_my_zsh_not_installed
       end
     end
-
-    _, stderr, status = installer.sh 'which brew'
-
-    if status.success?
-      logger.brew_skipped
-    else
-      installer.shell homebrew_install_command, true
-      installer.shell "echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> ~/.zprofile", true
-      installer.shell 'eval "$(/opt/homebrew/bin/brew shellenv)"', true
-    end
   end
 
   desc 'Install brew packages'
   task :brew_packages do
-
-    _, stderr, status = installer.sh 'which /opt/homebrew/bin/brew'
-    command = ''
-
-    if status.success?
-      command = '/opt/homebrew/bin/brew bundle install'
-    else
-      command = '/usr/local/bin/brew bundle install'
-    end
-
-    installer.shell command, true
+    installer.shell 'brew bundle install', true
     logger.write "Brew packages installed"
   end
 
