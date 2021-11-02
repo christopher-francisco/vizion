@@ -63,7 +63,7 @@ namespace :install do
   task :yarn_packages do
     logger.step 'Yarn', 'Installing Yarn global packages'
 
-    stdout, _, status = installer.sh 'yarn global install'
+    stdout, _, status = installer.sh 'yarn global upgrade'
 
     if status.success?
       logger.yarn_package_installed 'packages' # hack
