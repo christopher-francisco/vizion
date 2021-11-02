@@ -46,6 +46,7 @@ create_key() {
   touch $passphrase_filename
   echo '#!/bin/sh' >> $passphrase_filename
   echo "echo '$passphrase'" >> $passphrase_filename
+  chmod +x $passphrase_filename
 
   DISPLAY=1 SSH_ASKPASS="$passphrase_filename" ssh-add -K $filename < /dev/null
 
