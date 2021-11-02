@@ -44,12 +44,7 @@ namespace :install do
     if status.success?
       logger.brew_skipped
     else
-      _, stderr, status = installer.shell homebrew_install_command, true
-      if status.success?
-        logger.brew_installed
-      else
-        logger.brew_not_installed
-      end
+      installer.shell homebrew_install_command, true
     end
   end
 
