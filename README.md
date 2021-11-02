@@ -11,13 +11,23 @@ Several other tools are also installed and configured such as:
 Provisioner will symlink dotfiles to the home directory, and will assume your coding projects live in `~/Developer/code`.
 
 ### Installation
-Easy peasy lemon squeezy. Just run:
+Easy peasy lemon squeezy.
+
+First generate a GitHub token here: https://github.com/settings/tokens
+
+Then install the XCode Developer Tools:
+
+```
+xcode-select --install
+```
+
+Finally run:
 
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/christopher-francisco/vizion/master/install.sh)"
 ```
 
-### GitHub Hub for Enterprise
+### Retting up GitHub Hub for Enterprise
 
 The confusing part is the `GITHUB_HOST` vs the whitelisting with `git config --global --add hub.host MY.GIT.ORG`. It goes like this:
 
