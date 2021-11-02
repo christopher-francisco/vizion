@@ -33,7 +33,7 @@ namespace :install do
     else
       _, stderr, status = installer.sh oh_my_zsh_install_command
       if status.success?
-        installer.shell 'echo "source ~./zshrc.aliases" >> ~/.zshrc', true
+        installer.shell 'echo "source ~/.zshrc.aliases" >> ~/.zshrc', true
         logger.oh_my_zsh_installed
       else
         logger.oh_my_zsh_not_installed
