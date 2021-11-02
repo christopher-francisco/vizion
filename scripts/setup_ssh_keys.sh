@@ -50,7 +50,7 @@ create_key() {
 
   DISPLAY=1 SSH_ASKPASS="$passphrase_filename" ssh-add -K $filename < /dev/null
 
-  return $passphrase_filename
+  echo $passphrase_filename
 }
 
 main() {
