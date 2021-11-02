@@ -209,11 +209,14 @@ namespace :install do
   task :all => [
     :start,
     :base,
+    
+    # These 2 need to be installed before anything else so that config dirs are not altered
+    :dotfiles,
+    :directories,
+    
     :brew_packages,
     :yarn_packages,
     :cargo_packages,
-    :dotfiles,
-    :directories,
     :oh_my_zsh_themes,
     :tmux_plugin_manager,
     :tmux_plugins,
