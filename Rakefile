@@ -190,7 +190,7 @@ namespace :install do
 
   desc 'Grip settings'
   task :grip_settings do
-    installer.shell './scripts/setup_grip.sh', true
+    installer.shell './scripts/setup_grip.sh', false
     logger.write "Grip settings configured"
   end
 
@@ -202,8 +202,8 @@ namespace :install do
 
   desc 'Setup github tokens and rhubarb'
   task :github_tokens_and_rhubarb do
-    installer.shell './scripts/setup_tokens.sh', true
-    installer.shell './scripts/setup_rhubarb.sh', true
+    installer.shell './scripts/setup_tokens.sh', false
+    installer.shell './scripts/setup_rhubarb.sh', false
     logger.write "Gitconfig local configured"
   end
 

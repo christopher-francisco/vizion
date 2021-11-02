@@ -61,8 +61,8 @@ main() {
   fi
 
   echo
-  read -p "Generate enterprise SSH key? (Y/n): " generate_enterprise
-  if [[ $generate_enterprise != "n" ]]; then
+  read -p "Generate enterprise SSH key? (y/N): " generate_enterprise
+  if [[ $generate_enterprise == "y" ]]; then
     read -p "Enterprise name: " enterprise_name
     passphrase_enterprise=$(create_key $enterprise_name)
     if [[ 0 -eq $? ]]; then

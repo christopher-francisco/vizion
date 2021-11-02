@@ -257,7 +257,7 @@ class Logger
   #####################################################################
   # Vim plugs
   #####################################################################
-  def vim_plugs_installed
+  def nvim_plugs_installed
     self.write " #{self.check} #{self.highlight_y "Vim plugs"}" +
       " #{self.highlight "installed"}"
   end
