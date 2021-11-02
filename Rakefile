@@ -52,7 +52,17 @@ namespace :install do
 
   desc 'Install brew packages'
   task :brew_packages do
-    installer.shell 'brew bundle install', true
+
+    _, stderr, status = installer.sh 'which /opt/homebrew/bin/brew'
+    command = ''
+
+    if status.success?
+      command = '/opt/homebrew/bin/brew bundle install'
+    else
+      command = '/usr/local/bin/brew bundle install'
+    end
+
+    installer.shell command, true
     logger.write "Brew packages installed"
   end
 
