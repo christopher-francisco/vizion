@@ -56,7 +56,7 @@ create_key() {
 
 main() {
   echo "Generating personal SSH key"
-  $passphrase_filename=$(create_key)
+  passphrase_filename=$(create_key)
 
   if [[ 0 -eq $? ]]; then
     echo "Personal SSH key created and added to agent. Save it to your password manager: $passphrase_filename"
