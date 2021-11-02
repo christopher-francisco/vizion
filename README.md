@@ -14,23 +14,33 @@ Vizion will assume your coding projects live in `~/Developer/code`, and the ente
 
 Go here:  https://github.com/settings/tokens
 
-### 2. Install the XCode Developer Tools:
+### 2. Sign into the App Store
+
+### 3. Install the XCode Developer Tools:
 
 ```
 xcode-select --install
 ```
 
-### 3. Install Vizion
+### 4. Install Homebrew
+
+Go to https://brew.sh or run:
+
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### 5. Install Vizion
 
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/christopher-francisco/vizion/master/install.sh)"
 ```
 
-### 4. Save the SSH keys passphrases
+### 6. Save the SSH keys passphrases
 
 Location: `~/.ssh/passphrases`
 
-### 5. Add SSH Keys to GitHub
+### 7. Add SSH Keys to GitHub
 
 ```
 pbcopy < ~/.ssh/id_rsa.pub
