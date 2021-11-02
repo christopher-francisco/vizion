@@ -43,10 +43,8 @@ create_key() {
 
   ssh-keygen -t rsa -b 4096 -C $email -f $filename -N $passphrase -q
 
-  echo "
-#!/bin/sh
-echo test123
-" > ~/.ssh/$passphrase_filename
+  echo '#!/bin/sh' >> ~/.ssh/$passphrase_filename
+  echo "echo '$passphrase'" >> ~/.ssh/$passphrase_filename
 
   DISPLAY=1 SSH_ASKPASS="$passphrase_filename" ssh-add -K $filename < /dev/null
 
