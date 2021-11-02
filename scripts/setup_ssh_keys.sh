@@ -43,6 +43,7 @@ create_key() {
 
   ssh-keygen -t rsa -b 4096 -C $email -f $filename -N $passphrase -q
 
+  touch $passphrase_filename
   echo '#!/bin/sh' >> ~/.ssh/$passphrase_filename
   echo "echo '$passphrase'" >> ~/.ssh/$passphrase_filename
 
