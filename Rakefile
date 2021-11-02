@@ -111,12 +111,12 @@ namespace :install do
     logger.tmux_plugins_installed
   end
 
-  desc 'Install Vim plugs'
-  task :vim_plugs do
-    logger.step 'Vim plugs', 'Installing Vim plugs'
+  desc 'Install nvim plugs'
+  task :nvim_plugs do
+    logger.step 'nvim plugs', 'Installing nvim plugs'
 
-    installer.sh 'vim +PlugInstall +qall'
-    logger.vim_plugs_installed
+    installer.sh 'nvim --headless +PlugInstall +qall'
+    logger.nvim_plugs_installed
   end
 
   desc 'Link dotfiles'
@@ -238,7 +238,7 @@ namespace :install do
     :oh_my_zsh_themes,
     :tmux_plugin_manager,
     :tmux_plugins,
-    :vim_plugs,
+    :nvim_plugs,
     :iterm2_profile,
     :visuals,
     :grip_settings,
