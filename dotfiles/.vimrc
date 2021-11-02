@@ -194,6 +194,14 @@ set cmdheight=2 " Give more space for displaying messages.
 set updatetime=300 " Faster experience
 set signcolumn=yes " Always show the signcolumn
 let g:coc_disable_transparent_cursor = 1
+let g:coc_global_extensions = [
+      \'coc-ultisnips',
+      \'coc-prettier',
+      \'coc-marketplace',
+      \'coc-eslint',
+      \'coc-tsserver',
+      \'coc-json',
+      \]
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c

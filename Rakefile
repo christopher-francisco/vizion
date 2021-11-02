@@ -63,20 +63,12 @@ namespace :install do
   task :yarn_packages do
     logger.step 'Yarn', 'Installing Yarn global packages'
 
-    stdout, _, status = installer.sh 'yarn global list'
+    stdout, _, status = installer.sh 'yarn global install'
 
-    yarn_packages.each do |package|
-      if stdout.include? package
-        logger.yarn_package_skipped package
-      else
-        stdout, _, status = installer.sh "yarn global add #{package}"
-
-        if status.success?
-          logger.yarn_package_installed package
-        else
-          logger.yarn_package_not_installed package
-        end
-      end
+    if status.success?
+      logger.yarn_package_installed 'packages' # hack
+    else
+      logger.yarn_package_not_installed 'packages' # hack
     end
   end
 

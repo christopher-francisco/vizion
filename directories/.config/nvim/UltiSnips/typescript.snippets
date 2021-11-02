@@ -1,0 +1,18 @@
+snippet index "create a new snippet"
+export { default } from './$1';
+endsnippet
+
+snippet useStyles "create a useStyles hook" b
+import { 
+	Theme,
+	createStyles,
+	makeStyles,
+} from '@material-ui/core';
+
+const use$1Styles = makeStyles((theme: Theme) => createStyles({
+	$0,
+}));
+
+export default use$1Styles;
+
+endsnippet

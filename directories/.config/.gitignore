@@ -1,6 +1,8 @@
-*
-!.gitignore
-!nvim
-!nvim/*
-!karabiner
-!karabiner/*
+bat
+coc
+configstore
+iterm2
+karabiner/automatic_backups
+tmuxinator
+yarn/link
+yarn/global/node_modules

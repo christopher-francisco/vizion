@@ -1,5 +1,4 @@
-tap "chef/chef"
-tap "eth-p/software"
+tap "eth-p/software" # bat-extras
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
@@ -15,10 +14,9 @@ brew "git-lfs"
 brew "gnu-sed"
 brew "gnupg"
 brew "grip"
-brew "helm"
 brew "hub"
-brew "jenv"
 brew "jq"
+brew "mas"
 brew "n"
 brew "neovim"
 brew "python@3.8"
@@ -41,20 +39,18 @@ brew "zsh-syntax-highlighting"
 brew "eth-p/software/bat-extras"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 cask "1password"
-cask "adoptopenjdk"
-cask "chefdk"
 cask "docker"
-cask "firefox"
 cask "font-fira-code"
 cask "iterm2"
 cask "karabiner-elements"
 cask "licecap"
-cask "macvim"
-cask "opera"
-cask "postman"
-cask "sequel-pro"
-cask "spectacle"
 cask "spotify"
 cask "the-unarchiver"
 cask "visual-studio-code"
-cask "vlc"
+mas "Boop", id: 1518425043
+mas "Desk Remote Control", id: 1509037746
+mas "Magnet", id: 441258766
+mas "Spark – Email App by Readdle", id: 1176895641
+mas "Telegram", id: 747648890
+mas "Things 3", id: 904280696
+mas "Xcode", id: 497799835
