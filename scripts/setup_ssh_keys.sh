@@ -24,10 +24,10 @@ confirm_overwrite_filename() {
 create_key() {
   if [[ -n $1 ]]; then
     local filename=~/.ssh/id_rsa_$1
-    local $passphrase_filename=~/.ssh/passphrase_$1
+    local passphrase_filename=~/.ssh/passphrase_$1
   else
     local filename=~/.ssh/id_rsa
-    local $passphrase_filename=~/.ssh/passphrase_personal
+    local passphrase_filename=~/.ssh/passphrase_personal
   fi
 
   # If filename exists, overwrite or quit
