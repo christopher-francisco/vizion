@@ -45,7 +45,7 @@ namespace :install do
       logger.brew_skipped
     else
       installer.shell homebrew_install_command, true
-      installer.shell "echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> /Users/chris/.zprofile", true
+      installer.shell "echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> ~/.zprofile", true
       installer.shell 'eval "$(/opt/homebrew/bin/brew shellenv)"', true
     end
   end
