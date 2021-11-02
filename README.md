@@ -26,6 +26,22 @@ xcode-select --install
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/christopher-francisco/vizion/master/install.sh)"
 ```
 
+### 4. Save the SSH keys passphrases
+
+Location: `~/.ssh/passphrases`
+
+### 5. Add SSH Keys to GitHub
+
+```
+pbcopy < ~/.ssh/id_rsa.pub
+```
+
+### 6. Add key to agent
+
+```
+ssh-add -K ~/.ssh/id_rsa
+```
+
 ## Features
  - [x] Complete support for true colors and italics on iTerm, iTerm+Vim, iTerm+Tmux, iTerm+Tmux+Vim.
  - [x] Best mappings & plugins for Vim and Tmux
