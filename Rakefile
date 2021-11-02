@@ -6,6 +6,9 @@ logger = Logger.new
 installer = Installer.new
 linker = Linker.new
 
+oh_my_zsh_install_command = 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+homebrew_install_command = '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+
 def lines_from_file(file)
   return File::readlines(file).map { |line| line.chomp } # We want to remove the "\n"
 end
@@ -21,26 +24,14 @@ namespace :install do
 
   desc 'Install command line developer tools, Oh My Zshell, Brew'
   task :base do
-    logger.step 'Base', 'Installing XCode developer tools, oh-my-zshell and brew'
-
-    _, stderr, status = installer.sh 'xcode-select --install'
-
-    if status.success?
-      logger.xcode_tools_installed
-    else
-      if stderr.include? "already installed"
-        logger.xcode_tools_skipped
-      else
-        logger.xcode_tools_not_installed
-      end
-    end
+    logger.step 'Base', 'Installing oh-my-zsh and brew'
 
     _, stderr, status = installer.sh 'ls -a ~ | grep .oh-my-zsh'
 
     if status.success?
       logger.oh_my_zsh_skipped
     else
-      _, stderr, status = installer.sh 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
+      _, stderr, status = installer.sh oh_my_zsh_install_command
       if status.success?
         logger.oh_my_zsh_installed
       else
@@ -53,7 +44,7 @@ namespace :install do
     if status.success?
       logger.brew_skipped
     else
-      _, stderr, status = installer.sh '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+      _, stderr, status = installer.sh homebrew_install_command
       if status.success?
         logger.brew_installed
       else
@@ -239,7 +230,7 @@ namespace :install do
   task :all => [
     :start,
     :base,
-    # :brew_packages,
+    :brew_packages,
     :yarn_packages,
     :cargo_packages,
     :dotfiles,
@@ -247,11 +238,12 @@ namespace :install do
     :oh_my_zsh_themes,
     :tmux_plugin_manager,
     :tmux_plugins,
-    # :vim_plugs,
+    :vim_plugs,
     :iterm2_profile,
     :visuals,
     :grip_settings,
     :gitconfig_setup,
+    :github_tokens_and_rhubarb
     :setup_ssh_keys,
     :end
   ]
