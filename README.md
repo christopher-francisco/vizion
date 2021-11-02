@@ -38,18 +38,14 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/christopher-francisco/vizi
 
 ### 6. Save the SSH keys passphrases
 
-Location: `~/.ssh/passphrases`
+Location: `~/.ssh`
+
+Open the files and save the passphrases to your password manager
 
 ### 7. Add SSH Keys to GitHub
 
 ```
 pbcopy < ~/.ssh/id_rsa.pub
-```
-
-### 6. Add key to agent
-
-```
-ssh-add -K ~/.ssh/id_rsa
 ```
 
 ## Features
