@@ -24,8 +24,10 @@ confirm_overwrite_filename() {
 create_key() {
   if [[ -n $1 ]]; then
     local filename=~/.ssh/id_rsa_$1
+    local $passphrase_filename=~/.ssh/passphrase_$1
   else
     local filename=~/.ssh/id_rsa
+    local $passphrase_filename=~/.ssh/passphrase_personal
   fi
 
   # If filename exists, overwrite or quit
@@ -41,39 +43,39 @@ create_key() {
 
   ssh-keygen -t rsa -b 4096 -C $email -f $filename -N $passphrase -q
 
-  # TODO: issues/51
-  # ssh-add -q -K $filename <<< '$passphrase'
+  echo "
+#!/bin/sh
+echo test123
+" > ~/.ssh/$passphrase_filename
 
-  echo $passphrase;
+  DISPLAY=1 SSH_ASKPASS="$passphrase_filename" ssh-add -K $filename < /dev/null
+
+  return $passphrase_filename
 }
 
 main() {
-  passphrases_output_file=~/.ssh/passphrases
-  echo "# Save these passphrases to a safe place and delete this file" > $passphrases_output_file
-
   echo "Generating personal SSH key"
-  passphrase_personal=$(create_key)
+  $passphrase_filename=$(create_key)
 
   if [[ 0 -eq $? ]]; then
-    echo "Personal SSH key passphrase: $passphrase_personal" >> $passphrases_output_file
+    echo "Personal SSH key created and added to agent. Save it to your password manager: ~/.ssh/$passphrase_filename"
   else
     echo "Did not create Personal key"
   fi
 
   echo
   read -p "Generate enterprise SSH key? (y/N): " generate_enterprise
+
   if [[ $generate_enterprise == "y" ]]; then
     read -p "Enterprise name: " enterprise_name
-    passphrase_enterprise=$(create_key $enterprise_name)
+    passphrase_filename_enterprise=$(create_key $enterprise_name)
+
     if [[ 0 -eq $? ]]; then
-      echo "Enterprise SSH key passphrase: $passphrase_enterprise" >> $passphrases_output_file
+      echo "Enterprise SSH key created and added to agent. Save it to your password manager: ~/.ssh/$passphrase_filename_enterprise"
     else
       echo "Did not create Enterprise key"
     fi
   fi
-
-  echo
-  echo "Passphrases saved to $passphrases_output_file"
 
   if [ ! -f ~/.ssh/config ]; then 
     echo "Host *
