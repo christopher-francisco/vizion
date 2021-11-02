@@ -243,7 +243,7 @@ namespace :install do
     :visuals,
     :grip_settings,
     :gitconfig_setup,
-    :github_tokens_and_rhubarb
+    :github_tokens_and_rhubarb,
     :setup_ssh_keys,
     :end
   ]
