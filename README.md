@@ -66,3 +66,6 @@ git remote set-head origin -a
 ```bash
 brew install gawk
 ```
+
+>Neovim is all blue
+Run iTerm, not the Terminal app
