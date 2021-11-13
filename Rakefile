@@ -99,6 +99,14 @@ namespace :install do
     logger.nvim_plugs_installed
   end
 
+  desc 'Install nvim providers'
+  task :nvim_providers do
+    logger.step 'nvim providers', 'Installing nvim providers'
+
+    installer.sh './scripts/install_nvim_providers.sh'
+  end
+
+
   desc 'Link dotfiles'
   task :dotfiles do
     logger.step 'Dotfiles', 'Linking dotfiles to the home folder'
@@ -222,6 +230,7 @@ namespace :install do
     :tmux_plugin_manager,
     :tmux_plugins,
     :nvim_plugs,
+    :nvim_providers,
     :iterm2_profile,
     :visuals,
     :grip_settings,
