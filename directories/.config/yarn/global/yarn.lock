@@ -1201,10 +1201,10 @@ picomatch@^2.2.3:
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.0.tgz#f1f061de8f6a4bf022892e2d128234fb98302972"
   integrity sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==
 
-pnpm@6.10.0:
-  version "6.10.0"
-  resolved "https://registry.yarnpkg.com/pnpm/-/pnpm-6.10.0.tgz#9733248edcd6322b3db08d68865d0dcd1aac6d8c"
-  integrity sha512-fHKtgvnp9CfT/3qijmjUCstOFSB45OAF5EoK6lJxfdpEDe9bgO4om4do8Ut3boV+atZbV6rlEk9vZOUK6BGclw==
+pnpm@6.15.1:
+  version "6.15.1"
+  resolved "https://registry.yarnpkg.com/pnpm/-/pnpm-6.15.1.tgz#2f5983e05ee85c36d1166f6f81dcad1c996f7d10"
+  integrity sha512-hYGK8xlLdMj/sFhOLJ+x8IotsOkBp01c2mdWdLeKlUdA6EOl/RNWRp+7dUWs3Si2E1zgdTiHsEgNGYffv0PyLQ==
 
 postcss-media-query-parser@^0.2.3:
   version "0.2.3"
