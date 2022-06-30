@@ -40,7 +40,6 @@ alias code:vms='cd ~/Developer/vms'
 alias vizion="cd ~/Developer/code/vizion"
 
 # CLI tools
-alias cat=ccat                                                  # Always use ccat
 alias git=hub                                                   # Always use hub
 alias ssh='TERM=xterm-256color ssh'
 alias v='nvim .'

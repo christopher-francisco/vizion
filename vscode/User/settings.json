@@ -1,0 +1,31 @@
+{
+    "window.zoomLevel": 2,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "workbench.colorTheme": "One Dark Pro",
+    "timeline.excludeSources": [],
+    "editor.minimap.enabled": false,
+    "workbench.activityBar.visible": true,
+    "workbench.statusBar.visible": false,
+    "extensions.confirmedUriHandlerExtensionIds": [],
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+    "workbench.startupEditor": "newUntitledFile",
+    "breadcrumbs.enabled": true,
+    "editor.renderWhitespace": "none",
+    "workbench.editor.showTabs": false,
+    "explorer.confirmDragAndDrop": false,
+    "extensions.ignoreRecommendations": true,
+    "liveshare.authenticationProvider": "GitHub",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "workbench.iconTheme": "vscode-great-icons"
+}
