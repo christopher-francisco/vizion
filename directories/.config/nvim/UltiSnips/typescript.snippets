@@ -16,3 +16,25 @@ const use$1Styles = makeStyles((theme: Theme) => createStyles({
 export default use$1Styles;
 
 endsnippet
+
+snippet ittest "creates an it() block" b
+it("${1:specification}", () => {
+	${0}
+});$0
+endsnippet
+
+snippet tit "creates an it.todo() block" b
+it${1:.todo}("${2:specification}");
+endsnippet
+
+snippet xit "creates an xit() block" b
+xit('${1:specification}', () => {
+	${VISUAL:throw new Error('Specification not implemented');}
+});$0
+endsnippet
+
+snippet ita "creates an async it() block" b
+it('${1:specification}', async () => {
+	${0:${VISUAL:throw new Error('Specification not implemented');}}
+});
+endsnippet

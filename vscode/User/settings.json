@@ -1,8 +1,7 @@
 {
     "window.zoomLevel": 2,
     "javascript.updateImportsOnFileMove.enabled": "always",
-    "workbench.colorTheme": "One Dark Pro",
-    "timeline.excludeSources": [],
+    "workbench.colorTheme": "One Dark Pro Flat",
     "editor.minimap.enabled": false,
     "workbench.activityBar.visible": true,
     "workbench.statusBar.visible": false,
@@ -10,7 +9,7 @@
     "editor.scrollbar.horizontal": "hidden",
     "editor.scrollbar.vertical": "hidden",
     "workbench.startupEditor": "newUntitledFile",
-    "breadcrumbs.enabled": true,
+    "breadcrumbs.enabled": false,
     "editor.renderWhitespace": "none",
     "workbench.editor.showTabs": false,
     "explorer.confirmDragAndDrop": false,
@@ -27,5 +26,17 @@
     },
     "typescript.updateImportsOnFileMove.enabled": "always",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "workbench.iconTheme": "vscode-great-icons"
+    "workbench.iconTheme": "vscode-icons",
+    "editor.fontSize": 9,
+    "jenkins.pipeline.linter.connector.crumbUrl": "https://j5s.anaplan-np.net/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,%22:%22,//crumb)",
+    "jenkins.pipeline.linter.connector.url": "https://j5s.anaplan-np.net/pipeline-model-converter/validate",
+    "jenkins.pipeline.linter.connector.token": "11c68868d05ea3a5b4954ac38737bd8efb",
+    
+    
+    // "explorer.openEditors.visible": 3,
+    "workbench.sideBar.location": "right",
+    "workbench.layoutControl.enabled": false,
+    "vsicons.presets.jsOfficial": true,
+    "explorer.confirmDelete": false,
+
 }

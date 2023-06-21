@@ -60,6 +60,10 @@ alias dnonav='git config --global delta.navigate false'
 alias dvsp='git config --global delta.side-by-side true'
 alias dsp='git config --global delta.side-by-side false'
 
+cnx() {
+  rm -rf node_modules/.cache && nx $@ --skip-nx-cache
+}
+
 gitPrUrl() {
     branchName=$(git rev-parse --abbrev-ref HEAD)
     prNumber=$(git pr list | grep $branchName | rg -e "#(\d+)" -r '$1' -o)

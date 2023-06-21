@@ -597,6 +597,7 @@ set wm=0                                                " No auto line break
 " - `%` Create a new file
 " - `d` Create a new directory
 " - `D` Delete a file or directory
+" - `cmc` to copy
 
 " CtrlP
 " - `:tag [name]` Go to tag.

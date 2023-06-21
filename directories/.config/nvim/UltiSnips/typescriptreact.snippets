@@ -45,10 +45,14 @@ describe('${1:context}', () => {
 });
 endsnippet
 
-snippet it "creates an it() block" b
-it('${1:specification}', () => {
-	${0:${VISUAL:throw new Error('Specification not implemented');}}
-});
+snippet ittest "creates an it() block" b
+it("${1:specification}", () => {
+	${0}
+});$0
+endsnippet
+
+snippet tit "creates an it.todo() block" b
+it${1:.todo}("${2:specification}");
 endsnippet
 
 snippet xit "creates an xit() block" b
@@ -61,5 +65,11 @@ snippet ita "creates an async it() block" b
 it('${1:specification}', async () => {
 	${0:${VISUAL:throw new Error('Specification not implemented');}}
 });
+endsnippet
+
+snippet aaf "creates an anonymous arrow function"
+(${1}) => {
+	${0}
+}
 endsnippet
 

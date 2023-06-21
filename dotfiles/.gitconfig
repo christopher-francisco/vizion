@@ -17,3 +17,5 @@
 [delta]
 	side-by-side = false
 	navigate = false
+[push]
+	default = simple

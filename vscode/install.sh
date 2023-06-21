@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-ln -s ./User ~/Library/Application\ Support/Code/User
+dir=$(pwd)
+ln -s $dir/vscode/User ~/Library/Application\ Support/Code/User
 
-extensions=$(cat ./extensions)
+extensions=$(cat ./vscode/extensions)
 for extension in $extensions; do
-  code --install-extension extension
+  code --install-extension $extension
 done
