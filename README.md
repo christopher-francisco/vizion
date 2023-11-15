@@ -16,6 +16,8 @@ Go here:  https://github.com/settings/tokens
 
 ### 2. Sign into the App Store
 
+If you don't want to install Mac Store apps, then delete the `mas` lines in `Brewfile`
+
 ### 3. Install the XCode Developer Tools:
 
 ```
@@ -29,6 +31,8 @@ Go to https://brew.sh or run:
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+
+And also **make sure you run the post install commands to add `brew` to the `$PATH`**
 
 ### 5. Install Vizion
 
@@ -67,5 +71,6 @@ git remote set-head origin -a
 brew install gawk
 ```
 
->Neovim is all blue
+> Neovim is all blue
+
 Run iTerm, not the Terminal app
