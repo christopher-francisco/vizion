@@ -74,3 +74,7 @@ brew install gawk
 > Neovim is all blue
 
 Run iTerm, not the Terminal app
+
+> zsh autosuggest-accept not working
+
+Go to `System Preferences > Keyboard` and then go to `Keyboard Shortcuts > Input Sources` and then disable the shortcut with `ctrl + space` as it's conflicting
