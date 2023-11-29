@@ -16,7 +16,7 @@ Go here:  https://github.com/settings/tokens
 
 ### 2. Sign into the App Store
 
-If you don't want to install Mac Store apps, then delete the `mas` lines in `Brewfile`
+**NOTE**: If you don't want to install Mac Store apps (you haven't signed in to the App Store), the script will fail. You'll need to go to the cloned GitHub repo `~/Developer/code/vizion`, delete the `mas` lines in `Brewfile`, and re-run `rake`
 
 ### 3. Install the XCode Developer Tools:
 
