@@ -20,7 +20,7 @@ return {
           end,
         }
         -- NOTE: this line is making the snippet ordered before lsp results
-        -- table.insert(opts.sources, { name = "luasnip" })
+        --table.insert(opts.sources, { name = "luasnip" })
       end,
     },
   },

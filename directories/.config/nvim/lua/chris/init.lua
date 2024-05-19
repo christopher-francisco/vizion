@@ -5,7 +5,7 @@ local M = {}
 function M.setup()
   require("chris.plugins")
   require("chris.set")
-  require("chris.remap")
+  require("chris.keymaps").setup()
   require("chris.cmd")
 end
 
