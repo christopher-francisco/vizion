@@ -1,12 +1,16 @@
+-- TODO: find a way to get all these into which-key
 vim.keymap.set("n", "-", vim.cmd.Ex)
 
 vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("i", "kj", "<Esc>")
 
+--[[
+-- Not needed due to tmux-vim-navigator
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
+]]--
 
 vim.keymap.set("n", "<leader>w", vim.cmd.w)
 
@@ -20,10 +24,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv'")
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
-
-vim.keymap.set("n", "<leader>f", function()
-  vim.lsp.buf.format()
-end)
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
