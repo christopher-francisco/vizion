@@ -24,5 +24,4 @@ vim.opt.updatetime = 300
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-
-vim.cmd[[colorscheme tokyonight]]
+vim.opt.background = "light"
