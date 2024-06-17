@@ -63,6 +63,8 @@ return {
         tailwindcss = {},
 
         terraformls = {},
+
+        csharp_ls = {},
       },
     },
     ---@param opts PluginLspOpts

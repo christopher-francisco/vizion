@@ -52,6 +52,7 @@ return {
       indent = { enable = true },
       ensure_installed = {
         "bash",
+        "c_sharp",
         "diff",
         "hcl",
         "html",

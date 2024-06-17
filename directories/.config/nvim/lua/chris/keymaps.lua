@@ -15,6 +15,7 @@ function M.getLspKeymaps()
     { mode = { "n", "v" }, lhs = "<leader>ca", rhs = vim.lsp.buf.code_action,                                           desc = "Code Action", },
     { mode = "n",          lhs = "[d",         rhs = vim.diagnostic.goto_prev,                                          desc = "Goto previous" },
     { mode = "n",          lhs = "]d",         rhs = vim.diagnostic.goto_next,                                          desc = "Goto next" },
+    { mode = "n",          lhs = "<leader>cd", rhs = vim.diagnostic.open_float,                                          desc = "See diagnostics" },
   }
 end
 
@@ -27,7 +28,7 @@ function M.getGeneralKeymaps()
     { mode = "i",          lhs = "kj",                rhs = "<Esc>",                                                      desc = "Leave Insert" },
 
     -- normal mode
-    { mode = "n",          lhs = "-",                 rhs = vim.cmd.Ex,                                                   desc = "Open Explorer" },
+    { mode = "n",          lhs = "-",                 rhs = "<CMD>Oil<CR>",                                               desc = "Open Explorer" },
     { mode = "n",          lhs = "<leader>w",         rhs = vim.cmd.w,                                                    desc = "Write file" },
     { mode = "n",          lhs = "<c-d>",             rhs = "<c-d>zz",                                                    desc = "Scroll down, center" },
     { mode = "n",          lhs = "<c-u>",             rhs = "<c-u>zz",                                                    desc = "Scroll up, center" },
