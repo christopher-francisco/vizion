@@ -1,27 +1,34 @@
-vim.opt.number = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 0
-vim.opt.expandtab = true
+local opt = vim.opt
 
-vim.opt.wrap = false
+opt.number = true
+opt.tabstop = 2
+opt.softtabstop = 2
+opt.shiftwidth = 0
+opt.expandtab = true
 
--- vim.opt.autoindent = true
--- vim.opt.autoread = true
-vim.opt.swapfile = false
-vim.opt.backup = false
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.treesitter.foldexpr()"
+opt.foldtext = ""
+-- opt.foldcolumn = "0"
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldnestmax = 4
 
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
+opt.wrap = false
 
-vim.opt.termguicolors = true
+-- opt.autoindent = true
+-- opt.autoread = true
+opt.swapfile = false
+opt.backup = false
 
-vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
-vim.opt.cmdheight = 2
+opt.termguicolors = true
 
-vim.opt.updatetime = 300
+opt.scrolloff = 8
+opt.signcolumn = "yes"
+opt.cmdheight = 2
 
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.background = "light"
+opt.updatetime = 300
+
+opt.splitbelow = true
+opt.splitright = true
+opt.background = vim.env.THEME or "dark"

@@ -2,10 +2,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    dependencies = {
-      -- FIXME: should cmp-nvim-lsp be declared here?
-      { "folke/neodev.nvim", opts = {} },
-    },
     ---@class PluginLspOpts
     opts = {
       -- options for vim.diagnostic.config()

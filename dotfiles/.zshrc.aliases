@@ -1,3 +1,4 @@
+# source ~/.config/.zsh/catppuccin_latte-zsh-syntax-highlighting.zsh
 # Export
 
 # Set the visual editor
@@ -8,12 +9,9 @@ export EDITOR="$VISUAL"
 
 # Local binaries
 export PATH="$PATH:$HOME/bin"
-
-# Add cargo binaries
 export PATH="$PATH:$HOME/.cargo/bin"
-
-# Add composer global executables to $PATH
-export PATH="$PATH:$HOME/.composer/vendor/bin"
+export PATH="$PATH:$HOME/.dotnet/tools"
+export PATH="$PATH:$HOME/.bun/bin"
 
 # Enable true colors and italic.
 export TERM=xterm-256color-italic
@@ -101,6 +99,7 @@ zshPlugins() {
   source "$location/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
   source "$location/share/zsh/site-functions/_tmuxinator"
 }
+#source ~/.config/.zsh/catppuccin_latte-zsh-syntax-highlighting.zsh
 zshPlugins
 
 
