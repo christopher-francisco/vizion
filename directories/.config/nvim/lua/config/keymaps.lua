@@ -1,0 +1,131 @@
+local remove_buffer = require('config.utils.buffers').remove_buffer
+
+local M = {}
+
+local map = vim.keymap.set
+
+-- Move up/down including wrapped lines
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+
+-- Move to window using the <ctrl> hjkl keys
+-- TODO: Delete them as they are already handled by vim-tmux-navigator keys
+-- map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
+-- map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+-- map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+-- map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+
+-- Resize Window
+map("n", "<A-j>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<A-k>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<A-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<A-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+
+-- Move Lines
+map("n", "]l", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+map("n", "[l", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("v", "]l", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
+map("v", "[l", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
+
+-- Buffers
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous Buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", "<leader>bd", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+map("n", "<leader>bD", remove_buffer, { desc = "Delete Buffer but keep Window" })
+
+-- Write (Save)
+map("n", "<leader>ww", ":w<cr>", { desc = "Write buffer" })
+map("n", "<leader>wbd", ":w|q<cr>", { desc = "Write, then Quit / close Window" })
+map("n", "<leader>wbd", ":w|bd<cr>", { desc = "Write, then delete Buffer and Window" })
+map("n", "<leader>wbD", ":echo 'Not yet implemented'", { desc = "Write, then delete Buffer but keep Window" })
+map("n", "<leader>wso", ":w|so<cr>", { desc = "Write and source" })
+
+-- Quit
+map("n", "Q", ":q<cr>", { desc = "Quit / close window" })
+
+-- Better join
+map("n", "J", "mzJ`z", { desc = "Join, keep cursor position" })
+
+map("n", "<leader>ss", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute preloaded" })
+map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg - use when LSP is attached" })
+
+-- Movement
+-- TODO: Delete as these are not as useful
+-- map("n", "<c-d>", "<c-d>zz", { desc = "Scroll down, center" })
+-- map("n", "<c-u>", "<c-u>zz", { desc = "Scroll up, center" })
+-- map("n", "n", "nzzzv", { desc = "Go to next, center" })
+-- map("n", "N", "Nzzzv", { desc = "Go to next, center" })
+
+-- Clear search
+map("n", "<cr>", "<cmd>noh<cr><esc>", { desc = "Clear hlsearch" })
+
+-- Better indenting
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+
+-- Add undo break-points
+--[[  Not sure what is this for?  DAP maybe?
+map("i", ",", ",<c-g>u")
+map("i", ".", ".<c-g>u")
+map("i", ";", ";<c-g>u")
+]]
+   --
+
+-- commenting
+map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
+
+-- lazy
+map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+
+-- new file
+map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+
+map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
+map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+
+-- Quickfix
+map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
+map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+
+-- Diagnostics
+map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Next Diagnostic" })
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Previous Diagnostic" })
+map("n", "[e", function() vim.diagnostic.goto_prev({ severity = "ERROR" }) end, { desc = "Next Error" })
+map("n", "]e", function() vim.diagnostic.goto_next({ severity = "ERROR" }) end, { desc = "Previous Error" })
+map("n", "[w", function() vim.diagnostic.goto_prev({ severity = "WARN" }) end, { desc = "Next Warning" })
+map("n", "]w", function() vim.diagnostic.goto_next({ severity = "WARN" }) end, { desc = "Previous Warning" })
+
+-- Window
+map("n", "<leader>-", "<c-w>s", { desc = "Split Window Below", remap = true })
+map("n", "<leader>|", "<c-w>v", { desc = "Split Window Right", remap = true })
+
+-- Oil.nvim
+map("n", "-", ":Oil<cr>", { desc = "Open Explorer" })
+
+-- Clear search, diff update and redraw
+-- taken from runtime/lua/_editor.lua
+map(
+  "n",
+  "<leader>ur",
+  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+  { desc = "Redraw / Clear hlsearch / Diff Update" }
+)
+
+
+---@param buffer number
+function M.on_attach(_, buffer)
+  map("n", "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "Goto definition", buffer = buffer, silent = true })
+  map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = buffer, silent = true })
+  map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = buffer, silent = true })
+end
+
+function M.setup() end
+
+return M

@@ -1,1 +1,1 @@
-require("chris").setup()
+require("config.init").setup()

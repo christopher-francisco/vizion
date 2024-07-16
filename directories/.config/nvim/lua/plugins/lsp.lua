@@ -1,7 +1,14 @@
 return {
   {
+    "b0o/SchemaStore.nvim",
+    lazy = true,
+    version = false, -- last release is way too old
+  },
+  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    dependencies = {
+    },
     ---@class PluginLspOpts
     opts = {
       -- options for vim.diagnostic.config()
@@ -61,6 +68,21 @@ return {
         terraformls = {},
 
         csharp_ls = {},
+
+        jsonls = {
+          on_new_config = function(new_config)
+            new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+            vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+          end,
+          settings = {
+            json = {
+              format = {
+                enable = true,
+              },
+              validate = { enable = true },
+            },
+          },
+        }
       },
     },
     ---@param opts PluginLspOpts
@@ -81,7 +103,7 @@ return {
         callback = function(args)
           local buffer = args.buf ---@type number
           local client = vim.lsp.get_client_by_id(args.data.client_id)
-          require('chris.keymaps').on_attach(client, buffer)
+          require('config.keymaps').on_attach(client, buffer)
         end,
       })
 

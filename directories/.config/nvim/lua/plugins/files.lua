@@ -114,7 +114,18 @@ return {
   },
   {
     'stevearc/oil.nvim',
-    opts = {},
+    opts = {
+      skip_confirm_for_simple_edits = false,
+      view_options = {
+        show_hidden = true,
+      },
+      keymaps = {
+        ["<leader>|"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+        ["<leader>-"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
+        -- Avoid conflict with window movement
+        ["<leader>l"] = "actions.refresh",
+      }
+    },
     dependencies = { "nvim-tree/nvim-web-devicons" },
   }
 }
