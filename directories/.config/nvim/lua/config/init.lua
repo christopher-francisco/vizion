@@ -4,10 +4,10 @@ vim.g.maplocalleader = "\\"
 local M = {}
 
 function M.setup()
+  require("config.autocmds")
   require("config.plugins")
-  require("config.set")
-  require("config.keymaps").setup()
-  require("config.cmd")
+  require("config.options")
+  require("config.keymaps")
 end
 
 return M

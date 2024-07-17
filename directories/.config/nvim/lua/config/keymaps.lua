@@ -1,4 +1,4 @@
-local remove_buffer = require('config.utils.buffers').remove_buffer
+local remove_buffer = require('utils.buffers').remove_buffer
 
 local M = {}
 
@@ -18,10 +18,10 @@ map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = tru
 -- map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 -- Resize Window
-map("n", "<A-j>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<A-k>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<A-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<A-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+map("n", "<A-k>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<A-j>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<A-l>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<A-h>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Move Lines
 map("n", "]l", "<cmd>m .+1<cr>==", { desc = "Move Down" })
@@ -125,7 +125,5 @@ function M.on_attach(_, buffer)
   map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = buffer, silent = true })
   map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = buffer, silent = true })
 end
-
-function M.setup() end
 
 return M

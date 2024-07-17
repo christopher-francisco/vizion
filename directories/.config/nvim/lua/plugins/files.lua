@@ -10,41 +10,18 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     cmd = "Telescope",
-    keys = function()
-      local builtin = require("telescope.builtin")
-      return {
-        {
-          "<leader>ls",
-          function()
-            builtin.buffers({
-              sort_mru = true,
-              sort_lastused = true,
-              ignore_current_buffer = true
-            })
-          end,
-          desc = "Switch Buffer",
-        },
-        {
-          "<leader>lf",
-          require("telescope.builtin").git_files,
-          desc = "List git files",
-        },
-        {
-          "<leader>lr",
-          function()
-            require("telescope.builtin").oldfiles()
-          end,
-          desc = "List files",
-        },
-        {
-          "<leader>laf",
-          function()
-            require("telescope.builtin").find_files()
-          end,
-          desc = "List all files",
-        },
-      }
-    end,
+    keys = {
+      { "<leader>fc", ":Telescope find_files cwd=~/.config/nvim<cr>", desc = "Find Config files" },
+      {
+        "<leader>uC",
+        function()
+          -- ":Telescope colorscheme enable_preview=true<cr>"
+          require('config.colorscheme').load()
+          require('telescope.builtin').colorscheme({ enable_preview = true, ignore_builtins = true })
+        end,
+        desc = "Colorschemes with preview"
+      },
+    },
     -- We don't use opts because we need a reference to actions and telescope for each individual option
     config = function()
       local telescope = require("telescope")
