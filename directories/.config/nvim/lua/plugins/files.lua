@@ -11,7 +11,17 @@ return {
     },
     cmd = "Telescope",
     keys = {
-      { "<leader>fc", ":Telescope find_files cwd=~/.config/nvim<cr>", desc = "Find Config files" },
+      { "<leader>/", ":Telescope live_grep<cr>", desc = "Grep" },
+      { "<leader>:", ":Telescope command_history<cr>", desc = "Command history" },
+      { "<leader>*", ":Telescope grep_string<cr>", desc = "Word" },
+      { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+      { "<leader>ff", ":Telescope git_files", desc = "Find file" },
+      { "<leader>fF", ":Telescope find_files", desc = "Find file (all)" },
+      { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+      { "<leader>fR", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+      { "<leader>fc", ":Telescope find_files cwd=~/.config/nvim<cr>", desc = "Find config file" },
+      { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Marks" },
+      { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
       {
         "<leader>uC",
         function()
@@ -28,6 +38,24 @@ return {
 
       telescope.setup({
         defaults = {
+          vimgrep_arguments = {
+            "rg",
+            "--hidden",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case"
+          },
+          pickers = {
+            find_files = {
+              hidden = true
+            },
+            git_files = {
+              hidden = true
+            },
+          },
           mappings = {
             i = {
               ["<C-k>"] = actions.move_selection_previous,
