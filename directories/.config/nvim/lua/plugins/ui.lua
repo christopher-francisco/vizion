@@ -14,6 +14,63 @@ return {
     lazy = true
   },
   {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.g.lualine_laststatus = vim.o.laststatus
+      if vim.fn.argc(-1) > 0 then
+        -- set an empty statusline till lualine loads
+        vim.o.statusline = " "
+      else
+        -- hide the statusline on the starter page
+        vim.o.laststatus = 0
+      end
+    end,
+    opts = function()
+      vim.o.laststatus = vim.g.lualine_laststatus
+
+      local opts = {
+        options = {
+          theme = "auto",
+          globalstatus = true,
+          disabled_filetypes = { statusline = { "dashboard" } },
+          component_separators = '',
+        },
+        sections = {
+          lualine_a = {
+            { "mode", icon = { "" } }
+          },
+          lualine_b = {
+            { "branch", icon = { ""  } }
+          },
+          lualine_c = {
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            { "filename", path = 0, symbols = { modified = "", readonly = "" }, padding = { left = 0 } },
+          },
+          lualine_x = {
+            { "diff", symbols = {added = ' ', modified = ' ', removed = ' '} }
+          },
+          lualine_y = {
+            { "selectioncount" },
+            { "diagnostics" },
+          },
+          lualine_z = {
+            { "location" }
+          },
+        },
+        extensions = {
+          "quickfix",
+          "neo-tree",
+          "lazy",
+          "oil",
+          "trouble",
+        },
+      }
+
+      return opts
+    end,
+  },
+  {
     'nvimdev/dashboard-nvim',
     event = 'VimEnter',
     dependencies = {
@@ -30,7 +87,7 @@ return {
       local opts = {
         theme = "doom",
         hide = {
-          statusline = false,
+          statusline = false, -- taken from LazyVim, some sort of conflict happens otherwise
         },
         config = {
           header = vim.split(logo, "\n"),
@@ -46,9 +103,7 @@ return {
             },
             { action = "ene | startinsert", desc = " New File", icon = " ", key = "n" },
             {
-              action = function()
-                builtin.oldfiles()
-              end,
+              action = function() builtin.oldfiles() end,
               desc = " Recent Files",
               icon = " ",
               key = "r",

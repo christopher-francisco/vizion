@@ -14,6 +14,7 @@
   "friendly-snippets": { "branch": "main", "commit": "00ebcaa159e817150bd83bfe2d51fa3b3377d5c4" },
   "lazy.nvim": { "branch": "main", "commit": "9d445ebbd89401544a538c6af080e4d2785abb49" },
   "lazydev.nvim": { "branch": "main", "commit": "02f1055a777264d4b65896051ec28d0f322f7932" },
+  "lualine.nvim": { "branch": "master", "commit": "544dd1583f9bb27b393f598475c89809c4d5e86b" },
   "luvit-meta": { "branch": "main", "commit": "ce76f6f6cdc9201523a5875a4471dcfe0186eb60" },
   "mini.ai": { "branch": "main", "commit": "45587078f323eaf41b9f701bbc04f8d1ab008979" },
   "neo-tree.nvim": { "branch": "main", "commit": "206241e451c12f78969ff5ae53af45616ffc9b72" },
