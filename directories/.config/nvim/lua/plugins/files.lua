@@ -15,8 +15,7 @@ return {
       {
         "<leader>uC",
         function()
-          -- ":Telescope colorscheme enable_preview=true<cr>"
-          require('config.colorscheme').load()
+          require('utils.colorscheme').load()
           require('telescope.builtin').colorscheme({ enable_preview = true, ignore_builtins = true })
         end,
         desc = "Colorschemes with preview"

@@ -27,14 +27,31 @@ return {
       }
     },
   },
+  -- {
+  --   "sainnhe/everforest",
+  --   name = "everforest-vim",
+  --   lazy = should_lazy_load('everforest-vim'),
+  --   priority = get_priority('everforest-vim'),
+  --   event = get_event('everforest-vim'),
+  --   config = function ()
+  --     vim.g.everforest_background = "soft"
+  --     vim.g.everforest_enable_italic = true
+  --   end
+  -- },
   {
-    "sainnhe/everforest",
+    "neanias/everforest-nvim",
+    version = false,
     lazy = should_lazy_load('everforest'),
     priority = get_priority('everforest'),
     event = get_event('everforest'),
     config = function ()
-      vim.g.everforest_background = "soft"
-      vim.g.everforest_enable_italic = true
+      require('everforest').setup({
+        background = "soft",
+        italics = true,
+        on_highlights = function(hl, palette)
+          hl.DashboardHeader = { fg = palette.green }
+        end,
+      })
     end
   }
 }

@@ -16,17 +16,14 @@ return {
   {
     'nvimdev/dashboard-nvim',
     event = 'VimEnter',
-    dependencies = { { 'nvim-tree/nvim-web-devicons' } },
+    dependencies = {
+      { 'nvim-tree/nvim-web-devicons' },
+    },
     opts = function()
-      local logo = [[
-         ███████  ███   ███  ████████   ███  ████████
-        ███       ███   ███  ███   ███  ███  ███     
-        ███       █████████  ████████   ███  ████████
-        ███       ███   ███  ███   ███  ███       ███
-         ███████  ███   ███  ███   ███  ███  ████████
-      ]]
+      local art = require('utils.art').vizion_shadow
 
-      logo = string.rep("\n", 8) .. logo .. "\n\n"
+      -- Add some margin
+      local logo = string.rep("\n", art.margin_top) .. art.text .. string.rep("\n", art.margin_bottom)
 
       local builtin = require("telescope.builtin")
 
@@ -49,7 +46,7 @@ return {
             },
             { action = "ene | startinsert", desc = " New File", icon = " ", key = "n" },
             {
-              action = function ()
+              action = function()
                 builtin.oldfiles()
               end,
               desc = " Recent Files",
