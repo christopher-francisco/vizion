@@ -55,9 +55,15 @@ return {
     opts = function()
       vim.o.laststatus = vim.g.lualine_laststatus
 
+      local colorscheme = require('utils.colorscheme').colorscheme
+      local custom = require("lualine.themes." .. colorscheme)
+      for _, mode in pairs(custom) do
+        mode.c.bg = nil
+      end
+
       local opts = {
         options = {
-          theme = "auto",
+          theme = custom,
           globalstatus = true,
           disabled_filetypes = { statusline = { "dashboard" } },
           component_separators = '',
