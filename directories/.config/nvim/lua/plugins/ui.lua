@@ -2,12 +2,38 @@ return {
   {
     "folke/which-key.nvim",
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 700
-    end,
+    ---@class wk.Opts
     opts = {
-    }
+      delay = 500,
+      spec = {
+        {
+          mode =  { "n" },
+          { "<leader><tab>", group = "tabs" },
+          { "<leader>w", group = "write" },
+          { "<leader>b", group = "buffers" },
+          { "<leader>u", group = "ui" },
+          { "<leader>S", group = "session" },
+          { "[", group = "previous" },
+          { "]", group = "next" },
+        }
+      }
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Keymaps (which-key)",
+      },
+      {
+        "<c-w><space>",
+        function()
+          require("which-key").show({ keys = "<c-w>", loop = true })
+        end,
+        desc = "Window Hydra Mode (which-key)",
+      },
+    },
   },
   {
     "nvim-tree/nvim-web-devicons",
