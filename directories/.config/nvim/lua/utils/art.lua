@@ -115,7 +115,7 @@ local _vizion_shadow = [[
 ]]
 
 M.vizion_shadow = {
-  margin_top = 6,
+  margin_top = 2,
   margin_bottom = 1,
   text = [[
 ████═╗      ████═╗████═╗██████████████═╗████═╗  ████████████═╗  ██████═╗      ████═╗

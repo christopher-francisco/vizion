@@ -4,6 +4,13 @@ local M = {}
 
 local map = vim.keymap.set
 
+-- Config files
+map("n", "<leader>ftc", ":e ~/.tmux.conf<cr>", { desc = "Open Tmux config" })
+
+-- Sessions
+map("n", "<leader>SS", ":mks! ~/.local/state/nvim/session.vim<cr>", { desc = "Save session" })
+map("n", "<leader>SL", ":so ~/.local/state/nvim/session.vim<cr>", { desc = "Load session" })
+
 -- Move up/down including wrapped lines
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -105,6 +112,15 @@ map("n", "]w", function() vim.diagnostic.goto_next({ severity = "WARN" }) end, {
 -- Window
 map("n", "<leader>-", "<c-w>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>|", "<c-w>v", { desc = "Split Window Right", remap = true })
+
+-- Tabs
+map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "]t", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "[t", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "[T", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "]T", "<cmd>tablast<cr>", { desc = "Last Tab" })
+map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 
 -- Oil.nvim
 map("n", "-", ":Oil<cr>", { desc = "Open Explorer" })

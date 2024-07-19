@@ -58,6 +58,19 @@ return {
             { "location" }
           },
         },
+        tabline = {
+          lualine_a = {
+            {
+              "tabs",
+              mode = 1,
+              path = 0,
+              show_modified_status = true,
+              symbols = {
+                modified = '',
+              },
+            }
+          }
+        },
         extensions = {
           "quickfix",
           "neo-tree",
@@ -91,6 +104,7 @@ return {
           header = vim.split(logo, "\n"),
           -- stylua: ignore
           center = {
+            { action = ":so ~/.local/state/nvim/session.vim", desc = " Restore session", icon = "󰦛 ", key = "s", },
             { action = "Telescope oldfiles", desc = " Recent files", icon = " ", key = "r", },
             { action = "Telescope git_files", desc = " Find file", icon = " ", key = "f" },
             { action = "Telescope find_files", desc = " Search file", icon = "󰥨 ", key = "F" },
@@ -98,6 +112,8 @@ return {
             { action = "Telescope live_grep", desc = " Search text", icon = " ", key = "g" },
             { action = "Telescope find_files cwd=~/.config/nvim", desc = " Config files", icon = "󰒓 ", key = "c" },
             { action = "Lazy", desc = " Lazy", icon = "󰒲 ", key = "l" },
+            { action = "e ~/.tmux.conf", desc = " Tmux config", icon = " ", key = "t" },
+            { action = "Telescope find_files cwd=~/.tmux", desc = " Tmux config (Dir)", icon = " ", key = "T" },
             { action = "qa", desc = " Quit", icon = " ", key = "q" },
           },
           footer = function()
