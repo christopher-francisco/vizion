@@ -5,7 +5,7 @@ local opt = vim.opt
 
 -- ui
 opt.background = vim.env.THEME or "dark"
-opt.cmdheight = 1
+opt.cmdheight = 0
 opt.laststatus = 3
 opt.number = true
 opt.relativenumber = true
@@ -43,6 +43,7 @@ opt.formatexpr = "v:lua.require'conform'.formatexpr()"
 opt.formatoptions = "jcroqlnt" -- tcqj
 
 -- folds
+-- TODO: `:h vim.treesitter.foldexpr()` suggest `vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'`
 opt.foldexpr = "v:lua.treesitter.foldexpr()"
 opt.foldlevel = 99
 opt.foldlevelstart = 99

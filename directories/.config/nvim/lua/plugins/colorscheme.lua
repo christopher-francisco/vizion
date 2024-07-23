@@ -53,5 +53,16 @@ return {
         end,
       })
     end
-  }
+  },
+  {
+    "scottmckendry/cyberdream.nvim",
+    lazy = should_lazy_load('everforest'),
+    priority = get_priority('everforest'),
+    event = get_event('everforest'),
+    opts = {
+      transparent = true,
+      italic_comments = true,
+      hide_fillchars = true,
+    },
+  },
 }

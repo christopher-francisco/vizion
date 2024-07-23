@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   {
     "folke/which-key.nvim",
@@ -15,6 +16,8 @@ return {
           { "<leader>S", group = "session" },
           { "[", group = "previous" },
           { "]", group = "next" },
+          { "<leader>_", group = "Open in split" },
+          { "<leader>|", group = "Open in vertical split" },
         }
       }
     },
@@ -35,26 +38,74 @@ return {
       },
     },
   },
+  -- {
+  --   "nvim-tree/nvim-web-devicons",
+  --   lazy = true
+  -- },
   {
-    "nvim-tree/nvim-web-devicons",
-    lazy = true
+    "echasnovski/mini.icons",
+    lazy = true,
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+    opts = {
+      file = {
+        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
+      },
+      filetype = {
+        -- dotenv = { glyph = "", hl = "MiniIconsYellow" },
+      },
+    },
   },
+  -- NOTE: not 100% sure I like this plugin
+  -- {
+  --   enabled = false,
+  --   "folke/noice.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --   },
+  --   ---@type NoiceConfig
+  --   opts = {
+  --     cmdline = {
+  --       view = "cmdline"
+  --     },
+  --     lsp = {
+  --       override = {
+  --         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+  --         ["vim.lsp.util.stylize_markdown"] = true,
+  --         ["cmp.entry.get_documentation"] = true,
+  --       },
+  --       progress = {
+  --         enabled = true,
+  --       },
+  --     },
+  --     routes = {
+  --       {
+  --         filter = {
+  --           event = "msg_show",
+  --           kind = "",
+  --           find = "written",
+  --         },
+  --         opts = { skip = true },
+  --       },
+  --     },
+  --     presets = {
+  --       bottom_search = true, -- use a classic bottom cmdline for search
+  --       command_palette = true, -- position the cmdline and popupmenu together
+  --       long_message_to_split = true, -- long messages will be sent to a split
+  --       inc_rename = false, -- enables an input dialog for inc-rename.nvim
+  --       lsp_doc_border = false, -- add a border to hover docs and signature help
+  --     },
+  --   },
+  -- },
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    init = function()
-      vim.g.lualine_laststatus = vim.o.laststatus
-      if vim.fn.argc(-1) > 0 then
-        -- set an empty statusline till lualine loads
-        vim.o.statusline = " "
-      else
-        -- hide the statusline on the starter page
-        vim.o.laststatus = 0
-      end
-    end,
     opts = function()
-      vim.o.laststatus = vim.g.lualine_laststatus
-
       local colorscheme = require('utils.colorscheme').colorscheme
       local custom = require("lualine.themes." .. colorscheme)
       for _, mode in pairs(custom) do
@@ -73,21 +124,34 @@ return {
             { "mode", icon = { "" } }
           },
           lualine_b = {
-            { "branch", icon = { ""  } }
+            { "branch", icon = { ""  } },
           },
           lualine_c = {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { "filename", path = 0, symbols = { modified = "", readonly = "" }, padding = { left = 0 } },
           },
           lualine_x = {
-            { "diff", symbols = {added = ' ', modified = ' ', removed = ' '} }
+            -- {
+            --   ---@diagnostic disable-next-line: undefined-field
+            --   require("noice").api.status.command.get,
+            --   ---@diagnostic disable-next-line: undefined-field
+            --   cond = require("noice").api.status.command.has,
+            --   color = { fg = "#ff9e64" },
+            -- },
+            {
+              function ()
+                return "󱑍 " .. os.date("%X")
+              end,
+              cond = function() return os.getenv("TMUX") == nil end,
+            },
           },
           lualine_y = {
             { "selectioncount" },
             { "diagnostics" },
+            { "progress" },
           },
           lualine_z = {
-            { "location" }
+            { "location", padding = { left = 0, right = 1 } },
           },
         },
         tabline = {
@@ -119,7 +183,8 @@ return {
     'nvimdev/dashboard-nvim',
     event = 'VimEnter',
     dependencies = {
-      { 'nvim-tree/nvim-web-devicons' },
+      -- { 'nvim-tree/nvim-web-devicons' },
+      { "echasnovski/mini.icons" },
     },
     opts = function()
       local art = require('utils.art').vizion_shadow
@@ -136,7 +201,7 @@ return {
           header = vim.split(logo, "\n"),
           -- stylua: ignore
           center = {
-            { action = ":so ~/.local/state/nvim/session.vim", desc = " Restore session", icon = "󰦛 ", key = "s", },
+            { action = function() require("persistence").load() end, desc = " Restore session", icon = "󰦛 ", key = "s", },
             { action = "Telescope oldfiles", desc = " Recent files", icon = " ", key = "r", },
             { action = "Telescope git_files", desc = " Find file", icon = " ", key = "f" },
             { action = "Telescope find_files", desc = " Search file", icon = "󰥨 ", key = "F" },

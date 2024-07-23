@@ -1,5 +1,58 @@
 return {
-  { 'echasnovski/mini.ai',  version = false },
+  {
+    'echasnovski/mini.ai',
+    version = false,
+    opts = function ()
+      local ai = require('mini.ai')
+      return {
+        custom_textobjects = {
+          o = ai.gen_spec.treesitter({
+            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+          }),
+          c = ai.gen_spec.treesitter({ a = "@comment.outer", i = "@comment.inner" }),
+          F = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+        }
+      }
+    end
+  },
+  {
+    "echasnovski/mini.surround",
+    keys = {
+      { "gsa", desc = "Add Surrounding", mode = { "n", "v" } },
+      { "gsd", desc = "Delete Surrounding" },
+      { "gsf", desc = "Find Right Surrounding" },
+      { "gsF", desc = "Find Left Surrounding" },
+      { "gsh", desc = "Highlight Surrounding" },
+      { "gsr", desc = "Replace Surrounding" },
+      { "gsn", desc = "Update `MiniSurround.config.n_lines`" },
+    },
+    opts = {
+      mappings = {
+        add = "gsa", -- Add surrounding in Normal and Visual modes
+        delete = "gsd", -- Delete surrounding
+        find = "gsf", -- Find surrounding (to the right)
+        find_left = "gsF", -- Find surrounding (to the left)
+        highlight = "gsh", -- Highlight surrounding
+        replace = "gsr", -- Replace surrounding
+        update_n_lines = "gsn", -- Update `n_lines`
+      },
+    },
+  },
+  {
+    'Wansmer/treesj',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    keys = {
+      {  "gS", "<cmd>TSJSplit<cr>", desc = "Split node" },
+      {  "gJ", "<cmd>TSJJoin<cr>", desc = "Join node" },
+    },
+    opts = {
+      use_default_keymaps = false,
+    },
+    config = function(_, opts)
+      require('treesj').setup(opts)
+    end,
+  },
   {
     "rcarriga/nvim-dap-ui",
     dependencies = {
@@ -29,4 +82,15 @@ return {
       })
     end,
   },
+  {
+    'MeanderingProgrammer/markdown.nvim',
+    name = 'render-markdown',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'echasnovski/mini.icons',
+      -- 'nvim-tree/nvim-web-devicons'
+    },
+    ft = { "markdown" },
+    opts = {}
+  }
 }

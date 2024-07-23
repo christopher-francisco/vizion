@@ -82,7 +82,10 @@ return {
               validate = { enable = true },
             },
           },
-        }
+        },
+
+        sourcekit = {
+        },
       },
     },
     ---@param opts PluginLspOpts

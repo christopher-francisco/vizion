@@ -25,10 +25,10 @@ map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = tru
 -- map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 -- Resize Window
-map("n", "<A-k>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<A-j>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<A-l>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<A-h>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+map("n", "<A-k>", "<cmd>resize +5<cr>", { desc = "Increase Window Height" })
+map("n", "<A-j>", "<cmd>resize -5<cr>", { desc = "Decrease Window Height" })
+map("n", "<A-l>", "<cmd>vertical resize -5<cr>", { desc = "Decrease Window Width" })
+map("n", "<A-h>", "<cmd>vertical resize +5<cr>", { desc = "Increase Window Width" })
 
 -- Move Lines
 map("n", "]l", "<cmd>m .+1<cr>==", { desc = "Move Down" })
@@ -44,6 +44,7 @@ map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 map("n", "<leader>bD", remove_buffer, { desc = "Delete Buffer but keep Window" })
+map("n", "<leader>b%", ":%bd<cr>", { desc = "Delete all buffers" })
 
 -- Write (Save)
 map("n", "<leader>ww", ":w<cr>", { desc = "Write buffer" })
@@ -70,6 +71,7 @@ map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg - use when LSP is
 
 -- Clear search
 map("n", "<cr>", "<cmd>noh<cr><esc>", { desc = "Clear hlsearch" })
+map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Clear hlsearch" })
 
 -- Better indenting
 map("v", "<", "<gv")
@@ -90,8 +92,11 @@ map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Commen
 -- lazy
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
--- new file
+-- Files
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+map("n", "<leader>_f", ':sp <c-r>=expand("%:p:h")<cr>/', { desc = "Open file in split" })
+map("n", "<leader>|f", ':vsp <c-r>=expand("%:p:h")<cr>/', { desc = "Open file in split" })
+map("n", "<leader><tab>f", ':tabe<c-r>=expand("%:p:h")<cr>/', { desc = "Open file in split" })
 
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
@@ -111,7 +116,7 @@ map("n", "]w", function() vim.diagnostic.goto_next({ severity = "WARN" }) end, {
 
 -- Window
 map("n", "<leader>-", "<c-w>s", { desc = "Split Window Below", remap = true })
-map("n", "<leader>|", "<c-w>v", { desc = "Split Window Right", remap = true })
+map("n", "<leader>\\", "<c-w>v", { desc = "Split Window Right", remap = true })
 
 -- Tabs
 map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
@@ -119,11 +124,7 @@ map("n", "]t", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "[t", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "[T", "<cmd>tabfirst<cr>", { desc = "First Tab" })
 map("n", "]T", "<cmd>tablast<cr>", { desc = "Last Tab" })
-map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-
--- Oil.nvim
-map("n", "-", ":Oil<cr>", { desc = "Open Explorer" })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
@@ -140,6 +141,21 @@ function M.on_attach(_, buffer)
   map("n", "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "Goto definition", buffer = buffer, silent = true })
   map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = buffer, silent = true })
   map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = buffer, silent = true })
+
+  -- TODO: take a look at these for LSP
+  --[[
+  --wk.register({
+           K = {"<cmd>lua vim.lsp.buf.hover()<cr>", "LSP hover info"},
+           gd = {"<cmd>lua vim.lsp.buf.definition()<cr>", "LSP go to definition"},
+           gD = {"<cmd>lua vim.lsp.buf.declaration()<cr>", "LSP go to declaration"},
+           gi = {"<cmd>lua vim.lsp.buf.implementation()<cr>", "LSP go to implementation"},
+           gr = {"<cmd>lua vim.lsp.buf.references()<cr>", "LSP list references"},
+           gs = {"<cmd>lua vim.lsp.buf.signature_help()<cr>", "LSP signature help"},
+           gn = {"<cmd>lua vim.lsp.buf.rename()<cr>", "LSP rename"},
+           ["[g"] = {"<cmd>lua vim.diagnostic.goto_prev()<cr>", "Go to previous diagnostic"},
+           ["g]"] = {"<cmd>lua vim.diagnostic.goto_next()<cr>", "Go to next diagnostic"},
+         }, {
+  ]]--
 end
 
 return M

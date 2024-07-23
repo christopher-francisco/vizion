@@ -7,7 +7,8 @@ return {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make"
       },
-      "nvim-tree/nvim-web-devicons",
+      -- "nvim-tree/nvim-web-devicons",
+      "echasnovski/mini.icons",
     },
     cmd = "Telescope",
     keys = {
@@ -75,7 +76,8 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
+      -- "nvim-tree/nvim-web-devicons",
+      "echasnovski/mini.icons",
       { "MunifTanjim/nui.nvim", lazy = true }, -- remove lazy true if not working
     },
     cmd = "Neotree",
@@ -119,18 +121,29 @@ return {
   },
   {
     'stevearc/oil.nvim',
+    dependencies = { 
+      -- "nvim-tree/nvim-web-devicons" 
+      "echasnovski/mini.icons",
+    },
+    keys = {
+      { "-", ":Oil<cr>", desc = "Open Oil" },
+      { "<leader>_o", ":sp|Oil<cr>", desc = "Open split, then Oil" },
+      { "<leader>|o", ":vsp|Oil<cr>", desc = "Open vertical split, then Oil" },
+      { "<leader><tab>o", ":tabnew|Oil<cr>", desc = "New Tab, then Oil" },
+    },
     opts = {
       skip_confirm_for_simple_edits = false,
       view_options = {
         show_hidden = true,
       },
       keymaps = {
+        ["<C-s>"] = false,
         ["<leader>|"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+        ["<C-h>"] = false,
         ["<leader>-"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
-        -- Avoid conflict with window movement
         ["<leader>l"] = "actions.refresh",
+        ["<C-l>"] = false
       }
     },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
   }
 }
