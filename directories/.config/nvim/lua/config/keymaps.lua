@@ -1,4 +1,6 @@
 local remove_buffer = require('utils.buffers').remove_buffer
+local save_session = require('utils.sessions').save
+local load_session = require('utils.sessions').load
 
 local M = {}
 
@@ -8,8 +10,8 @@ local map = vim.keymap.set
 map("n", "<leader>ftc", ":e ~/.tmux.conf<cr>", { desc = "Open Tmux config" })
 
 -- Sessions
-map("n", "<leader>SS", ":mks! ~/.local/state/nvim/session.vim<cr>", { desc = "Save session" })
-map("n", "<leader>SL", ":so ~/.local/state/nvim/session.vim<cr>", { desc = "Load session" })
+map("n", "<leader>SS", save_session, { desc = "Save session" })
+map("n", "<leader>SL", load_session, { desc = "Load session" })
 
 -- Move up/down including wrapped lines
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
