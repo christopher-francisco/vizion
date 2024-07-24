@@ -54,6 +54,20 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+local filetypeMap = {
+  [".gitconfig*"] = "gitconfig",
+  ["*tmux.conf*"] = "tmux",
+}
+for pattern, filetype in pairs(filetypeMap) do
+  vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+    pattern = pattern,
+    callback = function ()
+      vim.bo.filetype = filetype
+    end
+  });
+end
+
+
 vim.api.nvim_create_user_command(
   'CEdit',
   function(details)

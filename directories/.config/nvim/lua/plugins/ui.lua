@@ -201,7 +201,8 @@ return {
           header = vim.split(logo, "\n"),
           -- stylua: ignore
           center = {
-            { action = function() require("persistence").load() end, desc = " Restore session", icon = "󰦛 ", key = "s", },
+            -- { action = function() require("persistence").load() end, desc = " Restore session", icon = "󰦛 ", key = "s", },
+            { action = "<cmd>so ~/.local/state/nvim/session.vim", desc = " Restore session", icon = "󰦛 ", key = "s", },
             { action = "Telescope oldfiles", desc = " Recent files", icon = " ", key = "r", },
             { action = "Telescope git_files", desc = " Find file", icon = " ", key = "f" },
             { action = "Telescope find_files", desc = " Search file", icon = "󰥨 ", key = "F" },
