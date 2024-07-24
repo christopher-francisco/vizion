@@ -125,6 +125,7 @@ return {
       -- "nvim-tree/nvim-web-devicons" 
       "echasnovski/mini.icons",
     },
+    cmd = "Oil",
     keys = {
       { "-", ":Oil<cr>", desc = "Open Oil" },
       { "<leader>_o", ":sp|Oil<cr>", desc = "Open split, then Oil" },

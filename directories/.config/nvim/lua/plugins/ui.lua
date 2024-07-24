@@ -107,24 +107,25 @@ return {
     event = "VeryLazy",
     opts = function()
       local colorscheme = require('utils.colorscheme').colorscheme
-      local custom = require("lualine.themes." .. colorscheme)
-      for _, mode in pairs(custom) do
-        mode.c.bg = nil
-      end
+
+      local custom = require('colorschemes.' .. colorscheme).lualine()
+      local theme = custom.theme
+      local components = custom.components
 
       local opts = {
         options = {
-          theme = custom,
+          component_separators = { left = " ", right = " " },
+          section_separators = { left = " ", right = " " },
+          theme = theme,
           globalstatus = true,
           disabled_filetypes = { statusline = { "dashboard" } },
-          component_separators = '',
         },
         sections = {
           lualine_a = {
             { "mode", icon = { "" } }
           },
           lualine_b = {
-            { "branch", icon = { ""  } },
+            { "branch", icon = { ""  }, padding = { right = 2, left = 2 } },
           },
           lualine_c = {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
@@ -148,10 +149,10 @@ return {
           lualine_y = {
             { "selectioncount" },
             { "diagnostics" },
-            { "progress" },
+            { "progress", padding = { left = 2, right = 1 } },
           },
           lualine_z = {
-            { "location", padding = { left = 0, right = 1 } },
+            { "location" },
           },
         },
         tabline = {
@@ -202,7 +203,7 @@ return {
           -- stylua: ignore
           center = {
             -- { action = function() require("persistence").load() end, desc = " Restore session", icon = "󰦛 ", key = "s", },
-            { action = "<cmd>so ~/.local/state/nvim/session.vim", desc = " Restore session", icon = "󰦛 ", key = "s", },
+            { action = "so ~/.local/state/nvim/session.vim", desc = " Restore session", icon = "󰦛 ", key = "s", },
             { action = "Telescope oldfiles", desc = " Recent files", icon = " ", key = "r", },
             { action = "Telescope git_files", desc = " Find file", icon = " ", key = "f" },
             { action = "Telescope find_files", desc = " Search file", icon = "󰥨 ", key = "F" },
