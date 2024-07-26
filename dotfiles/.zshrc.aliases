@@ -45,8 +45,7 @@ alias vs='nvim $(fzf)'
 alias nvs='nvim $(fzf)'
 alias mux=tmuxinator
 
-alias nv='nvim .'
-alias nvp='nvim -c "call FZFWithDevIcons()"'
+alias lazyvim='NVIM_APPNAME=lazyvim nvim'
 
 # Quick alises
 alias gccount='git rev-list --count develop..' # commits count between current branch and develop
