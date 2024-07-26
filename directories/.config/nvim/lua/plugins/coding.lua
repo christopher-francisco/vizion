@@ -2,6 +2,7 @@ return {
   {
     'echasnovski/mini.ai',
     version = false,
+    event = "FileLoad",
     opts = function ()
       local ai = require('mini.ai')
       return {

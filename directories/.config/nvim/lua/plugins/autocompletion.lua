@@ -100,6 +100,7 @@ return {
 
   {
     "windwp/nvim-ts-autotag",
+    event = "FileLoad",
     opts = {
       enable = true
     },

@@ -6,7 +6,7 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    event = "FileLoad",
     dependencies = {
     },
     ---@class PluginLspOpts

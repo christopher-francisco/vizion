@@ -2,7 +2,7 @@
 return {
   {
     "folke/which-key.nvim",
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    event = "FileLoad",
     ---@class wk.Opts
     opts = {
       delay = 500,
