@@ -73,12 +73,12 @@ namespace :install do
   task :tmux_plugin_manager do
     logger.step 'TPM', 'Installing Tmux Plugin Manager'
 
-    _, _, status = installer.sh 'ls ~/.tmux/plugins/tpm'
+    _, _, status = installer.sh 'ls ~/.config/tmux/plugins/tpm'
 
     if status.success?
       logger.tmux_plugin_manager_skipped
     else
-      installer.shell('git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm')
+      installer.shell('git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm')
       logger.tmux_plugin_manager_installed
     end
   end
@@ -87,7 +87,7 @@ namespace :install do
   task :tmux_plugins do
     logger.step 'Tmux Plugins', 'Installing Tmux plugins'
 
-    installer.sh '~/.tmux/plugins/tpm/bin/install_plugins'
+    installer.sh '~/.config/tmux/plugins/tpm/bin/install_plugins'
     logger.tmux_plugins_installed
   end
 

@@ -7,7 +7,7 @@ local M = {}
 local map = vim.keymap.set
 
 -- Config files
-map("n", "<leader>ftc", ":e ~/.tmux.conf<cr>", { desc = "Open Tmux config" })
+map("n", "<leader>ftc", ":e ~/.config/tmux/tmux.conf<cr>", { desc = "Open Tmux config" })
 
 -- Sessions
 map("n", "<leader>SS", save_session, { desc = "Save session" })

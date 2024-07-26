@@ -252,8 +252,8 @@ return {
             { action = "Telescope live_grep", desc = " Search text", icon = " ", key = "g" },
             { action = "Telescope find_files cwd=~/.config/nvim", desc = " Config files", icon = "󰒓 ", key = "c" },
             { action = "Lazy", desc = " Lazy", icon = "󰒲 ", key = "l" },
-            { action = "e ~/.tmux.conf", desc = " Tmux config", icon = " ", key = "t" },
-            { action = "Telescope find_files cwd=~/.tmux", desc = " Tmux config (Dir)", icon = " ", key = "T" },
+            { action = "e ~/.config/tmux/tmux.conf", desc = " Tmux config", icon = " ", key = "t" },
+            { action = "Telescope find_files cwd=~/.config/tmux", desc = " Tmux config (Dir)", icon = " ", key = "T" },
             { action = "qa", desc = " Quit", icon = " ", key = "q" },
           },
           footer = function()

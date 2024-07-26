@@ -5,10 +5,9 @@
     diffFilter = delta --color-only
 
 [delta]
+    line-numbers = true
     features = decorations
     whitespace-error-style = 22 reverse
-    line-numbers = true
-    syntax-theme = TwoDark
 
 [delta "decorations"]
     commit-decoration-style = bold yellow box ul

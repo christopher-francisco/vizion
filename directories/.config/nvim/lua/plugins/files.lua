@@ -20,7 +20,7 @@ return {
       { "<leader>fr", ":Telescope oldfiles<cr>", desc = "Recent" },
       -- { "<leader>fR", ":Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>fc", ":Telescope find_files cwd=~/.config/nvim<cr>", desc = "Find config file" },
-      { "<leader>ftf", ":Telescope find_files cwd=~/.tmux<cr>", desc = "Find Tmux config file" },
+      { "<leader>ftf", ":Telescope find_files cwd=~/.config/tmux<cr>", desc = "Find Tmux config file" },
       { "<leader>bl", ":Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
       { "<leader>sm", ":Telescope marks<cr>", desc = "Marks" },
       { "<leader>sR", ":Telescope resume<cr>", desc = "Resume" },
