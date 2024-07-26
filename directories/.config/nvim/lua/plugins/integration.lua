@@ -1,5 +1,10 @@
 return {
   {
+    "christopher-francisco/tmux-status.nvim",
+    lazy = true,
+    opts = {},
+  },
+  {
     "christoomey/vim-tmux-navigator",
     init = function ()
       vim.g.tmux_navigator_disable_when_zoomed = 1

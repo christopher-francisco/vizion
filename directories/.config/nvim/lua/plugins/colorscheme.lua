@@ -56,9 +56,9 @@ return {
   },
   {
     "scottmckendry/cyberdream.nvim",
-    lazy = should_lazy_load('everforest'),
-    priority = get_priority('everforest'),
-    event = get_event('everforest'),
+    lazy = should_lazy_load('cyberdream'),
+    priority = get_priority('cyberdream'),
+    event = get_event('cyberdream'),
     opts = {
       transparent = true,
       italic_comments = true,

@@ -18,6 +18,9 @@ opt.signcolumn = "yes"
 opt.statuscolumn = "%=%{v:relnum?v:relnum:v:lnum} %s%C"
 opt.termguicolors = true
 opt.virtualedit = "block"
+opt.fillchars = {
+  eob = " ", -- end of buffer
+}
 
 -- windows
 opt.splitbelow = true

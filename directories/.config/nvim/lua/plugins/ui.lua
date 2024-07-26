@@ -105,12 +105,27 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
+    init = function ()
+      vim.g.lualine_laststatus = vim.o.laststatus
+      if vim.fn.argc(-1) > 0 then
+        -- set an empty statusline till lualine loads
+        vim.o.statusline = " "
+      else
+        -- hide the statusline on the starter page
+        vim.o.laststatus = 0
+      end
+    end,
     opts = function()
+      vim.o.laststatus = vim.g.lualine_laststatus
+
       local colorscheme = require('utils.colorscheme').colorscheme
 
       local custom = require('colorschemes.' .. colorscheme).lualine()
       local theme = custom.theme
       local components = custom.components
+
+      -- For the tabs
+      vim.cmd([[ highlight custom_tab_active guifg=#e69875 ]])
 
       local opts = {
         options = {
@@ -130,6 +145,11 @@ return {
           lualine_c = {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { "filename", path = 0, symbols = { modified = "", readonly = "" }, padding = { left = 0 } },
+            {
+              require('tmux-status').tmux_windows,
+              cond = require('tmux-status').show,
+              padding = { left = 2 },
+            },
           },
           lualine_x = {
             -- {
@@ -150,9 +170,27 @@ return {
             { "selectioncount" },
             { "diagnostics" },
             { "progress", padding = { left = 2, right = 1 } },
+            -- TODO: do not show when no tmux
+            { "location", padding = { right = 1 } },
           },
           lualine_z = {
-            { "location" },
+            -- TODO: show when no tmux available
+            -- { "location" },
+            {
+              require('tmux-status').tmux_battery,
+              cond = require('tmux-status').show,
+              padding = { left = 1, right = 1 },
+            },
+            {
+              require('tmux-status').tmux_datetime,
+              cond = require('tmux-status').show,
+              padding = { left = 1, right = 1 },
+            },
+            {
+              require('tmux-status').tmux_session,
+              cond = require('tmux-status').show,
+              padding = { left = 1, right = 1 },
+            },
           },
         },
         tabline = {
@@ -165,6 +203,9 @@ return {
               symbols = {
                 modified = '',
               },
+              tabs_color = {
+                active = 'custom_tab_active'
+              }
             }
           }
         },
