@@ -52,6 +52,13 @@ Open the files and save the passphrases to your password manager
 pbcopy < ~/.ssh/id_rsa.pub
 ```
 
+### Install language servers
+
+```
+npm -g i typescript-language-server vscode-langservers-extracted eslint_d @fsouza/prettierd @tailwindcss/language-server
+brew install lua-language-server
+```
+
 ## Features
  - [x] Complete support for true colors and italics on iTerm, iTerm+Vim, iTerm+Tmux, iTerm+Tmux+Vim.
  - [x] Best mappings & plugins for Vim and Tmux

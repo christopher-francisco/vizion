@@ -96,7 +96,7 @@ zshPlugins() {
 
   source "$location/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
   source "$location/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-  source "$location/share/zsh/site-functions/_tmuxinator"
+  # source "$location/share/zsh/site-functions/_tmuxinator"
 }
 #source ~/.config/.zsh/catppuccin_latte-zsh-syntax-highlighting.zsh
 zshPlugins
