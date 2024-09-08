@@ -1,8 +1,19 @@
 return {
   {
     "christopher-francisco/tmux-status.nvim",
+    -- dir = "~/Developer/code/neovim-plugins/tmux-status.nvim",
     lazy = true,
-    opts = {},
+    opts = function ()
+      local colorscheme = require('utils.colorscheme').colorscheme
+      local custom = require('colorschemes.' .. colorscheme).lualine()
+      return {
+        colors = {
+          window_active = custom.extensions.active,
+          window_inactive = custom.extensions.inactive,
+          window_inactive_recent = custom.extensions.inactive_recent,
+        }
+      }
+    end,
   },
   {
     "christoomey/vim-tmux-navigator",

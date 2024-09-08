@@ -125,7 +125,7 @@ return {
       local components = custom.components
 
       -- For the tabs
-      vim.cmd([[ highlight custom_tab_active guifg=#e69875 ]])
+      vim.cmd.highlight('custom_tab_active guifg=' .. custom.extensions.active)
 
       local opts = {
         options = {
@@ -137,14 +137,15 @@ return {
         },
         sections = {
           lualine_a = {
-            { "mode", icon = { "" } }
-          },
-          lualine_b = {
+            { "mode", icon = { "" } },
             { "branch", icon = { ""  }, padding = { right = 2, left = 2 } },
-          },
-          lualine_c = {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { "filename", path = 0, symbols = { modified = "", readonly = "" }, padding = { left = 0 } },
+          },
+          lualine_b = {
+          },
+          lualine_c = {
+            '%=',
             {
               require('tmux-status').tmux_windows,
               cond = require('tmux-status').show,
@@ -200,6 +201,7 @@ return {
               mode = 1,
               path = 0,
               show_modified_status = true,
+              max_length = vim.o.columns,
               symbols = {
                 modified = '',
               },

@@ -11,7 +11,8 @@ return {
     priority = get_priority('tokyonight'),
     event = get_event('tokyonight'),
     opts = {
-      style = "moon"
+      style = "night",
+      plugins = { markdown = true }
     },
   },
   {

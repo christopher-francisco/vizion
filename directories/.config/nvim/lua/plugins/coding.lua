@@ -77,14 +77,40 @@ return {
     end,
   },
   {
-    'MeanderingProgrammer/markdown.nvim',
-    name = 'render-markdown',
+    'MeanderingProgrammer/render-markdown.nvim',
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
       'echasnovski/mini.icons',
-      -- 'nvim-tree/nvim-web-devicons'
     },
     ft = { "markdown" },
     opts = {}
-  }
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event = "FileLoad",
+    opts = {
+      enable = true
+    },
+  },
+
+  {
+    "echasnovski/mini.pairs",
+    event = "FileLoad",
+    opts = {
+      modes = { insert = true, command = false, terminal = false },
+
+      -- skip autopair when next character is one of these
+      -- skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+
+      -- skip autopair when the cursor is inside these treesitter nodes
+      -- skip_ts = { "string" },
+
+      -- skip autopair when next character is closing pair
+      -- and there are more closing pairs than opening pairs
+      -- skip_unbalanced = true,
+
+      -- better deal with markdown code blocks
+      markdown = true,
+    },
+  },
 }

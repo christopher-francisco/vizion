@@ -29,7 +29,12 @@ function M.lualine()
 
   return {
     theme = theme,
-    components = components
+    components = components,
+    extensions = {
+      active = '#e69875',
+      inactive = "#a9b1d6", -- FIXME: broken
+      inactive_recent = "#3b4261", -- FIXME: broken
+    }
   }
 end
 

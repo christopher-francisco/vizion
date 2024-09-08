@@ -1,6 +1,6 @@
 local M = {}
 
-M.colorscheme = 'everforest'
+M.colorscheme = 'tokyonight'
 
 local pattern = "ColorSchemeLoad"
 
