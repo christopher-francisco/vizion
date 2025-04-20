@@ -106,6 +106,13 @@ namespace :install do
     installer.sh './scripts/install_nvim_providers.sh'
   end
 
+  desc 'Accept Xcode license'
+  task :accept_xcode_license do
+    logger.step 'Accept Xcode license', 'Accept Xcode license'
+
+    installer.sh './scripts/accept_xcode_license.sh'
+  end
+    
 
   desc 'Link dotfiles'
   task :dotfiles do
@@ -224,6 +231,7 @@ namespace :install do
     :directories,
     
     :brew_packages,
+    :accept_xcode_license
     :yarn_packages,
     :cargo_packages,
     :oh_my_zsh_themes,
