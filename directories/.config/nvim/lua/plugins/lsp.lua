@@ -61,7 +61,7 @@ return {
           },
         },
 
-        tsserver = {},
+        ts_ls = {},
 
         tailwindcss = {},
 
@@ -102,6 +102,7 @@ return {
       local servers = opts.servers
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+      -- TODO: move this to autocmd?
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local buffer = args.buf ---@type number

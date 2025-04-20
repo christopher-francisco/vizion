@@ -24,35 +24,13 @@ return {
       end,
     },
   },
+  keys = {
+    { "<c-j>", function() require("luasnip").jump(1) end, silent = true, mode = "i", },
+    { "<c-j>", function() require("luasnip").jump(1) end, mode = "s" },
+    { "<c-k>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+  },
   opts = {
     history = true,
     delete_check_events = "TextChanged",
   },
-  keys = function()
-    local luasnip = require("luasnip")
-    return {
-      {
-        "<c-j>",
-        function()
-          luasnip.jump(1)
-        end,
-        silent = true,
-        mode = "i",
-      },
-      {
-        "<c-j>",
-        function()
-          require("luasnip").jump(1)
-        end,
-        mode = "s"
-      },
-      {
-        "<c-k>",
-        function()
-          require("luasnip").jump(-1)
-        end,
-        mode = { "i", "s" }
-      },
-    }
-  end,
 }

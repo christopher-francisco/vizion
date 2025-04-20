@@ -8,6 +8,7 @@ return {
       typescript = { "eslint_d" },
       javascriptreact = { "eslint_d" },
       typescriptreact = { "eslint_d" },
+      swift = { "swiftlint" },
     }
   },
   config = function(_, opts)

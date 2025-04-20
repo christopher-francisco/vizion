@@ -3,7 +3,7 @@ return {
     "christopher-francisco/tmux-status.nvim",
     -- dir = "~/Developer/code/neovim-plugins/tmux-status.nvim",
     lazy = true,
-    opts = function ()
+    opts = function()
       local colorscheme = require('utils.colorscheme').colorscheme
       local custom = require('colorschemes.' .. colorscheme).lualine()
       return {
@@ -17,7 +17,7 @@ return {
   },
   {
     "christoomey/vim-tmux-navigator",
-    init = function ()
+    init = function()
       vim.g.tmux_navigator_disable_when_zoomed = 1
     end,
     cmd = {
@@ -27,10 +27,10 @@ return {
       "TmuxNavigateRight",
     },
     keys = {
-      { "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>", desc = "Navigate left, pane or split" },
-      { "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>", desc = "Navigate down, pane or split"  },
-      { "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>", desc = "Navigate up, pane or split"  },
-      { "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>", desc = "Navigate right, pane or split"  },
+      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>",  desc = "Navigate left, pane or split" },
+      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>",  desc = "Navigate down, pane or split" },
+      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>",    desc = "Navigate up, pane or split" },
+      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>", desc = "Navigate right, pane or split" },
     },
   },
   {
@@ -89,5 +89,28 @@ return {
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
       end,
     },
+  },
+  -- TODO: lazy load on commands and perhaps key presses?
+  {
+    "wojciech-kulik/xcodebuild.nvim",
+    ft = "swift",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "MunifTanjim/nui.nvim",
+      "stevearc/oil.nvim",
+      "nvim-neo-tree/neo-tree.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    keys = {
+      { "<leader>X", "", desc = "+Xcode" },
+      { "<leader>Xp", "<cmd>XcodebuildPicker<cr>", desc = "Show Xcodebuild actions picker" },
+      { "<leader>Xb", "<cmd>XcodebuildBuild<cr>", desc = "Xcodebuild Build" },
+      { "<leader>Xr", "<cmd>XcodebuildBuildRun<cr>", desc = "Xcodebuild Build and Run" },
+      { "<leader>Xc", "<cmd>XcodebuildCancel<cr>", desc = "Xcodebuild Cancel" },
+    },
+    opts = {},
+    config = function(_, opts)
+      require("xcodebuild").setup(opts)
+    end,
   }
 }

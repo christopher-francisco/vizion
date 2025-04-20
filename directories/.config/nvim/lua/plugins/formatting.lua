@@ -28,6 +28,7 @@ return {
       yaml = { "prettierd" },
       markdown = { "prettierd" },
       graphql = { "prettierd" },
+      swift = { "swiftformat" },
     },
   },
 }
