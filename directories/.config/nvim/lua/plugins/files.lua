@@ -66,6 +66,11 @@ return {
             n = {
               q = actions.close,
             }
+          },
+          path_display = {
+            -- "truncate"
+            -- "smart"
+            "filename_first"
           }
         }
       })
@@ -84,16 +89,18 @@ return {
     keys = {
       {
         "<leader>E",
-        function()
-          require("neo-tree.command").execute({ toggle = true, position = "right" })
-        end,
+        ":Neotree toggle reveal dir=./product-areas/document-management<cr>",
+        -- function()
+        --   require("neo-tree.command").execute({ toggle = true, position = "right", reveal = true, dir = "product-areas/document-management" })
+        -- end,
         desc = "Open file explorer"
       },
       {
         "<leader>e",
-        function()
-          require("neo-tree.command").execute({ toggle = true, position = "right", reveal = true })
-        end,
+        -- function()
+        --   require("neo-tree.command").execute({ toggle = true, position = "right", reveal = true, })
+        -- end,
+        ":Neotree toggle reveal dir=./<cr>",
         desc = "Open file explorer relative"
       }
     },
@@ -117,7 +124,20 @@ return {
           end
         end,
       })
-    end
+    end,
+    opts = {
+      window = {
+        position = "right",
+        auto_expand_width = true,
+      },
+      filesystem = {
+        show_hidden_count = true,
+        hide_dotfiles = false,
+        hide_gitignored = false,
+        hide_hidden = false,
+        bind_to_cwd = false,
+      },
+    },
   },
   {
     'stevearc/oil.nvim',

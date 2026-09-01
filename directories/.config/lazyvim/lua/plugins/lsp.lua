@@ -1,6 +1,12 @@
 ---@type LazySpec
 return {
   {
+    "mason-org/mason.nvim",
+    opts = {
+      ensure_installed = { "prettierd" },
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
@@ -16,11 +22,6 @@ return {
         },
         cssls = {},
         cssmodules_ls = {},
-        -- ts_ls/vtsls + eslint handled by lang.typescript extra
-        -- terraformls handled by lang.terraform extra
-        -- jsonls + schemastore handled by lang.json extra
-        -- yamlls handled by lang.yaml extra
-        -- add as needed: csharp_ls, kotlin_language_server, phpactor, vacuum
       },
     },
   },

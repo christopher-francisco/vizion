@@ -58,6 +58,9 @@ vim.api.nvim_create_autocmd("FileType", {
 local filetypeMap = {
   [".gitconfig*"] = "gitconfig",
   ["*tmux.conf*"] = "tmux",
+  ["*.mdc"] = "markdown",
+  ["*.query"] = "graphql",
+  ["*.mutation"] = "graphql",
 }
 for pattern, filetype in pairs(filetypeMap) do
   vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {

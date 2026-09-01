@@ -3,6 +3,10 @@ return {
   -- Disable bufferline — using native tabs via lualine tabline
   { "akinsho/bufferline.nvim", enabled = false },
 
+  -- noice: silence the "No information available" toast when pressing K on a
+  -- buffer with multiple LSPs attached (e.g. cssmodules_ls has no hover impl)
+  { "folke/noice.nvim", opts = { lsp = { hover = { silent = true } } } },
+
   -- Tokyonight: night style (plugin already included by LazyVim)
   {
     "folke/tokyonight.nvim",

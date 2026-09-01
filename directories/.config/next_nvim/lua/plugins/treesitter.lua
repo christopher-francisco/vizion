@@ -1,23 +1,17 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false, -- last release is way too old and doesn't work on Windows
+    version = false,
+    branch = "main",
     build = ":TSUpdate",
     event = "FileLoad",
     lazy = vim.fn.argc(-1) == 0,
     init = function(plugin)
-      -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
-      -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
-      -- no longer trigger the **nvim-treesitter** module to be loaded in time.
-      -- Luckily, the only things that those plugins need are the custom queries, which we make available
-      -- during startup.
       require("lazy.core.loader").add_to_rtp(plugin)
       require("nvim-treesitter.query_predicates")
     end,
     dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-      },
+      "nvim-treesitter/nvim-treesitter-textobjects",
     },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     ---@type TSConfig
@@ -31,26 +25,31 @@ return {
           set_jumps = true,
           goto_next_start = {
             ["]f"] = "@function.outer",
-            ["]c"] = "@comment.outer"
+            ["]c"] = "@comment.outer",
           },
           goto_next_end = {
             ["]F"] = "@function.outer",
-            ["]C"] = "@comment.outer"
+            ["]C"] = "@comment.outer",
           },
           goto_previous_start = {
             ["[f"] = "@function.outer",
-            ["[c"] = "@comment.outer"
+            ["[c"] = "@comment.outer",
           },
           goto_previous_end = {
             ["[F"] = "@function.outer",
-            ["[C"] = "@comment.outer"
+            ["[C"] = "@comment.outer",
           },
         },
       },
       ensure_installed = {
         "bash",
+        "blade",
         "c_sharp",
+        "css",
         "diff",
+        "dockerfile",
+        "gitcommit",
+        "gitignore",
         "graphql",
         "hcl",
         "html",
@@ -66,8 +65,10 @@ return {
         "markdown",
         "markdown_inline",
         "php",
+        "prisma",
         "query",
         "regex",
+        "scss",
         "swift",
         "terraform",
         "toml",
@@ -79,9 +80,20 @@ return {
         "yaml",
       },
     },
-    -- ---@param opts TSConfig
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
     end,
-  }
+  },
+
+  -- Shows current function/class context pinned at the top while scrolling
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "FileLoad",
+    opts = {
+      max_lines = 3,
+    },
+    keys = {
+      { "[x", function() require("treesitter-context").go_to_context(vim.v.count1) end, desc = "Jump to context" },
+    },
+  },
 }

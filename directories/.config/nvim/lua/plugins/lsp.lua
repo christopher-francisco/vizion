@@ -61,13 +61,20 @@ return {
           },
         },
 
-        tsserver = {},
+        -- tsserver = {},
+        ts_ls = {},
 
-        tailwindcss = {},
+        -- tailwindcss = {},
 
         terraformls = {},
 
         csharp_ls = {},
+
+        cssls = {},
+
+        cssmodules_ls = {},
+
+        somesass_ls = {},
 
         jsonls = {
           on_new_config = function(new_config)
@@ -84,8 +91,18 @@ return {
           },
         },
 
+        kotlin_language_server = {},
+
         sourcekit = {
         },
+
+        vacuum = {},
+
+        -- Disabling as we get double diagnostic
+        -- Although, we don't get the code actions which sucks
+        eslint = {},
+
+        phpactor = {},
       },
     },
     ---@param opts PluginLspOpts
@@ -106,7 +123,18 @@ return {
         callback = function(args)
           local buffer = args.buf ---@type number
           local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+          if (client == nil) then return end
+
           require('config.keymaps').on_attach(client, buffer)
+
+          -- Fixes crashes on lsp.format due to tsserver doing the formatting before passing it to conform
+          -- @see https://github.com/stevearc/conform.nvim/issues/520
+          if client.name == "eslint" then
+            client.server_capabilities.documentFormattingProvider = true
+          elseif client.name == "tsserver" then
+            client.server_capabilities.documentFormattingProvider = false
+          end
         end,
       })
 
@@ -118,5 +146,13 @@ return {
         require("lspconfig")[server].setup(merged_server_opts)
       end
     end,
+
+    -- Configuration for vacuum LSP
+    vim.filetype.add {
+      pattern = {
+        ['openapi.*%.ya?ml'] = 'yaml.openapi',
+        ['openapi.*%.json'] = 'json.openapi',
+      },
+    }
   }
 }

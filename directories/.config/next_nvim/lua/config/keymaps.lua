@@ -144,13 +144,19 @@ map(
 )
 
 
+-- Inlay hints toggle
+map("n", "<leader>uh", function()
+  vim.lsp.inlay_hints.enable(not vim.lsp.inlay_hints.is_enabled())
+end, { desc = "Toggle Inlay Hints" })
+
 ---@param buffer number
 function M.on_attach(_, buffer)
-  map("n", "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "Goto definition", buffer = buffer, silent = true })
+  map("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto definition", buffer = buffer, silent = true })
+  map("n", "gr", function() Snacks.picker.lsp_references() end, { desc = "References", buffer = buffer, silent = true })
   map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = buffer, silent = true })
   map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = buffer, silent = true })
   map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = buffer, silent = true })
-  map("n", "<leader>cL", "<cmd>EslintFixxAll<cr>", { desc = "Fix linting", buffer = buffer, silent = true })
+  map("n", "<leader>cL", "<cmd>EslintFixAll<cr>", { desc = "Fix linting", buffer = buffer, silent = true })
 
   -- TODO: take a look at these for LSP
   --[[
